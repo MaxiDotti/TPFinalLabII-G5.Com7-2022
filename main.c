@@ -59,6 +59,8 @@ typedef struct celdaDivision{
 
 int main()
 {
+    printf("Hello world!\n");
+    /// maxiii anda?
     return 0;
 }
 
