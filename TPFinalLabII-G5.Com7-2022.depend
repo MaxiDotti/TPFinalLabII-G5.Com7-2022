@@ -1,14 +1,36 @@
 # depslib dependency file v1.0
-1667859970 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\main.c
+1667931808 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
 
-1667860181 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
+1667935500 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
+	"division.h"
 
-1667860973 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
+1667935465 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
 
-1667861056 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
+1667935465 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
+
+1667935465 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
+	"cuerpoTecnico.h"
+
+1667935465 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
+
+1667935465 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
+	"empleado.h"
+
+1667935465 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
+
+1667935465 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
+	"division.h"
+	"jugador.h"
+	"empleado.h"
+	"cuerpoTecnico.h"
+
+1667935553 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.h
+	"empleado.h"
+	"cuerpoTecnico.h"
+	"jugador.h"
 

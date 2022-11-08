@@ -31,6 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="cuerpoTecnico.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cuerpoTecnico.h" />
+		<Unit filename="division.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="division.h" />
+		<Unit filename="empleado.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="empleado.h" />
 		<Unit filename="jugador.c">
 			<Option compilerVar="CC" />
 		</Unit>
