@@ -10,7 +10,9 @@ typedef struct{
     int tel;
     char cargo[20];
     int activo;
-}stCT;///CUERPO TECNICO
+    char nombreDivision[15]; /// primera , segunda , tercera
+    int idDivision; /// 1, 2 ,3
+}stCT; ///CUERPO TECNICO
 
 typedef struct nodoCT{
     stCT dato;

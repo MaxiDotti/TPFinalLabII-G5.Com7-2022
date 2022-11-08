@@ -10,6 +10,8 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
+    char nombreDivision[15]; /// primera , segunda , tercera
+    int idDivision; /// 1, 2 ,3
 }stEmpleado;
 
 typedef struct nodoEmpleado{

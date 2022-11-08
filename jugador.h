@@ -11,6 +11,8 @@ typedef struct{
     char posicion[20]; /// ARQUERO - DEF - MEDIOC - DELANTERO
     int goles;
     int activo; /// 1 ACTIVO / 0 INACTIVO
+    char nombreDivision[15]; /// primera , segunda , tercera
+    int idDivision; /// 1, 2 ,3
 }stJugador; /// REGISTRO ARCHIVO
 
 typedef struct ArbolJugador{
