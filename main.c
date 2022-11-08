@@ -27,6 +27,7 @@ typedef struct{
     int dni;
     int tel;
     char cargo[20];
+    int activo;
 }stCT;///CUERPO TECNICO
 
 typedef struct nodoCT{
@@ -63,7 +64,6 @@ typedef struct celdaDivision{
 int main()
 {
     printf("Hello world!\n");
-    /// maxiii anda?
     return 0;
 }
 
