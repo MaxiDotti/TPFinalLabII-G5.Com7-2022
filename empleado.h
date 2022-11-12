@@ -2,10 +2,7 @@
 #define EMPLEADO_H_INCLUDED
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 242058895cfd75939e261285babd392abd517cc8
 typedef struct{
     int legajo;
     char nombre[20];
@@ -15,11 +12,10 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
-<<<<<<< HEAD
-=======
     char nombreDivision[15]; /// primera , segunda , tercera
     int idDivision; /// 1, 2 ,3
 }archiEmpleado;
+
 typedef struct{
     int legajo;
     char nombre[20];
@@ -29,7 +25,7 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
->>>>>>> 242058895cfd75939e261285babd392abd517cc8
+
 }stEmpleado;
 
 
@@ -49,11 +45,17 @@ int validacionDeAlta (int legajo);
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);
 
+////MOSTRAR:
+void MostrarEmpleado(stEmpleado nuevo);
+void MostarNodoE (nodoEmpleado * NodoE);
+void MostrarListaE (nodoEmpleado * ListaE);
 
-
-
-
-
-
+////FUNCIONES LISTA:
+nodoEmpleado * inicListaS ();
+nodoEmpleado * crearNodoS (stEmpleado nuevo);
+nodoEmpleado * agregarPpioS (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
+nodoEmpleado * agregarEnOrden (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
+nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int legajo);
+nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE);
 
 #endif // EMPLEADO_H_INCLUDED

@@ -1,6 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "empleado.h"
+#include "string.h"
+#include "division.h"
 
-
+///Validaciones
 int validarNumero (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso otro caracter
 {
     int i=0;
@@ -14,7 +19,7 @@ int validarNumero (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso o
         }
         else
         {
-            printf("\n\n\t\tUn dato ingresado no es un numero.Vuelva a ingresar el dato:\n\n\t\t");
+            printf("\nUn dato ingresado no es un numero.Vuelva a ingresar el dato:\n");
             flag=1;
         }
     }
@@ -35,7 +40,7 @@ int validarPalabra (char palabra[]) // retorna 0 si la palabra esta ok 1 si ingr
         }
         else
         {
-            printf("\n\n\t\tIngreso un caracter erroneo. Solo ingrese letras: \n\n\t\t");
+            printf("\nIngreso un caracter erroneo. Solo ingrese letras: \n");
             flag=1;
         }
     }
@@ -49,7 +54,7 @@ int validacionDeAlta (int legajo) // recorriendo el archivo y verifica si existe
     int flag=0;
     archiEmpleado aux;
 
-    FILE *archi=fopen("ArchivoEmpleados","rb");
+    FILE*archi=fopen("ArchivoEmpleados","rb");
 
     if (archi!=NULL)
     {
@@ -57,7 +62,7 @@ int validacionDeAlta (int legajo) // recorriendo el archivo y verifica si existe
         {
            if (aux.legajo == legajo)
            {
-              printf("\n\n\t\tEl cliente ya se encuentra cargado en el archivo.\n\n\t\t"); // si ya exite corta la busqueda con el flag si no el cliente se puede agregar a la lista.
+              printf("\nEl empleado ya se encuentra cargado en el archivo.\n"); // si ya exite corta la busqueda con el flag si no el cliente se puede agregar a la lista.
               flag = 1;
            }
         }
@@ -65,22 +70,22 @@ int validacionDeAlta (int legajo) // recorriendo el archivo y verifica si existe
     }
     else
     {
-        printf("\n\n\t\tNo pudo abrirse el archivo.\n\n\t\t");
+        printf("\nNo pudo abrirse el archivo.\n");
     }
 
     return flag;
 }
-
+///Carga
 int CargarEmpleado (archiEmpleado nuevo)
 {
 
     int flag = -1;
     int legajoAux = 0;
 
-    char validarNum [dim];
-    char validarString [dim];
+    char validarNum [20];
+    char validarString [20];
 
-    FILE*archi=fopen("ArchivoEmpleados","ab");
+    FILE * archi=fopen("ArchivoEmpleados","ab");
 
     if(archi)
     {
@@ -98,7 +103,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 fflush(stdin);
                 gets(validarString);
                }while((validarPalabra(validarString))!=0);
-               strcpy(nuevo.Nombre,validarString);
+               strcpy(nuevo.nombre,validarString);
 
                do{
                 printf("\nIngrese el apellido del empleado:\n");
@@ -119,7 +124,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 fflush(stdin);
                 scanf("%s",validarNum);
                }while ((validarNumero(validarNum))!=0);
-               nuevo.telefono=(atoi(validarNum));
+               nuevo.tel=(atoi(validarNum));
 
                do{
                 printf("\n Ingrese el puesto del empleado: \n");
@@ -131,7 +136,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                do{
                 printf("\n Ingrese el sueldo del empleado:\n");
                 fflush(stdin);
-                scanf("%f",&validarNum)
+                scanf("%f",&validarNum);
                }while((validarNumero(validarNum))!=0);
                nuevo.sueldo= atof(validarNum); /// fojarse si esta es la funcion correcta para float
 
@@ -141,7 +146,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese la categoria a la que pertenece el empleado\n");
                 fflush(stdin);
                 gets(validarString);
-               }((validarPalabra(validarString))!=0);
+               }while((validarPalabra(validarString))!=0);
                strcpy(nuevo.nombreDivision,validarString);
 
                if(strcmpi(nuevo.nombreDivision,"primera")== 0)
@@ -170,7 +175,144 @@ int CargarEmpleado (archiEmpleado nuevo)
 
 }
 
+///Mostrar
+void MostrarEmpleado (stEmpleado nuevo){
 
+   printf("----------------------------");
+   printf("\n LEGAJO: %d",nuevo.legajo);
+   printf("\n NOMBRE: %s ",nuevo.nombre);
+   printf("\n APELLIDO: &s ",nuevo.apellido);
+   printf("\n DNI: %d ", nuevo.dni);
+   printf("\n TELEFONO: %d ", nuevo.tel);
+   printf("\n SUELDO: %f ", nuevo.sueldo);
+   if(nuevo.activo == 1){
+     printf("\nACTIVO\n");
+   }
+   else{
+     printf("\nINACTIVO\n");
+   }
+}
+
+void MostarNodoE (nodoEmpleado * NodoE)
+{
+   MostrarEmpleado(NodoE->dato);
+}
+
+void MostrarListaE (nodoEmpleado * ListaE)
+{
+    nodoEmpleado * seg = ListaE;
+
+    while(seg->sig != NULL)
+    {
+        MostarNodoE(ListaE);
+        seg = seg->sig;
+    }
+}
+
+
+/// Funciones Lista
+
+nodoEmpleado * inicListaS(){
+
+ return NULL;
+
+}
+
+nodoEmpleado * crearNodoS(stEmpleado nuevo){
+
+ nodoEmpleado * aux = malloc(sizeof(nodoEmpleado));
+
+ aux->dato = nuevo;
+ aux->sig = NULL;
+
+ return aux;
+
+}
+
+
+nodoEmpleado * agregarPpioS (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE){
+
+  if(listaE == NULL) {
+      listaE = nuevoNodoE;
+   }
+   else
+   {
+      nuevoNodoE->sig = listaE;
+      listaE = nuevoNodoE;
+   }
+
+  return listaE;
+}
+
+nodoEmpleado * agregarEnOrden(nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE) {
+
+   if(listaE == NULL) {
+      listaE = nuevoNodoE;
+   }else {
+
+
+      if(strcmp(nuevoNodoE->dato.nombre,listaE->dato.nombre)<0){
+         listaE = agregarPpioS(listaE, nuevoNodoE);
+      } else {
+
+         nodoEmpleado * ante = listaE;
+         nodoEmpleado * seg = listaE->sig;
+
+         while((seg != NULL) && (strcmp(nuevoNodoE->dato.nombre,seg->dato.nombre)>0)) {
+            ante = seg;
+            seg = seg->sig;
+         }
+
+         nuevoNodoE->sig = seg;
+         ante->sig = nuevoNodoE;
+      }
+   }
+   return listaE;
+}
+
+nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int legajo) {
+
+   nodoEmpleado * seg;
+
+   while ((seg != NULL) && ( legajo != seg->dato.legajo)) {
+      seg=seg->sig;
+   }
+
+   return seg;
+}
+
+nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE)
+{
+    FILE * archi = fopen("ArchivoEmpleados","rb");
+    archiEmpleado aux;
+    stEmpleado nuevo;
+
+    while(fread(&aux,sizeof(archiEmpleado),1,archi))
+    {
+        nuevo = nuevoEmpleado(aux);
+        nodoEmpleado * nuevoNdo = crearNodoS(nuevo);
+        listaE = agregarEnOrden(listaE,nuevoNdo);
+    }
+
+    return listaE;
+}
+
+
+stEmpleado nuevoEmpleado(archiEmpleado aux)
+{
+    stEmpleado nuevo;
+
+    nuevo.legajo = aux.legajo;
+    strcpy(nuevo.nombre,aux.nombre);
+    strcpy(nuevo.apellido,aux.apellido);
+    nuevo.dni = aux.dni;
+    nuevo.tel = aux.tel;
+    strcpy(nuevo.puesto,aux.puesto);
+    nuevo.sueldo = aux.sueldo;
+    nuevo.activo = aux.activo;
+
+    return nuevo;
+}
 
 
 
