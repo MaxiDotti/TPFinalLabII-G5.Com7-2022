@@ -44,6 +44,7 @@ int validacionDeAlta (int legajo);
 
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);
+stEmpleado nuevoEmpleado(archiEmpleado aux);
 
 ////MOSTRAR:
 void MostrarEmpleado(stEmpleado nuevo);

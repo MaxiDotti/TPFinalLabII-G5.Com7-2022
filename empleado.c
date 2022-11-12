@@ -280,7 +280,21 @@ nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int legajo) {
 
    return seg;
 }
+stEmpleado nuevoEmpleado(archiEmpleado aux)
+{
+    stEmpleado nuevo;
 
+    nuevo.legajo = aux.legajo;
+    strcpy(nuevo.nombre,aux.nombre);
+    strcpy(nuevo.apellido,aux.apellido);
+    nuevo.dni = aux.dni;
+    nuevo.tel = aux.tel;
+    strcpy(nuevo.puesto,aux.puesto);
+    nuevo.sueldo = aux.sueldo;
+    nuevo.activo = aux.activo;
+
+    return nuevo;
+}
 nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE)
 {
     FILE * archi = fopen("ArchivoEmpleados","rb");
@@ -298,21 +312,7 @@ nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE)
 }
 
 
-stEmpleado nuevoEmpleado(archiEmpleado aux)
-{
-    stEmpleado nuevo;
 
-    nuevo.legajo = aux.legajo;
-    strcpy(nuevo.nombre,aux.nombre);
-    strcpy(nuevo.apellido,aux.apellido);
-    nuevo.dni = aux.dni;
-    nuevo.tel = aux.tel;
-    strcpy(nuevo.puesto,aux.puesto);
-    nuevo.sueldo = aux.sueldo;
-    nuevo.activo = aux.activo;
-
-    return nuevo;
-}
 
 
 
