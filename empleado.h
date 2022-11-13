@@ -12,10 +12,6 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
-<<<<<<< HEAD
-
-=======
->>>>>>> d1840b1305143d07741f11137f4ea23163c17294
     char nombreDivision[15]; /// primera , segunda , tercera
     int idDivision; /// 1, 2 ,3
 }archiEmpleado;

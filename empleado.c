@@ -5,12 +5,11 @@
 #include "string.h"
 #include "division.h"
 
-<<<<<<< HEAD
-=======
+
 const char nombreArchivo[20] = "ArchivoEmpleados";
 
 ///Validaciones
->>>>>>> d1840b1305143d07741f11137f4ea23163c17294
+
 int validarNumero2 (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso otro caracter
 {
     int i=0;
@@ -107,11 +106,8 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese el nombre  del empleado: \n");
                 fflush(stdin);
                 gets(validarString);
-<<<<<<< HEAD
                }while((validarPalabra(validarString))!=0);
-=======
-               }while((validarPalabra2(validarString))!=0);
->>>>>>> d1840b1305143d07741f11137f4ea23163c17294
+
                strcpy(nuevo.nombre,validarString);
 
                do{
@@ -131,13 +127,8 @@ int CargarEmpleado (archiEmpleado nuevo)
                do{
                 printf("\nIngrese el numero de telefono :\n");
                 fflush(stdin);
-<<<<<<< HEAD
-                scanf("%s",validarNum);
-               }while ((validarNumero(validarNum))!=0);
-=======
                 scanf("%s",&validarNum);
                }while ((validarNumero2(validarNum))!=0);
->>>>>>> d1840b1305143d07741f11137f4ea23163c17294
                nuevo.tel=(atoi(validarNum));
 
                do{
@@ -150,13 +141,8 @@ int CargarEmpleado (archiEmpleado nuevo)
                do{
                 printf("\n Ingrese el sueldo del empleado:\n");
                 fflush(stdin);
-<<<<<<< HEAD
-                scanf("%f",&validarNum);
-               }while((validarNumero(validarNum))!=0);
-=======
                 scanf("%s",&validarNum);
                }while((validarNumero2(validarNum))!=0);
->>>>>>> d1840b1305143d07741f11137f4ea23163c17294
                nuevo.sueldo= atof(validarNum); /// fojarse si esta es la funcion correcta para float
 
                nuevo.activo=1;/// si lo da de alta es por que va a estra activo
@@ -165,11 +151,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese la categoria a la que pertenece el empleado\n");
                 fflush(stdin);
                 gets(validarString);
-<<<<<<< HEAD
-               }while((validarPalabra(validarString))!=0);
-=======
                }while((validarPalabra2(validarString))!=0);
->>>>>>> d1840b1305143d07741f11137f4ea23163c17294
                strcpy(nuevo.nombreDivision,validarString);
 
                if(strcmpi(nuevo.nombreDivision,"primera")== 0)
