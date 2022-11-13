@@ -76,12 +76,12 @@
 
 1668276259 c:\users\usurio\documents\tpfinallabii-g5.com7-2022\cuerpotecnico.h
 
-1667936705 c:\users\usurio\documents\tpfinallabii-g5.com7-2022\division.h
+1668284174 c:\users\usurio\documents\tpfinallabii-g5.com7-2022\division.h
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"jugador.h"
 
-1668281512 c:\users\usurio\documents\tpfinallabii-g5.com7-2022\empleado.h
+1668296026 c:\users\usurio\documents\tpfinallabii-g5.com7-2022\empleado.h
 
 1667936705 c:\users\usurio\documents\tpfinallabii-g5.com7-2022\jugador.h
 
@@ -94,8 +94,17 @@
 1667936020 source:c:\users\usurio\documents\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
 
-1667936020 source:c:\users\usurio\documents\tpfinallabii-g5.com7-2022\main.c
+1668304396 source:c:\users\usurio\documents\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
+	"division.h"
+	"empleado.h"
+
+1668304143 source:c:\users\usurio\documents\tpfinallabii-g5.com7-2022\empleado.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"empleado.h"
+	"string.h"
 	"division.h"
 

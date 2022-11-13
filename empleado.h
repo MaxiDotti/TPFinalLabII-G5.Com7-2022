@@ -38,9 +38,9 @@ typedef struct nodoEmpleado{
 /////////////////////////////////////////////////////PROTOTIPADO/////////////////////////////////////////////////////////////////
 
 ////VALIDACIONES:
-int validarPalabra (char palabra[]);
-int validarNumero (char numeros[]);
-int validacionDeAlta (int legajo);
+int validarPalabra2(char palabra[]) ;
+int validarNumero2(char numeros[]) ;
+int validacionDeAlta2 (int legajo);
 
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);
@@ -50,6 +50,8 @@ stEmpleado nuevoEmpleado(archiEmpleado aux);
 void MostrarEmpleado(stEmpleado nuevo);
 void MostarNodoE (nodoEmpleado * NodoE);
 void MostrarListaE (nodoEmpleado * ListaE);
+void MostararchEpleado(archiEmpleado nuevo);
+void MostarArchiE();
 
 ////FUNCIONES LISTA:
 nodoEmpleado * inicListaS ();
