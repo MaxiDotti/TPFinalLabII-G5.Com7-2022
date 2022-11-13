@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "division.h"
-
+#include "empleado.h"
 int main()
 {
+<<<<<<< HEAD
     char archivoJugador[] = "ArchivoJugadores";
     ///cargarJugadorRegistroArchivo(archivoJugador);
     ///mostrarArchivoJugador(archivoJugador);
@@ -26,6 +27,13 @@ int main()
     printf("\n\nARBOL ORDENADO POR D.N.I.\n\n");
     mostrarArbolDNI(arbol);
 */
+=======
+
+
+
+
+
+>>>>>>> 71b06a2d261b73959dfb0d86db2c37a51e071a0f
     return 0;
 }
 
