@@ -12,10 +12,14 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1840b1305143d07741f11137f4ea23163c17294
     char nombreDivision[15]; /// primera , segunda , tercera
     int idDivision; /// 1, 2 ,3
 }archiEmpleado;
+
 typedef struct{
     int legajo;
     char nombre[20];
@@ -38,18 +42,27 @@ typedef struct nodoEmpleado{
 /////////////////////////////////////////////////////PROTOTIPADO/////////////////////////////////////////////////////////////////
 
 ////VALIDACIONES:
-int validarPalabra (char palabra[]);
-int validarNumero (char numeros[]);
-int validacionDeAlta (int legajo);
+int validarPalabra2(char palabra[]) ;
+int validarNumero2(char numeros[]) ;
+int validacionDeAlta2 (int legajo);
 
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);
+stEmpleado nuevoEmpleado(archiEmpleado aux);
 
+////MOSTRAR:
+void MostrarEmpleado(stEmpleado nuevo);
+void MostarNodoE (nodoEmpleado * NodoE);
+void MostrarListaE (nodoEmpleado * ListaE);
+void MostararchEpleado(archiEmpleado nuevo);
+void MostarArchiE();
 
-
-
-
-
-
+////FUNCIONES LISTA:
+nodoEmpleado * inicListaS ();
+nodoEmpleado * crearNodoS (stEmpleado nuevo);
+nodoEmpleado * agregarPpioS (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
+nodoEmpleado * agregarEnOrden (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
+nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int legajo);
+nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE);
 
 #endif // EMPLEADO_H_INCLUDED
