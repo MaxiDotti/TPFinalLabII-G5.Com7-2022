@@ -639,6 +639,9 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
     return A;
 }
 
+
+///Baja
+
 void bajaPorIdCT ()
 {
     FILE *buffer=fopen("ArchivoCuerpoTecnico","r+b");
