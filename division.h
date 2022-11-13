@@ -13,7 +13,7 @@ typedef struct celdaDivision{
     division dato;
     nodoEmpleado *emp;
     nodoCT *ct;
-    ArbolJugador *jug;
+    arbolJugador *jug;
 }celdaDivision;
 
 #endif // DIVISION_H_INCLUDED
