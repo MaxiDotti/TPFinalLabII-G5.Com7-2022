@@ -21,7 +21,7 @@ typedef struct{
     float sueldo;
     int dni;
     int telefono;
-    char cargo[20];
+    char cargo[20]; ///Nutricionista, Analista, Psicologo, DT
     int activo;
 }stCT; ///CUERPO TECNICO
 
@@ -47,7 +47,19 @@ nodoCT* crearNodoCT(stCT dato);
 nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo);
 nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo);
 void mostrarListaCT (nodoCT* lista);
-void mostrarEstructura (stCT dato);
+void mostrarEstructuraCT (stCT dato);
+void mostrarRegistroArchivoCT (registroArchivoCT dato);
+nodoCT* ArchiToListaCT (nodoCT* lista);
+stCT registroToCT (registroArchivoCT A);
+nodoCT* buscarPorIdCT (nodoCT* lista, int id);
+nodoCT* buscarPorDniCT (nodoCT* lista, int dni);
 
+///modificar
+registroArchivoCT modificarDatosCT (registroArchivoCT A);
+void modificarCTEleccion();
+int buscarPosIdArchivoCT (int id);
+
+///baja
+void bajaPorIdCT ();
 
 #endif // CUERPOTECNICO_H_INCLUDED
