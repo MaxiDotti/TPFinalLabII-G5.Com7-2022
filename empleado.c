@@ -1,7 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "empleado.h"
+#include "string.h"
+#include "division.h"
 
-
-int validarNumero (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso otro caracter
+int validarNumero2 (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso otro caracter
 {
     int i=0;
     int flag=0;
@@ -22,7 +26,7 @@ int validarNumero (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso o
     return flag;
 }
 
-int validarPalabra (char palabra[]) // retorna 0 si la palabra esta ok 1 si ingreso otro caracter
+int validarPalabra2 (char palabra[]) // retorna 0 si la palabra esta ok 1 si ingreso otro caracter
 {
     int i=0;
     int flag=0;
@@ -77,8 +81,8 @@ int CargarEmpleado (archiEmpleado nuevo)
     int flag = -1;
     int legajoAux = 0;
 
-    char validarNum [dim];
-    char validarString [dim];
+    char validarNum [20];
+    char validarString [20];
 
     FILE*archi=fopen("ArchivoEmpleados","ab");
 
@@ -98,7 +102,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 fflush(stdin);
                 gets(validarString);
                }while((validarPalabra(validarString))!=0);
-               strcpy(nuevo.Nombre,validarString);
+               strcpy(nuevo.nombre,validarString);
 
                do{
                 printf("\nIngrese el apellido del empleado:\n");
@@ -119,7 +123,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 fflush(stdin);
                 scanf("%s",validarNum);
                }while ((validarNumero(validarNum))!=0);
-               nuevo.telefono=(atoi(validarNum));
+               nuevo.tel=(atoi(validarNum));
 
                do{
                 printf("\n Ingrese el puesto del empleado: \n");
@@ -131,7 +135,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                do{
                 printf("\n Ingrese el sueldo del empleado:\n");
                 fflush(stdin);
-                scanf("%f",&validarNum)
+                scanf("%f",&validarNum);
                }while((validarNumero(validarNum))!=0);
                nuevo.sueldo= atof(validarNum); /// fojarse si esta es la funcion correcta para float
 
@@ -141,7 +145,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese la categoria a la que pertenece el empleado\n");
                 fflush(stdin);
                 gets(validarString);
-               }((validarPalabra(validarString))!=0);
+               }while((validarPalabra(validarString))!=0);
                strcpy(nuevo.nombreDivision,validarString);
 
                if(strcmpi(nuevo.nombreDivision,"primera")== 0)

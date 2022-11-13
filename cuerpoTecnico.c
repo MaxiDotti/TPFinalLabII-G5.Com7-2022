@@ -101,7 +101,20 @@ int validacionDniCT (int dni)
     return flag;
 }
 
-registroArchivoCT cargarCT ()
+void cargarArchivoCT ()
+{
+    char control='s';
+    do
+    {
+        cargarCT ();
+        printf("\nDesea seguir ingresando? s/n\n");
+        fflush(stdin);
+        scanf("%c",&control);
+    }
+    while(control!='n');
+}
+
+void cargarCT ()
 {
     registroArchivoCT nuevo;
     int flag=-1;
@@ -114,118 +127,121 @@ registroArchivoCT cargarCT ()
     {
         do
         {
-            do
-            {
-                printf("\nIngrese el id: \n");
-                fflush(stdin);
-                gets(validarNum);
-            }
-            while((validarNumero(validarNum))!=0);
-            nuevo.idCT= atoi(validarNum);
-
-            flag = validacionIdCT (nuevo.idCT);
-        }
-        while(flag==1);
-
-        do
-        {
-            printf("\nIngrese el nombre: \n");
-            fflush(stdin);
-            gets(validarString);
-        }
-        while((validarPalabra(validarString))!=0);
-        strcpy(nuevo.nombre,validarString);
-
-        do
-        {
-            printf("\nIngrese el apellido:\n");
-            fflush(stdin);
-            gets(validarString);
-        }
-        while((validarPalabra(validarString))!=0);
-        strcpy(nuevo.apellido,validarString);
-
-        do
-        {
-            do
-            {
-                printf("\nIngrese el dni: \n");
-                fflush(stdin);
-                gets(validarNum);
-            }
-            while((validarNumero(validarNum))!=0);
-            nuevo.dni= atoi(validarNum);
-
-            flag= validacionDniCT (nuevo.dni);
-        }
-        while (flag==1);
-
-        do
-        {
-            printf("\nIngrese el numero de telefono :\n");
-            fflush(stdin);
-            scanf("%s",validarNum);
-        }
-        while ((validarNumero(validarNum))!=0);
-        nuevo.telefono=(atoi(validarNum));
-
-        do
-        {
-            printf("\nIngrese el cargo en el cuerpo tecnico: \n");
-            fflush(stdin);
-            gets(validarString);
-        }
-        while((validarPalabra(validarString))!=0);
-        strcpy(nuevo.cargo,validarString);
-
-        do
-        {
-            printf("\nIngrese el sueldo:\n");
+            printf("\nIngrese el id: \n");
             fflush(stdin);
             gets(validarNum);
         }
         while((validarNumero(validarNum))!=0);
-        nuevo.sueldo= atof(validarNum);///no me funciona con comas
+        nuevo.idCT= atoi(validarNum);
 
-        nuevo.activo=1;
+        flag = validacionIdCT (nuevo.idCT);
 
-        do
+
+        if (flag!=1)
         {
-            flag=0;
             do
             {
-                printf("\nIngrese la categoria a la que pertenece\n");
+                printf("\nIngrese el nombre: \n");
                 fflush(stdin);
                 gets(validarString);
             }
             while((validarPalabra(validarString))!=0);
-            strcpy(nuevo.nombreDivision,validarString);
+            strcpy(nuevo.nombre,validarString);
 
-            if(strcmpi(nuevo.nombreDivision,"primera")== 0)
+            do
             {
-                nuevo.idDivision =1;
+                printf("\nIngrese el apellido:\n");
+                fflush(stdin);
+                gets(validarString);
             }
-            else if (strcmpi(nuevo.nombreDivision,"segunda")== 0)
+            while((validarPalabra(validarString))!=0);
+            strcpy(nuevo.apellido,validarString);
+
+            do
             {
-                nuevo.idDivision =2;
+                do
+                {
+                    printf("\nIngrese el dni: \n");
+                    fflush(stdin);
+                    gets(validarNum);
+                }
+                while((validarNumero(validarNum))!=0);
+                nuevo.dni= atoi(validarNum);
+
+                flag= validacionDniCT (nuevo.dni);
             }
-            else if (strcmpi(nuevo.nombreDivision,"tercera")== 0)
+            while (flag==1);
+
+            do
             {
-                nuevo.idDivision =3;
+                printf("\nIngrese el numero de telefono :\n");
+                fflush(stdin);
+                scanf("%s",validarNum);
             }
-            else
+            while ((validarNumero(validarNum))!=0);
+            nuevo.telefono=(atoi(validarNum));
+
+            do
             {
-                printf("\nCategoria erronea, vuelva a ingresar\n");
-                flag=1;
+                printf("\nIngrese el cargo en el cuerpo tecnico: \n");
+                fflush(stdin);
+                gets(validarString);
             }
+            while((validarPalabra(validarString))!=0);
+            strcpy(nuevo.cargo,validarString);
+
+            do
+            {
+                printf("\nIngrese el sueldo:\n");
+                fflush(stdin);
+                gets(validarNum);
+            }
+            while((validarNumero(validarNum))!=0);
+            nuevo.sueldo= atof(validarNum);///no me funciona con comas
+
+            nuevo.activo=1;
+
+            do
+            {
+                flag=0;
+                do
+                {
+                    printf("\nIngrese la categoria a la que pertenece\n");
+                    fflush(stdin);
+                    gets(validarString);
+                }
+                while((validarPalabra(validarString))!=0);
+                strcpy(nuevo.nombreDivision,validarString);
+
+                if(strcmpi(nuevo.nombreDivision,"primera")== 0)
+                {
+                    nuevo.idDivision =1;
+                }
+                else if (strcmpi(nuevo.nombreDivision,"segunda")== 0)
+                {
+                    nuevo.idDivision =2;
+                }
+                else if (strcmpi(nuevo.nombreDivision,"tercera")== 0)
+                {
+                    nuevo.idDivision =3;
+                }
+                else
+                {
+                    printf("\nCategoria erronea, vuelva a ingresar\n");
+                    flag=1;
+                }
+            }
+            while (flag==1);
+
+            fwrite(&nuevo,sizeof(registroArchivoCT),1,buf);
+
         }
-        while (flag==1);
+    }
+    else
+    {
+        printf("\nEl archivo no se pudo abrir.\n");
     }
     fclose(buf);
-
-
-    return nuevo;
-
 }
 
 nodoCT* inicListaDoble ()
@@ -255,29 +271,64 @@ nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo)
     return lista;
 }
 
+nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo)
+{
+    if(lista==NULL)
+    {
+        lista=nuevoNodo;
+    }
+    else
+    {
+        if(strcmpi(lista->dato.nombre,nuevoNodo->dato.nombre)<0)
+        {
+            lista= agregarAlPpioDoble(lista,nuevoNodo);
+        }
+        else
+        {
+            nodoCT* ante=lista;
+            nodoCT* seg=lista->sig;
+
+            while((seg != NULL) && (strcmpi(nuevoNodo->dato.nombre,seg->dato.nombre)>0))
+            {
+                ante = seg;
+                seg = seg->sig;
+            }
+
+            ante->sig=nuevoNodo;
+            seg->ant = nuevoNodo;
+            nuevoNodo->sig=seg;
+            nuevoNodo->ant=ante;
+        }
+    }
+    return lista;
+}
+
 void mostrarListaCT (nodoCT* lista)
 {
     while(lista!=NULL)
     {
-        printf("\n----------------------------------------------\n");
-        printf("ID: %d \n", lista->dato.idCT);
-        printf("Nombre: %s \n", lista->dato.nombre);
-        printf("Apellido: %s \n", lista->dato.apellido);
-        printf("Sueldo: %.02f \n", lista->dato.sueldo);
-        printf("DNI: %d \n", lista->dato.dni);
-        printf("Telefono: %d \n", lista->dato.telefono);
-        printf("Cargo en el cuerpo tecnico: %s \n", lista->dato.cargo);
-        if (lista->dato.activo==1)
-        {
-            printf("Estado: Activo");
-        }
-        else
-        {
-            printf("Estado: Inactivo");
-        }
-        printf("\n----------------------------------------------\n");
+        mostrarEstructura (lista->dato);
         lista=lista->sig;
     }
-
 }
 
+void mostrarEstructura (stCT dato)
+{
+    printf("\n----------------------------------------------\n");
+    printf("ID: %d \n", dato.idCT);
+    printf("Nombre: %s \n", dato.nombre);
+    printf("Apellido: %s \n", dato.apellido);
+    printf("Sueldo: %.02f \n", dato.sueldo);
+    printf("DNI: %d \n", dato.dni);
+    printf("Telefono: %d \n", dato.telefono);
+    printf("Cargo en el cuerpo tecnico: %s \n", dato.cargo);
+    if (dato.activo==1)
+    {
+        printf("Estado: Activo");
+    }
+    else
+    {
+        printf("Estado: Inactivo");
+    }
+    printf("\n----------------------------------------------\n");
+}

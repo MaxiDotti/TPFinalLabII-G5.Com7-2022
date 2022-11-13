@@ -2,10 +2,7 @@
 #define EMPLEADO_H_INCLUDED
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 242058895cfd75939e261285babd392abd517cc8
 typedef struct{
     int legajo;
     char nombre[20];
@@ -15,8 +12,7 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
-<<<<<<< HEAD
-=======
+
     char nombreDivision[15]; /// primera , segunda , tercera
     int idDivision; /// 1, 2 ,3
 }archiEmpleado;
@@ -29,7 +25,7 @@ typedef struct{
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
->>>>>>> 242058895cfd75939e261285babd392abd517cc8
+
 }stEmpleado;
 
 

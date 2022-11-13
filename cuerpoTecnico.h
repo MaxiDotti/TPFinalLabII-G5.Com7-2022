@@ -31,15 +31,23 @@ typedef struct nodoCT{
     struct nodoCT *sig;
 }nodoCT;
 
+///Validaciones
 int validarNumero (char numeros[]);
 int validarPalabra (char palabra[]);
 int validacionIdCT (int idCT);
 int validacionDniCT (int dni);
-registroArchivoCT cargarCT ();
+
+///Cargar CT
+void cargarArchivoCT ();
+void cargarCT ();
+
+///Funciones lista doble
 nodoCT* inicListaDoble ();
 nodoCT* crearNodoCT(stCT dato);
 nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo);
+nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo);
 void mostrarListaCT (nodoCT* lista);
+void mostrarEstructura (stCT dato);
 
 
 #endif // CUERPOTECNICO_H_INCLUDED
