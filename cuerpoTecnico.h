@@ -60,6 +60,6 @@ void modificarCTEleccion();
 int buscarPosIdArchivoCT (int id);
 
 ///baja
-void bajaPorIdCT ();
+void bajaReactivarPorIdCT (int activar);
 
 #endif // CUERPOTECNICO_H_INCLUDED

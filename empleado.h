@@ -54,8 +54,8 @@ void MostararchEpleado(archiEmpleado nuevo);
 void MostarArchiE();
 
 ////BAJAS:
-archiEmpleado bajarEmpleado (archiEmpleado aux);
-void bajarEmpleadoArchivo(int dni);
+int buscarPosLegajoArchivoE (int legajo);
+void bajaReactivarPorLegajoE (int activar);
 
 ////MODIFICACIONES:
 nodoEmpleado * modificarEmpleado(nodoEmpleado *listaE,int dni,char cambio[]);
