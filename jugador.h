@@ -52,6 +52,8 @@ arbolJugador *buscarPorDNI (arbolJugador *arbol, int dni);
 arbolJugador *buscarGoleador (arbolJugador *arbol, arbolJugador *goleador);
 int sumarGolesDivision (arbolJugador *arbol);
 arbolJugador *top3Goleadores (arbolJugador *arbol, arbolJugador *goleador, arbolJugador *goleadores, int cont);
+arbolJugador *buscarPorDNIyDarDeBaja (arbolJugador *arbol, int dni);
+arbolJugador *buscarGoleadorActivo (arbolJugador *arbol, arbolJugador *goleador);
 
 
 /***********************************************************************/

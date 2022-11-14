@@ -299,12 +299,12 @@ arbolJugador *buscarPorDNI (arbolJugador *arbol, int dni){
     return buscar;
 }
 
-arbolJugador *buscarGoleador (arbolJugador *arbol, arbolJugador *goleador){
+arbolJugador *buscarGoleador (arbolJugador *arbol, arbolJugador *goleador){ /// SE LE PASA POR PARAMETRO UN GOLEADOR EN NULL
     if(arbol){
         if(!goleador){
             goleador = arbol;
         }
-        if(arbol->dato.goles > goleador->dato.goles){
+        else if(arbol->dato.goles > goleador->dato.goles){
             goleador = arbol;
         }
         goleador = buscarGoleador(arbol->der, goleador);
@@ -321,23 +321,60 @@ int sumarGolesDivision (arbolJugador *arbol){
     return goles;
 }
 
+
+
+
+
+
+/*
+arbolJugador *buscarPorDNIyDarDeBaja (arbolJugador *arbol, int dni){
+    if(arbol){
+        if(arbol->dato.dni == dni){
+            arbol->dato.activo = 0;
+        }
+        else{
+            if(arbol->dato.dni < dni){
+                arbol = buscarPorDNI(arbol->der, dni);
+            }
+            else{
+                arbol = buscarPorDNI(arbol->izq, dni);
+            }
+        }
+    }
+    return arbol;
+}
+
+arbolJugador *buscarGoleadorActivo (arbolJugador *arbol, arbolJugador *goleador){ /// SE LE PASA POR PARAMETRO UN GOLEADOR EN NULL
+    if(arbol){
+        if(!goleador && arbol->dato.activo == 1){
+            goleador = arbol;
+        }
+        else if(arbol->dato.goles > goleador->dato.goles && arbol->dato.activo == 1){
+            goleador = arbol;
+        }
+        goleador = buscarGoleadorActivo(arbol->der, goleador);
+        goleador = buscarGoleadorActivo(arbol->izq, goleador);
+    }
+    return goleador;
+}
+
 arbolJugador *top3Goleadores (arbolJugador *arbol, arbolJugador *goleador, arbolJugador *goleadores, int cont){
     if(arbol){
-        if(!goleador){
-            goleador = arbol;
-        }
-        if(arbol->dato.goles > goleador->dato.goles && arbol->dato.activo == 1){
-            goleador = arbol;
-        }
-        goleador = top3Goleadores(arbol->der, goleador, goleadores, cont);
-        goleador = top3Goleadores(arbol->izq, goleador, goleadores, cont);
+        printf("\nENTRA AL IF BUSCARGOLEADORACTIVO ------------\n");
+        goleador = buscarGoleadorActivo(arbol, goleador);
+        printf("\nSALE DEL IF BUSCARGOLEADORACTIVO ------------\n");
+        goleadores = insertarEnArbol(goleadores, goleador); /// INSERTO EL GOLEADOR EN EL ARBOL DE GOLEADORES
+        arbol = buscarPorDNIyDarDeBaja(arbol, goleador->dato.dni); /// BUSCO EL DNI DEL GOLEADOR EN EL ARBOL Y LO DOY DE BAJA
     }
-    if(cont<=3){ /// SI YA NO HAY MAS NODOS POR VERIFICAR, SE INSERTA EL GOLEADOR EN EL ARBOL DE GOLEADORES
-        goleadores = insertarEnArbol(goleadores, goleador);
-        goleador->dato.activo = 0;
-        goleadores = top3Goleadores(arbol, goleador, goleadores, cont+1);
+
+    if(cont<1){ /// REPETIMOS LA FUNCION 3 VECES
+        printf("\nENTRA AL IF ------------\n");
+        printf("\nCONTADOR: %i ------------\n", cont);
+        cont++;
+        goleador = inicArbol(); /// INICIO EL ARBOL GOLEADOR PARA BUSCAR EL OTRO GOLEADOR MENOR
+        goleadores = top3Goleadores(arbol, goleador, goleadores, cont);
     }
     return goleadores;
 }
-
+*/
 

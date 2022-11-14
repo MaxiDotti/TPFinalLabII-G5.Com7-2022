@@ -11,6 +11,7 @@ int main()
     arbolJugador *arbol = inicArbol();
     arbol = archivoToArbol(archivoJugador);
     mostrarArbolDNI(arbol);
+<<<<<<< HEAD
     arbolJugador *goleador = inicArbol();
     arbolJugador *goleadores = inicArbol();
     int i=0; /// SE INICIALIZA EL CONTADOR EN 0
@@ -37,6 +38,8 @@ int main()
         fflush(stdin);
         scanf("%i",&opcion);
         system("cls");
+=======
+>>>>>>> 2c8887f9178ff0453a83311b79ca4c14a36f2adf
 
 
 
