@@ -5,7 +5,7 @@
 #include "division.h"
 #include "string.h"
 
-const char nombreArchivoCT[20] = "ArchivoCuerpoTecnico";
+const char nombreArchivoCT[30] = "ArchivoCuerpoTecnico.bin";
 
 int validarNumero (char numeros[])
 {
@@ -399,24 +399,40 @@ stCT registroToCT (registroArchivoCT A)
     return aux;
 }
 
-nodoCT* buscarPorIdCT (nodoCT* lista, int id)
+void mostrarPorCargo (char cargo[])
 {
-    while(lista!=NULL && lista->dato.idCT != id)
+    FILE* buf=fopen(nombreArchivoCT,"rb");
+    registroArchivoCT aux;
+    if (buf)
     {
-        lista=lista->sig;
+        while (fread(&aux,sizeof(registroArchivoCT),1,buf)>0)
+        {
+            if (strcmpi (aux.cargo,cargo)==0)
+            {
+                mostrarRegistroArchivoCT(aux);
+            }
+        }
     }
-
-    return lista;
 }
 
-nodoCT* buscarPorDniCT (nodoCT* lista, int dni)
+int mostrarPorId (int id)
 {
-    while(lista!=NULL && lista->dato.dni != dni)
-    {
-        lista=lista->sig;
-    }
+    int flag=0;
+    FILE* buf=fopen(nombreArchivoCT,"rb");
+    registroArchivoCT aux;
 
-    return lista;
+    if (buf)
+    {
+        while (fread(&aux,sizeof(registroArchivoCT),1,buf)>0)
+        {
+            if (aux.idCT==id)
+            {
+                mostrarRegistroArchivoCT(aux);
+                flag=1;
+            }
+        }
+    }
+    return flag;
 }
 
 ///Modificar por id en el archivo
@@ -663,7 +679,7 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
     aux.idCT= atoi(validarNum);
 
     flag = validacionIdCT (aux.idCT);
-
+    system("cls");
     if (flag==1)
     {
         int posID = buscarPosIdArchivoCT (aux.idCT);
@@ -677,7 +693,8 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
             fseek(buffer,sizeof(registroArchivoCT)*(posID),SEEK_SET);
             fwrite(&aux,sizeof(registroArchivoCT),1,buffer);
             fclose(buffer);
-
+            printf("Asi quedo: \n");
+            mostrarRegistroArchivoCT(aux);
         }
         else
         {
