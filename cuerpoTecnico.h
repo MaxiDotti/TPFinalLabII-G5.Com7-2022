@@ -53,6 +53,8 @@ nodoCT* ArchiToListaCT (nodoCT* lista);
 stCT registroToCT (registroArchivoCT A);
 nodoCT* buscarPorIdCT (nodoCT* lista, int id);
 nodoCT* buscarPorDniCT (nodoCT* lista, int dni);
+void mostrarPorCargo(char cargo[]);
+int mostrarPorId(int id);
 
 ///modificar
 registroArchivoCT modificarDatosCT (registroArchivoCT A);
@@ -60,6 +62,6 @@ void modificarCTEleccion();
 int buscarPosIdArchivoCT (int id);
 
 ///baja
-void bajaPorIdCT ();
+void bajaReactivarPorIdCT (int activar);
 
 #endif // CUERPOTECNICO_H_INCLUDED
