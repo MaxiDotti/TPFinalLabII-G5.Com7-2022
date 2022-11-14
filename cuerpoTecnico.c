@@ -18,7 +18,7 @@ int validarNumero (char numeros[])
         }
         else
         {
-            printf("\n\n\t\tUn dato ingresado no es un numero.Vuelva a ingresar el dato:\n\n\t\t");
+            printf("\n\n\t\tUn dato ingresado no es un numero. Vuelva a ingresar el dato:\n\n\t\t");
             flag=1;
         }
     }

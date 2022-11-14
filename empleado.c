@@ -360,20 +360,20 @@ nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE)
 nodoEmpleado * borrarNodoE(nodoEmpleado* listaE, int dni) {
    nodoEmpleado * seg;
    nodoEmpleado * ante;
-   if((lista != NULL) && (listaE->dato.dni == dni )) {
+   if((listaE != NULL) && (listaE->dato.dni == dni )) {
 
       nodoEmpleado * aux = listaE;
-      listaE = listaE->siguiente;
+      listaE = listaE->sig;
       free(aux);
    }else {
       seg = listaE;
       while((seg != NULL) && (listaE->dato.dni != dni)) {
          ante = seg;
-         seg = seg->siguiente;
+         seg = seg->sig;
       }
 
       if(seg!=NULL) {
-         ante->siguiente = seg->siguiente;
+         ante->sig = seg->sig;
          free(seg);
 
       }
@@ -393,19 +393,19 @@ archiEmpleado bajarEmpleado (archiEmpleado aux)
 
 void bajarEmpleadoArchivo(int dni){
     FILE *archi = fopen (nombreArchivo, "r+b");
-    archiEmpleador aux;
+    archiEmpleado aux;
     int flag=0;
 
     if(!archi){
         printf("\nEL ARCHIVO NO SE PUEDE ABRIR.\n");
     }
     else{
-        while(fread(&aux, sizeof(archiEmpleador), 1, archi) > 0 && flag==0){
+        while(fread(&aux, sizeof(archiEmpleado), 1, archi) > 0 && flag==0){
             if(aux.dni == dni){
-                aux = bajaJugador(aux);
+                aux = bajarEmpleado(aux);
                 flag = 1;
-                fseek(archi, sizeof(archiEmpleador)*(-1),1);
-                fwrite(&aux, sizeof(archiEmpleador), 1, archi);
+                fseek(archi, sizeof(archiEmpleado)*(-1),1);
+                fwrite(&aux, sizeof(archiEmpleado), 1, archi);
             }
         }
         if(flag == 0){
