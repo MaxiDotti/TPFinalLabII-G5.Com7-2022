@@ -16,4 +16,25 @@ typedef struct celdaDivision{
     arbolJugador *jug;
 }celdaDivision;
 
+
+////PROTOTIPADO CT:
+
+int altaCT (celdaDivision celd[], stCT nuevoCT, char nombreDivision[], int idDivision, int validos);
+int buscarPosDivision (celdaDivision celd[],int idDivision,int validos);
+int agregarDivision(celdaDivision celd[],char nombreDivision[],int idDivision,int validos);
+int archivoToArrCT (celdaDivision arr[], int dim);
+void mostrarArregloCT (celdaDivision arr[], int validos);
+
+////PROTOTIPADO EMPLEADO:
+int altaEmpleado(celdaDivision celd[], stEmpleado nuevo, char nombreDivision[], int idDivision, int validos);
+int archivoArrE (celdaDivision arr[], int dim);
+int agregarDivisionSimple(celdaDivision celd[],char nombreDivision[],int idDivision,int validos);
+void mostrarArregloEmpleado (celdaDivision arr[], int validos);
+
+////PROTOTIPADO JUGADOR:
+
+
+
+
+
 #endif // DIVISION_H_INCLUDED

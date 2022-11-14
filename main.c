@@ -11,6 +11,10 @@ int main()
     arbolJugador *arbol = inicArbol();
     arbol = archivoToArbol(archivoJugador);
     mostrarArbolDNI(arbol);
+<<<<<<< HEAD
+=======
+
+>>>>>>> b548783ffd24b6facbd6ba0efaf9aaffe9699223
     arbolJugador *goleador = inicArbol();
     arbolJugador *goleadores = inicArbol();
     int i=0; /// SE INICIALIZA EL CONTADOR EN 0
@@ -39,6 +43,10 @@ int main()
         fflush(stdin);
         scanf("%i",&opcion);
         system("cls");
+<<<<<<< HEAD
+=======
+
+>>>>>>> b548783ffd24b6facbd6ba0efaf9aaffe9699223
 
         if (opcion==1)
         {
@@ -139,81 +147,11 @@ int main()
     return 0;
 }
 
-///Funciones arreglo ct
 
-int altaCT (celdaDivision celd[], stCT nuevoCT, char nombreDivision[], int idDivision, int validos)
-{
-    nodoCT* aux=crearNodoCT(nuevoCT);
-    int pos=buscarPosDivision (celd,idDivision,validos);
-    if(pos==-1)
-    {
-        validos= agregarDivision(celd, nombreDivision, idDivision, validos);
-        pos=validos-1;
-    }
-    celd[pos].ct=agregarEnOrdenDobleId(celd[pos].ct, aux);
 
-    return validos;
-}
 
-int buscarPosDivision (celdaDivision celd[],int idDivision,int validos)
-{
-    int rta=-1;
-    int i=0;
 
-    while (validos>i && (rta==-1))
-    {
-        if (idDivision == celd[i].dato.idDivision)
-        {
-            rta=i;
-        }
-        i++;
-    }
-    return rta;
-}
 
-int agregarDivision(celdaDivision celd[],char nombreDivision[],int idDivision,int validos)
-{
-    strcpy(celd[validos].dato.nombreDivision, nombreDivision);
-    celd[validos].ct=inicListaDoble();
-    celd[validos].dato.idDivision=idDivision;
-    validos++;
 
-    return validos;
-}
 
-int archivoToArrCT (celdaDivision arr[], int dim)
-{
-    FILE* buf=fopen("ArchivoCuerpoTecnico","rb");
-    registroArchivoCT aux;
-    stCT ct;
 
-    int  validos=0;
-
-    if (buf)
-    {
-        while(fread(&aux,sizeof(registroArchivoCT),1,buf)>0 && validos<dim)
-        {
-            ct=registroToCT(aux);
-            validos=altaCT(arr,ct,aux.nombreDivision,aux.idDivision,validos);
-        }
-    }
-    else
-    {
-        printf("\nEl archivo no se pudo abrir.\n");
-    }
-    return validos;
-}
-
-void mostrarArregloCT (celdaDivision arr[], int validos)
-{
-    int i=0;
-    while (i<validos)
-    {
-        printf("Division: %s\n",arr[i].dato.nombreDivision);
-        printf("Id de la division : %d\n",arr[i].dato.idDivision);
-        mostrarListaCT(arr[i].ct);
-        i++;
-        system("pause");
-        system("cls");
-    }
-}

@@ -38,8 +38,7 @@ typedef struct nodoEmpleado{
 /////////////////////////////////////////////////////PROTOTIPADO/////////////////////////////////////////////////////////////////
 
 ////VALIDACIONES:
-int validarPalabra2(char palabra[]) ;
-int validarNumero2(char numeros[]) ;
+
 int validacionDeAlta2 (int dni);
 
 ////CARGA:
@@ -58,8 +57,7 @@ int buscarPosLegajoArchivoE (int legajo);
 void bajaReactivarPorLegajoE (int activar);
 
 ////MODIFICACIONES:
-nodoEmpleado * modificarEmpleado(nodoEmpleado *listaE,int dni,char cambio[]);
-stEmpleado editarEmpleado(stEmpleado editado , char cambio[]);
+archiEmpleado modificarDatosE (archiEmpleado  E);
 
 ////FUNCIONES LISTA:
 nodoEmpleado * inicListaS ();

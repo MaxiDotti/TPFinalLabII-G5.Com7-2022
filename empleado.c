@@ -8,49 +8,7 @@
 
 const char nombreArchivo[20] = "ArchivoEmpleados";
 
-///Validaciones
 
-int validarNumero2 (char numeros[]) // retorna 0 si el nro esta ok 1 si ingreso otro caracter
-{
-    int i=0;
-    int flag=0;
-
-    while(i<strlen(numeros) && flag==0)
-    {
-        if ((isdigit(numeros[i]))!=0)
-        {
-            i++;
-        }
-        else
-        {
-            printf("\nUn dato ingresado no es un numero.Vuelva a ingresar el dato:\n");
-            flag=1;
-        }
-    }
-
-    return flag;
-}
-
-int validarPalabra2 (char palabra[]) // retorna 0 si la palabra esta ok 1 si ingreso otro caracter
-{
-    int i=0;
-    int flag=0;
-
-    while(i<strlen(palabra) && flag==0)
-    {
-        if ((isalpha(palabra[i]))!=0 || (isspace(palabra[i])!=0))
-        {
-            i++;
-        }
-        else
-        {
-            printf("\nIngreso un caracter erroneo. Solo ingrese letras: \n");
-            flag=1;
-        }
-    }
-
-    return flag;
-}
 
 
 int validacionDeAlta2 (int dni) // recorriendo el archivo y verifica si existe
@@ -121,7 +79,7 @@ int CargarEmpleado (archiEmpleado nuevo)
     {
         printf("\nIngrese el dni del empleado: \n");
         scanf("%d",&dniAux);
-        flag = validacionDeAlta2(dniAux);
+        flag = validarNumero(dniAux);
 
         if(flag == 0)
         {
@@ -131,7 +89,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese el legajo del empleado: \n");
                 fflush(stdin);
                 scanf("%s",&validarNum);
-               }while((validarNumero2(validarNum))!=0);
+               }while((validarNumero(validarNum))!=0);
                nuevo.legajo= atoi(validarNum);
 
                do{
@@ -145,7 +103,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese el apellido del empleado:\n");
                 fflush(stdin);
                 gets(validarString);
-               }while((validarPalabra2(validarString))!=0);
+               }while((validarPalabra(validarString))!=0);
                strcpy(nuevo.apellido,validarString);
 
 
@@ -154,21 +112,21 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese el numero de telefono :\n");
                 fflush(stdin);
                 scanf("%s",&validarNum);
-               }while ((validarNumero2(validarNum))!=0);
+               }while ((validarNumero(validarNum))!=0);
                nuevo.tel=(atoi(validarNum));
 
                do{
                 printf("\n Ingrese el puesto del empleado: \n");
                 fflush(stdin);
                 gets(validarString);
-               }while((validarPalabra2(validarString))!=0);
+               }while((validarPalabra(validarString))!=0);
                strcpy(nuevo.puesto,validarString);
 
                do{
                 printf("\n Ingrese el sueldo del empleado:\n");
                 fflush(stdin);
                 scanf("%s",&validarNum);
-               }while((validarNumero2(validarNum))!=0);
+               }while((validarNumero(validarNum))!=0);
                nuevo.sueldo= atof(validarNum); /// fijarse si esta es la funcion correcta para float
 
                nuevo.activo=1;/// si lo da de alta es por que va a estra activo
@@ -177,7 +135,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 printf("\nIngrese la categoria a la que pertenece el empleado\n");
                 fflush(stdin);
                 gets(validarString);
-               }while((validarPalabra2(validarString))!=0);
+               }while((validarPalabra(validarString))!=0);
                strcpy(nuevo.nombreDivision,validarString);
 
                if(strcmpi(nuevo.nombreDivision,"primera")== 0)
@@ -479,5 +437,173 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
 
 
 ///modificar
+
+archiEmpleado modificarDatosE (archiEmpleado  E)
+{
+    system("cls");
+    printf("\nDatos actuales del ingresado\n");
+    int flag;
+    MostarArchiE();
+    int bucle=0;
+    char validarNum[30];
+    char validarString[30];
+
+    do
+    {
+        printf("Menu para modificar\n\n1.Modificar nombre\n2.Modificar apellido\n3.Modificar telefono\n4.Modificar cargo\n5.Modificar sueldo\n6.Modificar DNI\n7.Modificar Division\n0.Salir\n\n");
+        fflush(stdin);
+        scanf("%i",&bucle);
+        switch (bucle)
+        {
+        case 0:
+        {
+            break;
+        }
+        case 1:
+        {
+            do
+            {
+                printf("\nIngrese el nombre: \n");
+                fflush(stdin);
+                gets(validarString);
+            }
+            while((validarPalabra(validarString))!=0);
+            strcpy(E.nombre,validarString);
+
+            break;
+        }
+        case 2:
+        {
+            do
+            {
+                printf("\nIngrese el apellido:\n");
+                fflush(stdin);
+                gets(validarString);
+            }
+            while((validarPalabra(validarString))!=0);
+            strcpy(E.apellido,validarString);
+
+            break;
+        }
+        case 3:
+        {
+            do
+            {
+                printf("\nIngrese el numero de telefono :\n");
+                fflush(stdin);
+                scanf("%s",validarNum);
+            }
+            while ((validarNumero(validarNum))!=0);
+            E.tel=(atoi(validarNum));
+
+            break;
+        }
+        case 4:
+        {
+            do
+            {
+                printf("\nIngrese el puesto: \n");
+                fflush(stdin);
+                gets(validarString);
+            }
+            while((validarPalabra(validarString))!=0);
+            strcpy(E.puesto,validarString);
+            break;
+        }
+        case 5:
+        {
+            do
+            {
+                printf("\nIngrese el sueldo:\n");
+                fflush(stdin);
+                gets(validarNum);
+            }
+            while((validarNumero(validarNum))!=0);
+            E.sueldo= atof(validarNum);///no me funciona con comas
+            break;
+        }
+        case 6:
+        {
+            do
+            {
+                do
+                {
+                    printf("\nIngrese el dni: \n");
+                    fflush(stdin);
+                    gets(validarNum);
+                }
+                while((validarNumero(validarNum))!=0);
+                E.dni= atoi(validarNum);
+
+                flag= validacionDeAlta2(E.dni);
+            }
+            while (flag==1);
+
+            break;
+        }
+        case 7:
+        {
+            do
+            {
+                flag=0;
+                do
+                {
+                    printf("\nIngrese la nueva categoria\n");
+                    fflush(stdin);
+                    gets(validarString);
+                }
+                while((validarPalabra(validarString))!=0);
+                strcpy(E.nombreDivision,validarString);
+
+                if(strcmpi(E.nombreDivision,"primera")== 0)
+                {
+                    E.idDivision =1;
+                }
+                else if (strcmpi(E.nombreDivision,"segunda")== 0)
+                {
+                    E.idDivision =2;
+                }
+                else if (strcmpi(E.nombreDivision,"tercera")== 0)
+                {
+                    E.idDivision =3;
+                }
+                else
+                {
+                    printf("\nCategoria erronea, vuelva a ingresar\n");
+                    flag=1;
+                }
+            }
+            while (flag==1);
+
+            break;
+        }
+
+        default:
+        {
+            system("cls");
+            printf("Numero equivocado, elija otra vez\n");
+            break;
+        }
+        }
+        system("cls");
+        printf("\nAsi quedo modificado\n");
+        MostarArchiE();
+    }
+    while (bucle!=0);
+    return E;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
