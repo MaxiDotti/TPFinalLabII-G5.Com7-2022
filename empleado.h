@@ -38,8 +38,7 @@ typedef struct nodoEmpleado{
 /////////////////////////////////////////////////////PROTOTIPADO/////////////////////////////////////////////////////////////////
 
 ////VALIDACIONES:
-int validarPalabra2(char palabra[]) ;
-int validarNumero2(char numeros[]) ;
+
 int validacionDeAlta2 (int dni);
 
 ////CARGA:
@@ -54,8 +53,8 @@ void MostararchEpleado(archiEmpleado nuevo);
 void MostarArchiE();
 
 ////BAJAS:
-archiEmpleado bajarEmpleado (archiEmpleado aux);
-void bajarEmpleadoArchivo(int dni);
+int buscarPosLegajoArchivoE (int legajo);
+void bajaReactivarPorLegajoE (int activar);
 
 ////MODIFICACIONES:
 archiEmpleado modificarDatosE (archiEmpleado  E);

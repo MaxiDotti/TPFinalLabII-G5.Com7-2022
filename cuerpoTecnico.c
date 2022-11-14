@@ -5,6 +5,8 @@
 #include "division.h"
 #include "string.h"
 
+const char nombreArchivoCT[20] = "ArchivoCuerpoTecnico";
+
 int validarNumero (char numeros[])
 {
     int i=0;
@@ -52,7 +54,7 @@ int validacionIdCT (int idCT) // recorriendo el archivo y verifica si existe
     int flag=0;
     registroArchivoCT aux;
 
-    FILE *buf=fopen("ArchivoCuerpoTecnico","rb");
+    FILE *buf=fopen(nombreArchivoCT,"rb");
 
     if (buf!=NULL)
     {
@@ -79,7 +81,7 @@ int validacionDniCT (int dni)
     int flag=0;
     registroArchivoCT aux;
 
-    FILE *buf=fopen("ArchivoCuerpoTecnico","rb");
+    FILE *buf=fopen(nombreArchivoCT,"rb");
 
     if (buf!=NULL)
     {
@@ -121,7 +123,7 @@ void cargarCT ()
     char validarNum[30];
     char validarString[30];
 
-    FILE* buf=fopen("ArchivoCuerpoTecnico","ab");
+    FILE* buf=fopen(nombreArchivoCT,"ab");
 
     if (buf)
     {
@@ -270,8 +272,7 @@ nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo)
 
     return lista;
 }
-
-nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo) ///no funciona creo
+nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo)
 {
     if(lista==NULL)
     {
@@ -279,7 +280,7 @@ nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo) ///no funciona cre
     }
     else
     {
-        if(strcmpi(lista->dato.nombre,nuevoNodo->dato.nombre)<0)
+        if(lista->dato.idCT > nuevoNodo->dato.idCT)
         {
             lista= agregarAlPpioDoble(lista,nuevoNodo);
         }
@@ -288,15 +289,18 @@ nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo) ///no funciona cre
             nodoCT* ante=lista;
             nodoCT* seg=lista->sig;
 
-            while((seg != NULL) && (strcmpi(nuevoNodo->dato.nombre,seg->dato.nombre)>0))
+            while((seg != NULL) && lista->dato.idCT < nuevoNodo->dato.idCT)
             {
                 ante = seg;
                 seg = seg->sig;
             }
 
+            if (seg!=NULL)
+            {
+                seg->ant = nuevoNodo;
+                nuevoNodo->sig=seg;
+            }
             ante->sig=nuevoNodo;
-            seg->ant = nuevoNodo;
-            nuevoNodo->sig=seg;
             nuevoNodo->ant=ante;
         }
     }
@@ -358,7 +362,7 @@ void mostrarRegistroArchivoCT (registroArchivoCT dato)
 
 nodoCT* ArchiToListaCT (nodoCT* lista)
 {
-    FILE* buf=fopen("ArchivoCuerpoTecnico","rb");
+    FILE* buf=fopen(nombreArchivoCT,"rb");
     registroArchivoCT nuevo;
     stCT ct;
 
@@ -418,7 +422,7 @@ nodoCT* buscarPorDniCT (nodoCT* lista, int dni)
 ///Modificar por id en el archivo
 int buscarPosIdArchivoCT (int id)
 {
-    FILE *buffer=fopen("ArchivoCuerpoTecnico","rb");
+    FILE *buffer=fopen(nombreArchivoCT,"rb");
     registroArchivoCT aux;
     int flag=0;
     int i=0;
@@ -441,7 +445,7 @@ int buscarPosIdArchivoCT (int id)
 }
 void modificarCTEleccion()
 {
-    FILE *buffer=fopen("ArchivoCuerpoTecnico","r+b");
+    FILE *buffer=fopen(nombreArchivoCT,"r+b");
     registroArchivoCT aux;
     char validarNum[30];
     int flag;
@@ -640,11 +644,11 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
 }
 
 
-///Baja
+///Baja y reactivar
 
-void bajaPorIdCT ()
+void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
 {
-    FILE *buffer=fopen("ArchivoCuerpoTecnico","r+b");
+    FILE *buffer=fopen(nombreArchivoCT,"r+b");
     registroArchivoCT aux;
     char validarNum[30];
     int flag;
@@ -668,7 +672,7 @@ void bajaPorIdCT ()
         {
             fseek(buffer,sizeof(registroArchivoCT)*(posID),SEEK_SET);
             fread(&aux,sizeof(registroArchivoCT),1,buffer);
-            aux.activo=0;
+            aux.activo=activar;
 
             fseek(buffer,sizeof(registroArchivoCT)*(posID),SEEK_SET);
             fwrite(&aux,sizeof(registroArchivoCT),1,buffer);
@@ -686,3 +690,4 @@ void bajaPorIdCT ()
     }
 
 }
+
