@@ -58,8 +58,7 @@ archiEmpleado bajarEmpleado (archiEmpleado aux);
 void bajarEmpleadoArchivo(int dni);
 
 ////MODIFICACIONES:
-nodoEmpleado * modificarEmpleado(nodoEmpleado *listaE,int dni,char cambio[]);
-stEmpleado editarEmpleado(stEmpleado editado , char cambio[]);
+archiEmpleado modificarDatosE (archiEmpleado  E);
 
 ////FUNCIONES LISTA:
 nodoEmpleado * inicListaS ();

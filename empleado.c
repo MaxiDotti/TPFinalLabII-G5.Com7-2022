@@ -418,93 +418,173 @@ void bajarEmpleadoArchivo(int dni){
 
 ///modificar
 
-nodoEmpleado * modificarEmpleado(nodoEmpleado *listaE,int dni,char cambio[])
+archiEmpleado modificarDatosE (archiEmpleado  E)
 {
+    system("cls");
+    printf("\nDatos actuales del ingresado\n");
+    int flag;
+    MostarArchiE();
+    int bucle=0;
+    char validarNum[30];
+    char validarString[30];
 
+    do
+    {
+        printf("Menu para modificar\n\n1.Modificar nombre\n2.Modificar apellido\n3.Modificar telefono\n4.Modificar cargo\n5.Modificar sueldo\n6.Modificar DNI\n7.Modificar Division\n0.Salir\n\n");
+        fflush(stdin);
+        scanf("%i",&bucle);
+        switch (bucle)
+        {
+        case 0:
+        {
+            break;
+        }
+        case 1:
+        {
+            do
+            {
+                printf("\nIngrese el nombre: \n");
+                fflush(stdin);
+                gets(validarString);
+            }
+            while((validarPalabra(validarString))!=0);
+            strcpy(E.nombre,validarString);
 
-    listaE = buscarNodoE(listaE,dni);
-    listaE->dato=editarEmpleado(listaE->dato,cambio);
+            break;
+        }
+        case 2:
+        {
+            do
+            {
+                printf("\nIngrese el apellido:\n");
+                fflush(stdin);
+                gets(validarString);
+            }
+            while((validarPalabra(validarString))!=0);
+            strcpy(E.apellido,validarString);
 
-    return listaE;
+            break;
+        }
+        case 3:
+        {
+            do
+            {
+                printf("\nIngrese el numero de telefono :\n");
+                fflush(stdin);
+                scanf("%s",validarNum);
+            }
+            while ((validarNumero(validarNum))!=0);
+            E.telefono=(atoi(validarNum));
+
+            break;
+        }
+        case 4:
+        {
+            do
+            {
+                printf("\nIngrese el cargo en el cuerpo tecnico: \n");
+                fflush(stdin);
+                gets(validarString);
+            }
+            while((validarPalabra(validarString))!=0);
+            strcpy(E.cargo,validarString);
+            break;
+        }
+        case 5:
+        {
+            do
+            {
+                printf("\nIngrese el sueldo:\n");
+                fflush(stdin);
+                gets(validarNum);
+            }
+            while((validarNumero(validarNum))!=0);
+            E.sueldo= atof(validarNum);///no me funciona con comas
+            break;
+        }
+        case 6:
+        {
+            do
+            {
+                do
+                {
+                    printf("\nIngrese el dni: \n");
+                    fflush(stdin);
+                    gets(validarNum);
+                }
+                while((validarNumero(validarNum))!=0);
+                E.dni= atoi(validarNum);
+
+                flag= validacionDeAlta2(E.dni);
+            }
+            while (flag==1);
+
+            break;
+        }
+        case 7:
+        {
+            do
+            {
+                flag=0;
+                do
+                {
+                    printf("\nIngrese la nueva categoria\n");
+                    fflush(stdin);
+                    gets(validarString);
+                }
+                while((validarPalabra(validarString))!=0);
+                strcpy(E.nombreDivision,validarString);
+
+                if(strcmpi(E.nombreDivision,"primera")== 0)
+                {
+                    A.idDivision =1;
+                }
+                else if (strcmpi(E.nombreDivision,"segunda")== 0)
+                {
+                    A.idDivision =2;
+                }
+                else if (strcmpi(E.nombreDivision,"tercera")== 0)
+                {
+                    A.idDivision =3;
+                }
+                else
+                {
+                    printf("\nCategoria erronea, vuelva a ingresar\n");
+                    flag=1;
+                }
+            }
+            while (flag==1);
+
+            break;
+        }
+
+        default:
+        {
+            system("cls");
+            printf("Numero equivocado, elija otra vez\n");
+            break;
+        }
+        }
+        system("cls");
+        printf("\nAsi quedo modificado\n");
+        MostarArchiE();
+    }
+    while (bucle!=0);
+    return E;
 }
 
-stEmpleado editarEmpleado(stEmpleado editado , char cambio[])
-{
-    char validarNum [20];
-    char validarString [20];
+///Arreglo
 
-    if(strcmpi(cambio,"legajo")==0)
-    {
-        do{
-           printf("\nIngrese el nuevo legajo del empleado: \n");
-           fflush(stdin);
-           scanf("%s",&validarNum);
-        }while((validarNumero2(validarNum))!=0);
-        editado.legajo= atoi(validarNum);
-    }
-    else if(strcmpi(cambio,"nombre")==0)
-    {
 
-        do{
-           printf("\nIngrese el nombre  del empleado: \n");
-           fflush(stdin);
-           gets(validarString);
-        }while((validarPalabra(validarString))!=0);
-        strcpy(editado.nombre,validarString);
-    }
-    else if(strcmpi(cambio,"apellido"))
-    {
-        do{
-           printf("\nIngrese el apellido del empleado:\n");
-           fflush(stdin);
-           gets(validarString);
-        }while((validarPalabra2(validarString))!=0);
-        strcpy(editado.apellido,validarString);
-    }
-    else if(strcmpi(cambio,"dni")==0)
-    {
-        do{
-           printf("\nIngrese el nuevo DNI del empleado: \n");
-           fflush(stdin);
-           scanf("%s",&validarNum);
-        }while((validarNumero2(validarNum))!=0);
-        editado.dni= atoi(validarNum);
-    }
-    else if(strcmpi(cambio,"telefono")== 0)
-    {
-        do{
-           printf("\nIngrese el nuevo telefono del empleado: \n");
-           fflush(stdin);
-           scanf("%s",&validarNum);
-        }while((validarNumero2(validarNum))!=0);
-        editado.tel= atoi(validarNum);
-    }
-    else if(strcmpi(cambio,"puesto")==0)
-    {
-        do{
-           printf("\nIngrese el puesto del empleado:\n");
-           fflush(stdin);
-           gets(validarString);
-        }while((validarPalabra2(validarString))!=0);
-        strcpy(editado.puesto,validarString);
-    }
-    else if(strcmpi(cambio,"sueldo"))
-    {
-        do{
-           printf("\n Ingrese el sueldo del empleado:\n");
-           fflush(stdin);
-           scanf("%s",&validarNum);
-        }while((validarNumero2(validarNum))!=0);
-        editado.sueldo= atof(validarNum);
-    }
-    else{
 
-        printf("\nEL DATO A CAMBIAR NO EXISTE, ELIJA UN CAMPO CORRECTO\N");
-    }
 
-    editado.activo=1;
 
-    return editado;
-}
+
+
+
+
+
+
+
 
 
