@@ -53,7 +53,7 @@ int validarPalabra2 (char palabra[]) // retorna 0 si la palabra esta ok 1 si ing
 }
 
 
-int validacionDeAlta2 (int legajo) // recorriendo el archivo y verifica si existe
+int validacionDeAlta2 (int dni) // recorriendo el archivo y verifica si existe
 {
     int flag=0;
     archiEmpleado aux;
@@ -64,7 +64,7 @@ int validacionDeAlta2 (int legajo) // recorriendo el archivo y verifica si exist
     {
         while(fread(&aux,sizeof(archiEmpleado),1,archi)>0 && flag == 0)
         {
-           if (aux.legajo == legajo)
+           if (aux.dni == dni)
            {
               printf("\nEl empleado ya se encuentra cargado en el archivo.\n"); // si ya exite corta la busqueda con el flag si no el cliente se puede agregar a la lista.
               flag = 1;
@@ -84,7 +84,7 @@ int CargarEmpleado (archiEmpleado nuevo)
 {
 
     int flag = -1;
-    int legajoAux = 0;
+    int dniAux = 0;
 
     char validarNum [20];
     char validarString [20];
@@ -93,21 +93,26 @@ int CargarEmpleado (archiEmpleado nuevo)
 
     if(archi)
     {
-        printf("\nIngrese el legajo del empleado: \n");
-        fflush(stdin);
-        scanf("%d",&legajoAux);
-        flag = validacionDeAlta2(legajoAux);
+        printf("\nIngrese el dni del empleado: \n");
+        scanf("%d",&dniAux);
+        flag = validacionDeAlta2(dniAux);
 
         if(flag == 0)
         {
-            nuevo.legajo = legajoAux;
+            nuevo.dni = dniAux;
 
-            do{
+               do{
+                printf("\nIngrese el legajo del empleado: \n");
+                fflush(stdin);
+                scanf("%s",&validarNum);
+               }while((validarNumero2(validarNum))!=0);
+               nuevo.legajo= atoi(validarNum);
+
+               do{
                 printf("\nIngrese el nombre  del empleado: \n");
                 fflush(stdin);
                 gets(validarString);
                }while((validarPalabra(validarString))!=0);
-
                strcpy(nuevo.nombre,validarString);
 
                do{
@@ -117,12 +122,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                }while((validarPalabra2(validarString))!=0);
                strcpy(nuevo.apellido,validarString);
 
-               do{
-                printf("\n Ingrese el dni: \n");
-                fflush(stdin);
-                scanf("%s",&validarNum);
-               }while((validarNumero2(validarNum))!=0);
-               nuevo.dni= atoi(validarNum);
+
 
                do{
                 printf("\nIngrese el numero de telefono :\n");
@@ -143,7 +143,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 fflush(stdin);
                 scanf("%s",&validarNum);
                }while((validarNumero2(validarNum))!=0);
-               nuevo.sueldo= atof(validarNum); /// fojarse si esta es la funcion correcta para float
+               nuevo.sueldo= atof(validarNum); /// fijarse si esta es la funcion correcta para float
 
                nuevo.activo=1;/// si lo da de alta es por que va a estra activo
 
@@ -316,11 +316,11 @@ nodoEmpleado * agregarEnOrden(nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE) 
    return listaE;
 }
 
-nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int legajo) {
+nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int dni) {
 
    nodoEmpleado * seg;
 
-   while ((seg != NULL) && ( legajo != seg->dato.legajo)) {
+   while ((seg != NULL) && ( dni != seg->dato.dni)) {
       seg=seg->sig;
    }
 
@@ -357,12 +357,154 @@ nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE)
     return listaE;
 }
 
+nodoEmpleado * borrarNodoE(nodoEmpleado* listaE, int dni) {
+   nodoEmpleado * seg;
+   nodoEmpleado * ante;
+   if((lista != NULL) && (listaE->dato.dni == dni )) {
+
+      nodoEmpleado * aux = listaE;
+      listaE = listaE->siguiente;
+      free(aux);
+   }else {
+      seg = listaE;
+      while((seg != NULL) && (listaE->dato.dni != dni)) {
+         ante = seg;
+         seg = seg->siguiente;
+      }
+
+      if(seg!=NULL) {
+         ante->siguiente = seg->siguiente;
+         free(seg);
+
+      }
+   }
+   return listaE;
+}
 
 
+/// Bajas
+
+archiEmpleado bajarEmpleado (archiEmpleado aux)
+{
+    aux.activo=0;
+
+    return aux;
+}
+
+void bajarEmpleadoArchivo(int dni){
+    FILE *archi = fopen (nombreArchivo, "r+b");
+    archiEmpleador aux;
+    int flag=0;
+
+    if(!archi){
+        printf("\nEL ARCHIVO NO SE PUEDE ABRIR.\n");
+    }
+    else{
+        while(fread(&aux, sizeof(archiEmpleador), 1, archi) > 0 && flag==0){
+            if(aux.dni == dni){
+                aux = bajaJugador(aux);
+                flag = 1;
+                fseek(archi, sizeof(archiEmpleador)*(-1),1);
+                fwrite(&aux, sizeof(archiEmpleador), 1, archi);
+            }
+        }
+        if(flag == 0){
+            printf("\nEL DNI DEL EMPLEADO INGRESADO NO SE ENCUENTRA EN EL ARCHIVO.\n");
+        }
+        fclose(archi);
+    }
+}
 
 
+///modificar
+
+nodoEmpleado * modificarEmpleado(nodoEmpleado *listaE,int dni,char cambio[])
+{
 
 
+    listaE = buscarNodoE(listaE,dni);
+    listaE->dato=editarEmpleado(listaE->dato,cambio);
 
+    return listaE;
+}
+
+stEmpleado editarEmpleado(stEmpleado editado , char cambio[])
+{
+    char validarNum [20];
+    char validarString [20];
+
+    if(strcmpi(cambio,"legajo")==0)
+    {
+        do{
+           printf("\nIngrese el nuevo legajo del empleado: \n");
+           fflush(stdin);
+           scanf("%s",&validarNum);
+        }while((validarNumero2(validarNum))!=0);
+        editado.legajo= atoi(validarNum);
+    }
+    else if(strcmpi(cambio,"nombre")==0)
+    {
+
+        do{
+           printf("\nIngrese el nombre  del empleado: \n");
+           fflush(stdin);
+           gets(validarString);
+        }while((validarPalabra(validarString))!=0);
+        strcpy(editado.nombre,validarString);
+    }
+    else if(strcmpi(cambio,"apellido"))
+    {
+        do{
+           printf("\nIngrese el apellido del empleado:\n");
+           fflush(stdin);
+           gets(validarString);
+        }while((validarPalabra2(validarString))!=0);
+        strcpy(editado.apellido,validarString);
+    }
+    else if(strcmpi(cambio,"dni")==0)
+    {
+        do{
+           printf("\nIngrese el nuevo DNI del empleado: \n");
+           fflush(stdin);
+           scanf("%s",&validarNum);
+        }while((validarNumero2(validarNum))!=0);
+        editado.dni= atoi(validarNum);
+    }
+    else if(strcmpi(cambio,"telefono")== 0)
+    {
+        do{
+           printf("\nIngrese el nuevo telefono del empleado: \n");
+           fflush(stdin);
+           scanf("%s",&validarNum);
+        }while((validarNumero2(validarNum))!=0);
+        editado.tel= atoi(validarNum);
+    }
+    else if(strcmpi(cambio,"puesto")==0)
+    {
+        do{
+           printf("\nIngrese el puesto del empleado:\n");
+           fflush(stdin);
+           gets(validarString);
+        }while((validarPalabra2(validarString))!=0);
+        strcpy(editado.puesto,validarString);
+    }
+    else if(strcmpi(cambio,"sueldo"))
+    {
+        do{
+           printf("\n Ingrese el sueldo del empleado:\n");
+           fflush(stdin);
+           scanf("%s",&validarNum);
+        }while((validarNumero2(validarNum))!=0);
+        editado.sueldo= atof(validarNum);
+    }
+    else{
+
+        printf("\nEL DATO A CAMBIAR NO EXISTE, ELIJA UN CAMPO CORRECTO\N");
+    }
+
+    editado.activo=1;
+
+    return editado;
+}
 
 

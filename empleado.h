@@ -40,7 +40,7 @@ typedef struct nodoEmpleado{
 ////VALIDACIONES:
 int validarPalabra2(char palabra[]) ;
 int validarNumero2(char numeros[]) ;
-int validacionDeAlta2 (int legajo);
+int validacionDeAlta2 (int dni);
 
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);
@@ -53,12 +53,21 @@ void MostrarListaE (nodoEmpleado * ListaE);
 void MostararchEpleado(archiEmpleado nuevo);
 void MostarArchiE();
 
+////BAJAS:
+archiEmpleado bajarEmpleado (archiEmpleado aux);
+void bajarEmpleadoArchivo(int dni);
+
+////MODIFICACIONES:
+nodoEmpleado * modificarEmpleado(nodoEmpleado *listaE,int dni,char cambio[]);
+stEmpleado editarEmpleado(stEmpleado editado , char cambio[]);
+
 ////FUNCIONES LISTA:
 nodoEmpleado * inicListaS ();
 nodoEmpleado * crearNodoS (stEmpleado nuevo);
 nodoEmpleado * agregarPpioS (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
 nodoEmpleado * agregarEnOrden (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
-nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int legajo);
+nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int dni);
 nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE);
+nodoEmpleado * borrarNodoE(nodoEmpleado* listaE, int dni);
 
 #endif // EMPLEADO_H_INCLUDED
