@@ -18,7 +18,6 @@ typedef struct celdaDivision{
 
 
 ////PROTOTIPADO CT:
-
 int altaCT (celdaDivision celd[], stCT nuevoCT, char nombreDivision[], int idDivision, int validos);
 int buscarPosDivision (celdaDivision celd[],int idDivision,int validos);
 int agregarDivision(celdaDivision celd[],char nombreDivision[],int idDivision,int validos);
@@ -32,7 +31,9 @@ int agregarDivisionSimple(celdaDivision celd[],char nombreDivision[],int idDivis
 void mostrarArregloEmpleado (celdaDivision arr[], int validos);
 
 ////PROTOTIPADO JUGADOR:
-
+int altaJugadorDivision (celdaDivision celd[], stJugador nuevoJug, char nombreDivision[], int idDivision, int validos);
+int archivoToArrJug (celdaDivision arr[], int dim);
+int agregarDivisionJugador(celdaDivision celd[],char nombreDivision[],int idDivision,int validos);
 
 
 

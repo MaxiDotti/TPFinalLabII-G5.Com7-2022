@@ -479,8 +479,12 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
             fseek(buffer,sizeof(archiEmpleado)*(posLegajo),SEEK_SET);
             fwrite(&aux,sizeof(archiEmpleado),1,buffer);
             fclose(buffer);
+<<<<<<< HEAD
             printf("Asi quedo: \n");
             MostarArchiE(aux);
+=======
+
+>>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
         }
         else
         {

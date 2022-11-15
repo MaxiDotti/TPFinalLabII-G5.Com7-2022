@@ -5,7 +5,21 @@
 
 int main()
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    char archivoJugador[] = "ArchivoJugadores";
+    ///cargarJugadorRegistroArchivo(archivoJugador);
+    ///mostrarArchivoJugador(archivoJugador);
+>>>>>>> d4b114324b525cfeaa22a39421a6faadaeffbbce
+>>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
 
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
     int corte;
     int opcion=0;
     int eleccion;
@@ -15,14 +29,14 @@ int main()
     do
     {
         system("cls");
-        printf("A que menu desea ingresar: \n\n1.Jugador\n2.Empleados\n3.Cuerpo Tecnico\n4.Divisiones\n0.Salir\n\n");
+        printf("A que menu desea ingresar: \n\n1. Jugador\n2. Empleados\n3. Cuerpo Tecnico\n4. Divisiones\n0. Salir\n\n");
         fflush(stdin);
         scanf("%i",&opcion);
         system("cls");
 
         if (opcion==1)
         {
-
+            menuJugador(validos);
         }
         else if (opcion==2)
         {
@@ -162,12 +176,28 @@ int main()
     }
     while(corte==1);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
 
 
 
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+=======
+>>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
+>>>>>>> 32789900a17e534a71da308fc7ed95367d452f3a
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
+>>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
     return 0;
 }
 

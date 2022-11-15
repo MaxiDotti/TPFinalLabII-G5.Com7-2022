@@ -46,8 +46,8 @@ stJugador cargarUnStJugador (registroArchivoJugador aux);
 registroArchivoJugador bajaJugador(registroArchivoJugador aux);
 registroArchivoJugador altaJugador(registroArchivoJugador aux);
 registroArchivoJugador modificarUnJugadorAuxiliar (FILE *buf, registroArchivoJugador aux, int legajo);
-int buscarDni (FILE* buf, int dni);
-void buscarYModificarUnJugador (int dni);
+int buscarPosicionDni (FILE* buf, int dni);
+int buscarYModificarUnJugador (int dni);
 
 arbolJugador *inicArbol();
 arbolJugador *crearNodoArbol (stJugador aux);
@@ -59,6 +59,7 @@ int sumarGolesDivision (arbolJugador *arbol);
 arbolJugador *top3Goleadores (arbolJugador *arbol, arbolJugador *goleador, arbolJugador *goleadores, int cont);
 arbolJugador *buscarPorDNIyDarDeBaja (arbolJugador *arbol, int dni);
 arbolJugador *buscarGoleadorActivo (arbolJugador *arbol, arbolJugador *goleador);
+int mostrarNodoArbolPorLegajo (arbolJugador *arbol, int legajo);
 
 
 /***********************************************************************/

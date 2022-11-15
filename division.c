@@ -6,6 +6,10 @@
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
 ///Funciones arreglo ct
 
 int altaCT (celdaDivision celd[], stCT nuevoCT, char nombreDivision[], int idDivision, int validos)
@@ -104,7 +108,11 @@ int altaEmpleado(celdaDivision celd[], stEmpleado nuevo, char nombreDivision[], 
 
 int archivoArrE (celdaDivision arr[], int dim)
 {
+<<<<<<< HEAD
+    FILE* buf=fopen("archivoEmpleados","rb");
+=======
     FILE* buf=fopen("ArchivoEmpleados","rb");
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
     archiEmpleado aux;
     stEmpleado E;
 
@@ -149,5 +157,52 @@ void mostrarArregloEmpleado (celdaDivision arr[], int validos)
     }
 }
 
+/// FUNCIONES JUGADOR
+
+int altaJugadorDivision (celdaDivision celd[], stJugador nuevoJug, char nombreDivision[], int idDivision, int validos){
+    arbolJugador *aux = crearNodoArbol(nuevoJug);
+    int pos=buscarPosDivision (celd,idDivision,validos);
+    if(pos==-1)
+    {
+        validos = agregarDivisionJugador(celd, nombreDivision, idDivision, validos);
+        pos=validos-1;
+    }
+    celd[pos].jug = insertarEnArbol(celd[pos].jug, aux);
+
+    return validos;
+}
+
+int agregarDivisionJugador(celdaDivision celd[],char nombreDivision[],int idDivision,int validos){
+    strcpy(celd[validos].dato.nombreDivision, nombreDivision);
+    celd[validos].jug = inicArbol();
+    celd[validos].dato.idDivision=idDivision;
+    validos++;
+
+    return validos;
+}
+
+int archivoToArrJug (celdaDivision arr[], int dim){
+    FILE* buf=fopen("archivoJugadores","rb");
+    registroArchivoJugador aux;
+    stJugador jugador;
+
+    int  validos=0;
+
+    if (buf){
+        while(fread(&aux,sizeof(registroArchivoJugador),1,buf)>0 && validos<dim){
+            jugador = cargarUnStJugador(aux);
+            validos = altaJugadorDivision(arr, jugador, aux.nombreDivision, aux.idDivision, validos);
+        }
+    }else{
+        printf("\nEL ARCHIVO NO SE PUDO ABRIR.\n");
+    }
+    return validos;
+}
 
 
+
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
