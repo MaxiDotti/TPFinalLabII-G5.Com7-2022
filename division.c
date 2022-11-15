@@ -198,7 +198,7 @@ int archivoToArrJug (celdaDivision arr[], int dim)
 }
 ///FUNCIONES GENERALES
 
-void mostrarArrDivGeneral(celdaDivision arr[], int validos)
+void mostrarArrDivGeneral(celdaDivision arr[], int validos) ///Muestra el arreglo completo
 {
     int i=0;
     system("cls");
@@ -226,7 +226,7 @@ void mostrarArrDivGeneral(celdaDivision arr[], int validos)
     }
 }
 
-void mostrarUnaDivision (celdaDivision arr[], int i)
+void mostrarUnaDivision (celdaDivision arr[], int i) ///Muestra una division especifica
 {
     system("cls");
 
@@ -250,7 +250,7 @@ void mostrarUnaDivision (celdaDivision arr[], int i)
     printf("\n\n\n");
 }
 
-void mostrarPorNombreDiv(celdaDivision arr[],char nombre[], int validos)
+void mostrarPorNombreDiv(celdaDivision arr[],char nombre[], int validos) ///Muestra por nombre en las divisiones
 {
     int i=0;
     while (validos>i)
@@ -306,7 +306,7 @@ void menuDivision (int validos, int dim)
     {
 
         validos=archivoToArrCT(arr,dim);
-        maxValidos=validos;
+        maxValidos=validos;///Guarda los validos maximos
 
         validos = archivoToArrJug(arr, dim);
         if(validos>maxValidos)
