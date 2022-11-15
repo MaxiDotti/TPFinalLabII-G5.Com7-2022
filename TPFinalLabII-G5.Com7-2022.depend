@@ -5,21 +5,21 @@
 	"division.h"
 	"empleado.h"
 
-1668440666 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
+1668466865 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
 	"division.h"
 	"empleado.h"
 
-1668440666 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
+1668465917 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
 	<string.h>
 
-1668437695 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
+1668467102 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
 	<stdio.h>
 	<stdlib.h>
 
-1668347283 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
+1668459891 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -27,9 +27,9 @@
 	"division.h"
 	"string.h"
 
-1668347283 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
+1668441353 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
 
-1668347283 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
+1668459126 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -37,7 +37,7 @@
 	"string.h"
 	"division.h"
 
-1668347283 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
+1668441353 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
 
 1667935465 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
 	"division.h"

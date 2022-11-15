@@ -3,29 +3,52 @@
 
 registroArchivoJugador cargarUnJugador(int dni, int legajo){
     registroArchivoJugador aux;
+    char validarP[30];
 
     aux.dni = dni;
     aux.legajo = legajo+1;
 
-    printf("\nNOMBRE DIVISION: ");
-    fflush(stdin);
-    gets(aux.nombreDivision);
+    do{
+        printf("\nNOMBRE DIVISION: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarPalabra(validarP) != 0));
+    strcpy(aux.nombreDivision, validarP);
 
-    printf("ID DIVISION: ");
-    fflush(stdin);
-    scanf("%i", &aux.idDivision);
+    do{
+        printf("ID DIVISION: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarNumero(validarP) != 0));
+    aux.idDivision = atoi(validarP);
 
-    printf("NOMBRE: ");
-    fflush(stdin);
-    gets(aux.nombre);
+    do{
+        printf("NOMBRE: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarPalabra(validarP) != 0));
+    strcpy(aux.nombre, validarP);
 
-    printf("APELLIDO: ");
-    fflush(stdin);
-    gets(aux.apellido);
+    do{
+        printf("APELLIDO: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarPalabra(validarP) != 0));
+    strcpy(aux.apellido, validarP);
 
-    printf("POSICION: ");
-    fflush(stdin);
-    gets(aux.posicion);
+    do{
+        printf("EDAD: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarNumero(validarP) != 0));
+    aux.edad = atoi(validarP);
+
+    do{
+        printf("POSICION: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarPalabra(validarP) != 0));
+    strcpy(aux.posicion, validarP);
 
     printf("SUELDO: ");
     fflush(stdin);
@@ -35,9 +58,12 @@ registroArchivoJugador cargarUnJugador(int dni, int legajo){
     fflush(stdin);
     scanf("%f", &aux.valorpase);
 
-    printf("GOLES: ");
-    fflush(stdin);
-    scanf("%i", &aux.goles);
+    do{
+        printf("GOLES: ");
+        fflush(stdin);
+        gets(validarP);
+    }while((validarNumero(validarP) != 0));
+    aux.goles = atoi(validarP);
 
     aux.activo = 1;
 
@@ -49,7 +75,7 @@ int verificarDNIenArchivo (FILE *buf, int dni){
     int flag=0;
 
     fseek(buf, 0, 0);
-    while ((fread (&aux, sizeof(registroArchivoJugador), 1, buf) > 0) && flag != -1) /// verifica si el DNI ingresado es de un cliente ya existente.
+    while ((fread (&aux, sizeof(registroArchivoJugador), 1, buf) > 0) && flag != -1) /// verifica si el DNI ingresado es de un jugador ya existente.
     {
         if (dni == aux.dni){
             flag = -1;
@@ -61,10 +87,10 @@ int verificarDNIenArchivo (FILE *buf, int dni){
     return flag;
 }
 
-void cargarJugadorRegistroArchivo(char archiJugador[]){
-    FILE *buf = fopen (archiJugador, "a+b");
+void cargarJugadorRegistroArchivo(){
+    FILE *buf = fopen ("archivoJugadores", "a+b");
     registroArchivoJugador nuevo;
-    char control = 's';
+    char control = 's', validar[30];
     int flag=0, dni=0;
 
     if(!buf){
@@ -73,8 +99,13 @@ void cargarJugadorRegistroArchivo(char archiJugador[]){
     else{
         while(control == 's' || control == 'S'){
             printf("\n-------> COMPLETE LOS DATOS SEGUN CORRESPONDA <-------\n\n");
-            printf("\nDNI: ");
-            scanf("%i", &dni);
+            do{
+                printf("DNI: ");
+                fflush(stdin);
+                gets(validar);
+            }while((validarNumero(validar) != 0));
+            dni = atoi(validar);
+
             flag = verificarDNIenArchivo(buf, dni);
             if(flag != -1){ /// SI EL DNI NO EXISTE EN EL ARCHIVO, CARGA EL JUGADOR
                 nuevo = cargarUnJugador(dni, flag); /// FLAG = ULTIMO NUMERO DE LEGAJO CARGADO EN EL ARCHIVO
@@ -100,6 +131,7 @@ void mostrarUnJugadorRegistro(registroArchivoJugador aux){
     printf("\n|          NOMBRE: %s", aux.nombre);
     printf("\n|        APELLIDO: %s", aux.apellido);
     printf("\n|             DNI: %i", aux.dni);
+    printf("\n|            EDAD: %i", aux.edad);
     printf("\n|        POSICION: %s", aux.posicion);
     printf("\n|          SUELDO: %.2f", aux.sueldo);
     printf("\n|      VALOR PASE: %.2f", aux.valorpase);
@@ -113,8 +145,8 @@ void mostrarUnJugadorRegistro(registroArchivoJugador aux){
     printf("\n-------------------------------");
 }
 
-void mostrarArchivoJugador(char archiJugador[]){
-    FILE *buf = fopen (archiJugador, "rb");
+void mostrarArchivoJugador(){
+    FILE *buf = fopen ("archivoJugadores", "rb");
     registroArchivoJugador aux;
 
     if(!buf){
@@ -133,8 +165,8 @@ registroArchivoJugador bajaJugador(registroArchivoJugador aux){
     return aux;
 }
 
-void bajaJugadorArchivo(char archiJugador[], int dni){
-    FILE *buf = fopen (archiJugador, "r+b");
+void bajaJugadorArchivo(int dni){
+    FILE *buf = fopen ("archivoJugadores", "r+b");
     registroArchivoJugador aux;
     int flag=0;
 
@@ -162,8 +194,8 @@ registroArchivoJugador altaJugador(registroArchivoJugador aux){
     return aux;
 }
 
-void altaJugadorArchivo(char archiJugador[], int dni){
-    FILE *buf = fopen (archiJugador, "r+b");
+void altaJugadorArchivo(int dni){
+    FILE *buf = fopen ("archivoJugadores", "r+b");
     registroArchivoJugador aux;
     int flag=0;
 
@@ -186,6 +218,179 @@ void altaJugadorArchivo(char archiJugador[], int dni){
     }
 }
 
+registroArchivoJugador modificarUnJugadorAuxiliar (FILE *buf, registroArchivoJugador aux, int legajo){
+    char control = 's';
+    char validar[30];
+    int flag=-1;
+
+    aux.legajo = legajo;
+
+    printf("\n\nModificar nombre? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s')
+    {
+        do{
+        printf("NOMBRE: ");
+        fflush(stdin);
+        gets(validar);
+        }while((validarPalabra(validar) != 0));
+        strcpy(aux.nombre, validar);
+    }
+
+    printf("Modificar apellido? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        do{
+        printf("APELLIDO: ");
+        fflush(stdin);
+        gets(validar);
+        }while((validarPalabra(validar) != 0));
+        strcpy(aux.apellido, validar);
+    }
+
+    printf("Modificar edad? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        do{
+            printf("EDAD: ");
+            fflush(stdin);
+            gets(validar);
+        }while((validarNumero(validar) != 0));
+        aux.edad = atoi(validar);
+    }
+
+    printf("Modificar DNI? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    while(control=='s' && flag == -1){
+        do{
+            printf("DNI: ");
+            fflush(stdin);
+            gets(validar);
+        }while((validarNumero(validar) != 0));
+
+        flag = verificarDNIenArchivo(buf, atoi(validar));
+        if(flag == -1){
+            printf("\nEL DNI YA EXISTE EN EL ARCHIVO.\n");
+        }
+        else{
+            aux.dni = atoi(validar);
+            flag = 0;
+        }
+    }
+
+    printf("Modificar goles? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        do{
+        printf("GOLES: ");
+        fflush(stdin);
+        gets(validar);
+        }while((validarNumero(validar) != 0));
+        aux.goles = atoi(validar);
+    }
+
+    printf("Modificar division? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        do{
+        printf("ID DIVISION: ");
+        fflush(stdin);
+        gets(validar);
+        }while((validarNumero(validar) != 0));
+        aux.idDivision = atoi(validar);
+
+        do{
+        printf("\nNOMBRE DIVISION: ");
+        fflush(stdin);
+        gets(validar);
+        }while((validarPalabra(validar) != 0));
+        strcpy(aux.nombreDivision, validar);
+    }
+
+    printf("Modificar posicion? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        do{
+        printf("POSICION: ");
+        fflush(stdin);
+        gets(validar);
+        }while((validarPalabra(validar) != 0));
+        strcpy(aux.posicion, validar);
+    }
+
+    printf("Modificar valor del pase? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        printf("Ingrese valor del pase: ");
+        scanf("%f", &aux.valorpase);
+    }
+
+    printf("Modificar sueldo? s/n: ");
+    fflush(stdin);
+    scanf("%c", &control);
+    if(control=='s'){
+        printf("Ingrese sueldo: ");
+        scanf("%f", &aux.sueldo);
+    }
+
+    return aux;
+}
+
+int buscarPosicionDni (FILE* buf, int dni){
+    registroArchivoJugador aux;
+    int i = 0;
+    int flag = 0;
+
+    while((fread(&aux, sizeof(registroArchivoJugador), 1, buf)) > 0 && flag == 0){
+        if (dni == aux.dni){
+            flag = 1;
+        }
+        else{
+            i++;
+        }
+    }
+    return i;
+}
+
+void buscarYModificarUnJugador (int dni){
+    FILE *buf = fopen("archivoJugadores", "r+b");
+    registroArchivoJugador aux;;
+    int pos = 0;
+    int flag = 0;
+
+    if(!buf){
+        printf("El archivo no se puede abrir.\n");
+    }
+    else{
+        flag = verificarDNIenArchivo(buf, dni); /// SI ENCUENTRA EL DNI DEVUELVE -1
+
+        if(flag == -1){
+            pos = buscarPosicionDni(buf, dni);
+            fseek(buf, sizeof(registroArchivoJugador)*(pos), 0);
+            fread(&aux, sizeof(registroArchivoJugador), 1, buf);
+
+            aux = modificarUnJugadorAuxiliar(buf, aux, aux.legajo);
+
+            fseek(buf, sizeof(registroArchivoJugador)*(-1), 1);
+            fwrite(&aux, sizeof(registroArchivoJugador), 1, buf);
+            printf("\n\nJUGADOR MODIFICADO EXISTOSAMENTE\n\n");
+            flag = 1;
+        }
+        else{
+            printf("\nEL JUGADOR NO SE ENCUENTRA EN EL ARCHIVO\n");
+        }
+        fclose(buf);
+    }
+}
+
 /************************ FUNCIONES ARBOL JUGADOR ************************/
 
 void mostrarUnStJugador(stJugador aux){
@@ -193,6 +398,7 @@ void mostrarUnStJugador(stJugador aux){
     printf("\n|          NOMBRE: %s", aux.nombre);
     printf("\n|        APELLIDO: %s", aux.apellido);
     printf("\n|             DNI: %i", aux.dni);
+    printf("\n|            EDAD: %i", aux.edad);
     printf("\n|        POSICION: %s", aux.posicion);
     printf("\n|          SUELDO: %.2f", aux.sueldo);
     printf("\n|      VALOR PASE: %.2f", aux.valorpase);
@@ -228,6 +434,7 @@ stJugador cargarUnStJugador (registroArchivoJugador aux){
     strcpy(jug.nombre, aux.nombre);
     strcpy(jug.posicion, aux.posicion);
     jug.dni = aux.dni;
+    jug.edad = aux.edad;
     jug.goles = aux.goles;
     jug.sueldo = aux.sueldo;
     jug.valorpase = aux.valorpase;
@@ -250,13 +457,13 @@ arbolJugador *insertarEnArbol(arbolJugador *arbol, arbolJugador *nuevo){
     return arbol;
 }
 
-arbolJugador *archivoToArbol (char archiJugador[]){
+arbolJugador *archivoToArbolJugadores (){
     arbolJugador *arbol = inicArbol();
     arbolJugador *nuevo = inicArbol();
     registroArchivoJugador aux;
     stJugador jug;
 
-    FILE *buf = fopen(archiJugador, "rb");
+    FILE *buf = fopen("archivoJugadores", "rb");
 
     if(!buf){
         printf("\nEL ARCHIVO NO SE PUDO ABRIR.\n");

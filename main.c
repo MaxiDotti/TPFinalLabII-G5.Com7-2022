@@ -2,8 +2,17 @@
 #include <stdlib.h>
 #include "division.h"
 #include "empleado.h"
+
 int main()
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    char archivoJugador[] = "ArchivoJugadores";
+    ///cargarJugadorRegistroArchivo(archivoJugador);
+    ///mostrarArchivoJugador(archivoJugador);
+>>>>>>> d4b114324b525cfeaa22a39421a6faadaeffbbce
 
     int corte;
     int opcion=0;
@@ -115,6 +124,7 @@ int main()
     }
     while(corte==1);
 
+>>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
     return 0;
 }
 
