@@ -2,8 +2,14 @@
 #include "jugador.h"
 #include "empleado.h"
 #include "cuerpoTecnico.h"
+#include "string.h"
 
 
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
 ///Funciones arreglo ct
 
 int altaCT (celdaDivision celd[], stCT nuevoCT, char nombreDivision[], int idDivision, int validos)
@@ -48,7 +54,7 @@ int agregarDivision(celdaDivision celd[],char nombreDivision[],int idDivision,in
 
 int archivoToArrCT (celdaDivision arr[], int dim)
 {
-    FILE* buf=fopen("ArchivoCuerpoTecnico","rb");
+    FILE* buf=fopen("ArchivoCuerpoTecnico.bin","rb");
     registroArchivoCT aux;
     stCT ct;
 
@@ -102,7 +108,11 @@ int altaEmpleado(celdaDivision celd[], stEmpleado nuevo, char nombreDivision[], 
 
 int archivoArrE (celdaDivision arr[], int dim)
 {
+<<<<<<< HEAD
     FILE* buf=fopen("archivoEmpleados","rb");
+=======
+    FILE* buf=fopen("ArchivoEmpleados","rb");
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
     archiEmpleado aux;
     stEmpleado E;
 
@@ -191,5 +201,8 @@ int archivoToArrJug (celdaDivision arr[], int dim){
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff

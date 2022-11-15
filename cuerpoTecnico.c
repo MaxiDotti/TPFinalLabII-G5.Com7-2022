@@ -116,6 +116,26 @@ void cargarArchivoCT ()
     while(control!='n');
 }
 
+int generarID (registroArchivoCT ct)
+{
+    FILE *buff=fopen(nombreArchivoCT,"a+b");
+    registroArchivoCT aux;
+    if (buff!=NULL)
+    {
+        fseek(buff,sizeof(registroArchivoCT)*(-1),SEEK_END);
+        if ((fread(&aux,sizeof(registroArchivoCT),1,buff))>0)
+        {
+            ct.idCT=(aux.idCT)+1;
+        }
+        else
+        {
+            ct.idCT=1;
+        }
+        fclose(buff);
+    }
+    return ct.idCT;
+}
+
 void cargarCT ()
 {
     registroArchivoCT nuevo;
@@ -127,17 +147,7 @@ void cargarCT ()
 
     if (buf)
     {
-        do
-        {
-            printf("\nIngrese el id: \n");
-            fflush(stdin);
-            gets(validarNum);
-        }
-        while((validarNumero(validarNum))!=0);
-        nuevo.idCT= atoi(validarNum);
-
-        flag = validacionIdCT (nuevo.idCT);
-
+        nuevo.idCT=generarID(nuevo);
 
         if (flag!=1)
         {
@@ -181,7 +191,7 @@ void cargarCT ()
                 scanf("%s",validarNum);
             }
             while ((validarNumero(validarNum))!=0);
-            nuevo.telefono=(atoi(validarNum));
+            strcpy(nuevo.telefono,validarNum);
 
             do
             {
@@ -199,7 +209,7 @@ void cargarCT ()
                 gets(validarNum);
             }
             while((validarNumero(validarNum))!=0);
-            nuevo.sueldo= atof(validarNum);///no me funciona con comas
+            nuevo.sueldo= atof(validarNum);
 
             nuevo.activo=1;
 
@@ -324,7 +334,7 @@ void mostrarEstructuraCT (stCT dato)
     printf("Apellido: %s \n", dato.apellido);
     printf("Sueldo: %.02f \n", dato.sueldo);
     printf("DNI: %d \n", dato.dni);
-    printf("Telefono: %d \n", dato.telefono);
+    printf("Telefono: %s \n", dato.telefono);
     printf("Cargo en el cuerpo tecnico: %s \n", dato.cargo);
     if (dato.activo==1)
     {
@@ -347,7 +357,7 @@ void mostrarRegistroArchivoCT (registroArchivoCT dato)
     printf("Apellido: %s \n", dato.apellido);
     printf("Sueldo: %.02f \n", dato.sueldo);
     printf("DNI: %d \n", dato.dni);
-    printf("Telefono: %d \n", dato.telefono);
+    printf("Telefono: %s \n", dato.telefono);
     printf("Cargo en el cuerpo tecnico: %s \n", dato.cargo);
     if (dato.activo==1)
     {
@@ -390,7 +400,7 @@ stCT registroToCT (registroArchivoCT A)
     aux.activo=A.activo;
     aux.dni=A.dni;
     aux.sueldo=A.sueldo;
-    aux.telefono=A.telefono;
+    strcpy(aux.telefono,A.telefono);
     aux.idCT=A.idCT;
     strcpy(aux.nombre,A.nombre);
     strcpy(aux.apellido,A.apellido);
@@ -466,7 +476,7 @@ void modificarCTEleccion()
     char validarNum[30];
     int flag;
 
-    do ///No se si va en el menu
+    do
     {
         printf("\nIngrese el id: \n");
         fflush(stdin);
@@ -560,7 +570,7 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
                 scanf("%s",validarNum);
             }
             while ((validarNumero(validarNum))!=0);
-            A.telefono=(atoi(validarNum));
+            strcpy(A.telefono,validarNum);
 
             break;
         }
@@ -585,7 +595,7 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
                 gets(validarNum);
             }
             while((validarNumero(validarNum))!=0);
-            A.sueldo= atof(validarNum);///no me funciona con comas
+            A.sueldo= atof(validarNum);
             break;
         }
         case 6:
@@ -669,7 +679,7 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
     char validarNum[30];
     int flag;
 
-    do ///No se si va en el menu
+    do
     {
         printf("\nIngrese el id: \n");
         fflush(stdin);

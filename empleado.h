@@ -40,6 +40,7 @@ typedef struct nodoEmpleado{
 ////VALIDACIONES:
 
 int validacionDeAlta2 (int dni);
+int generarLegajo (archiEmpleado nuevo);
 
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);
