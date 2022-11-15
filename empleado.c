@@ -62,15 +62,6 @@ int validacionDeLegajo2 (int legajo) // recorriendo el archivo y verifica si exi
 
     return flag;
 }
-<<<<<<< HEAD
-int generarLegajo (archiEmpleado nuevo)
-{
-    FILE * buff=fopen("ArchivoEmpleados","a+b");
-    archiEmpleado aux;
-    if (buff!=NULL)
-    {
-        fseek(&buff,sizeof(archiEmpleado)*(-1),SEEK_END);
-=======
 
 int generarLegajo (archiEmpleado nuevo)
 {
@@ -79,7 +70,6 @@ int generarLegajo (archiEmpleado nuevo)
     if (buff!=NULL)
     {
         fseek(buff,sizeof(archiEmpleado)*(-1),SEEK_END);
->>>>>>> 32789900a17e534a71da308fc7ed95367d452f3a
         if ((fread(&aux,sizeof(archiEmpleado),1,buff))>0)
         {
             nuevo.legajo=(aux.legajo)+1;
@@ -90,14 +80,10 @@ int generarLegajo (archiEmpleado nuevo)
         }
         fclose(buff);
     }
-<<<<<<< HEAD
+
     return nuevo.legajo;///fijarse como usarla.
 }
-=======
-    return nuevo.legajo;
-}
 
->>>>>>> 32789900a17e534a71da308fc7ed95367d452f3a
 ///Carga
 int CargarEmpleado (archiEmpleado nuevo)
 {

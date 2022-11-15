@@ -5,18 +5,6 @@
 
 int main()
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-    char archivoJugador[] = "ArchivoJugadores";
-    ///cargarJugadorRegistroArchivo(archivoJugador);
-    ///mostrarArchivoJugador(archivoJugador);
->>>>>>> d4b114324b525cfeaa22a39421a6faadaeffbbce
-
->>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
     int corte;
     int opcion=0;
     int eleccion;
@@ -33,7 +21,7 @@ int main()
 
         if (opcion==1)
         {
-            menuJugador(validos);
+            menuJugador();
         }
         else if (opcion==2)
         {
@@ -122,35 +110,10 @@ int main()
         }
 
 
-        printf("\nPRESIONE 1 PARA VOLVER AL MENU PRINCIPAL / 0 PARA SALIR\n");
+        printf("\nPRESIONE 1 PARA VOLVER AL MENU PRINCIPAL / 0 PARA SALIR: ");
         scanf("%i",&corte);
     }
     while(corte==1);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
->>>>>>> 32789900a17e534a71da308fc7ed95367d452f3a
->>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
     return 0;
 }
-
-
-
-
-
-
-
-
-
