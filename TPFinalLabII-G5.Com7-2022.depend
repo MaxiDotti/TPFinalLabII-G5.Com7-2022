@@ -5,21 +5,22 @@
 	"division.h"
 	"empleado.h"
 
-1668466865 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
+1668480007 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
 	"division.h"
 	"empleado.h"
 
-1668465917 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
+1668483061 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
+	"division.h"
 	<string.h>
 
-1668467102 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
+1668481510 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
 	<stdio.h>
 	<stdlib.h>
 
-1668459891 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
+1668467547 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -27,9 +28,9 @@
 	"division.h"
 	"string.h"
 
-1668441353 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
+1668467547 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
 
-1668459126 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
+1668468141 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -37,15 +38,15 @@
 	"string.h"
 	"division.h"
 
-1668441353 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
+1668467547 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
 
-1667935465 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
+1668480933 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
 	"division.h"
 	"jugador.h"
 	"empleado.h"
 	"cuerpoTecnico.h"
 
-1668280772 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.h
+1668480933 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.h
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"jugador.h"

@@ -391,37 +391,20 @@ int buscarPosLegajoArchivoE (int legajo)
     return rta;
 }
 
-<<<<<<< HEAD
-void bajarEmpleadoArchivo(int dni){
-    FILE *archi = fopen (nombreArchivo, "r+b");
-    archiEmpleado aux;
-    int flag=0;
-=======
 void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
 {
     FILE *buffer=fopen(nombreArchivo,"r+b");
     archiEmpleado aux;
     char validarNum[30];
     int flag;
->>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
+
 
     do ///No se si va en el menu
     {
         printf("\nIngrese el legajo: \n");
         fflush(stdin);
         gets(validarNum);
-    }
-<<<<<<< HEAD
-    else{
-        while(fread(&aux, sizeof(archiEmpleado), 1, archi) > 0 && flag==0){
-            if(aux.dni == dni){
-                aux = bajarEmpleado(aux);
-                flag = 1;
-                fseek(archi, sizeof(archiEmpleado)*(-1),1);
-                fwrite(&aux, sizeof(archiEmpleado), 1, archi);
-            }
-=======
-    while((validarNumero(validarNum))!=0);
+    }while((validarNumero(validarNum))!=0);
     aux.legajo= atoi(validarNum);
 
     flag = validacionDeLegajo2(aux.legajo);
@@ -439,7 +422,7 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
             fseek(buffer,sizeof(archiEmpleado)*(posLegajo),SEEK_SET);
             fwrite(&aux,sizeof(archiEmpleado),1,buffer);
             fclose(buffer);
->>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
+
         }
         else
         {
