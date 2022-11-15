@@ -94,14 +94,14 @@ int altaEmpleado(celdaDivision celd[], stEmpleado nuevo, char nombreDivision[], 
         validos= agregarDivisionSimple(celd, nombreDivision, idDivision, validos);
         pos=validos-1;
     }
-    celd[pos].emp=agregarEnOrden(celd.emp,aux);
+    celd[pos].emp=agregarEnOrden(celd[pos].emp,aux);
 
     return validos;
 }
 
 int archivoArrE (celdaDivision arr[], int dim)
 {
-    FILE* buf=fopen(nombreArchivo,"rb");
+    FILE* buf=fopen("ArchivoEmpleados","rb");
     archiEmpleado aux;
     stEmpleado E;
 
@@ -139,7 +139,7 @@ void mostrarArregloEmpleado (celdaDivision arr[], int validos)
     {
         printf("Division: %s\n",arr[i].dato.nombreDivision);
         printf("Id de la division : %d\n",arr[i].dato.idDivision);
-        MostrarListaE(arr[i].emp));
+        MostrarListaE(arr[i].emp);
         i++;
         system("pause");
         system("cls");
