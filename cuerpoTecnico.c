@@ -746,7 +746,8 @@ void menuCuerpoTecnico (int validos,int dim)
 
     system("cls");
     printf("------> MENU DE CUERPO TECNICO\n\n");
-    printf("1.ALTA\n2.BAJA/REACTIVACION\n3.MODIFICAR\n4.LISTA DEL CUERPO TECNICO\n0.SALIR\n\n");
+    printf("[1] ALTA\n[2] BAJA/REACTIVACION\n[3] MODIFICAR\n[4] LISTA DEL CUERPO TECNICO\n[0] SALIR\n\n");
+    printf("OPCION: ");
     fflush(stdin);
     scanf("%d",&controles);
     system("cls");

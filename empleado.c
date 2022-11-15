@@ -733,7 +733,8 @@ void menuEmpleados (int validos, int dim)
 
     system("cls");
     printf("------> MENU DE EMPLEADOS\n\n");
-    printf("1.ALTA\n2.BAJA/REACTIVACION\n3.MODIFICAR\n4.LISTA DE EMPLEADOS\n0.SALIR\n\n");
+    printf("[1] ALTA\n[2] BAJA/REACTIVACION\n[3] MODIFICAR\n[4] LISTA DE EMPLEADOS\n[0] SALIR\n\n");
+    printf("OPCION: ");
     fflush(stdin);
     scanf("%d",&controles);
     system("cls");
@@ -745,7 +746,9 @@ void menuEmpleados (int validos, int dim)
         break;
     }
     case 2:
-        printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
+        printf("------> MENU DE BAJA/REACTIVACION\n\n[0] PARA DAR DE BAJA\n[1] PARA DAR DE ALTA\n");
+        printf("\nOPCION: ");
+        fflush(stdin);
         scanf("%d",&eleccion);
         if (eleccion == 0)///Da de baja
         {
@@ -770,7 +773,8 @@ void menuEmpleados (int validos, int dim)
     {
         validos= archivoArrE (arr, dim);///Pasa del archivo al arreglo
         printf("%d",validos);
-        printf("------> MENU DE MOSTRAR\n1.MOSTRAR TODO\n2.MOSTRAR POR PUESTO\n3.MOSTRAR POR ID\n4.MOSTRAR POR DIVISION\n");
+        printf("------> MENU DE MOSTRAR\n[1] MOSTRAR TODO\n[2] MOSTRAR POR PUESTO\n[3] MOSTRAR POR ID\n[4] MOSTRAR POR DIVISION\n[0] SALIR\n\n");
+        printf("OPCION: ");
         scanf("%d",&eleccion);
         system("cls");
         if (eleccion==1)

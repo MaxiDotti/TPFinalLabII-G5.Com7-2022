@@ -4,22 +4,21 @@
 	<stdlib.h>
 	"division.h"
 
-1668487121 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
+1668538263 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
 	"division.h"
-	"empleado.h"
 
-1668486055 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
+1668535315 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
 	"division.h"
 	<string.h>
 
-1668481510 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
+1668535315 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.h
 	<stdio.h>
 	<stdlib.h>
 
-1668483593 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
+1668537792 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -27,9 +26,9 @@
 	"division.h"
 	"string.h"
 
-1668483593 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
+1668535315 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
 
-1668483874 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
+1668538224 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -37,16 +36,16 @@
 	"string.h"
 	"division.h"
 
-1668483593 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
+1668535315 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
 
-1668483846 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
+1668537792 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
 	"division.h"
 	"jugador.h"
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"string.h"
 
-1668480933 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.h
+1668535315 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.h
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"jugador.h"

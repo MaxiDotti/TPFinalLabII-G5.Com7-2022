@@ -294,7 +294,8 @@ void menuDivision (int validos, int dim)
 
     system("cls");
     printf("------> MENU DE DIVISION\n\n");
-    printf("1.MOSTRAR TODAS LAS DIVISIONES\n2.MOSTRAR POR DIVISION\n3.BUSCAR NOMBRES\n0.SALIR\n");
+    printf("[1] MOSTRAR TODAS LAS DIVISIONES\n[2] MOSTRAR POR DIVISION\n[3] BUSCAR NOMBRES\n[0] SALIR\n\n");
+    printf("OPCION: ");
     fflush(stdin);
     scanf("%d",&controles);
     system("cls");
