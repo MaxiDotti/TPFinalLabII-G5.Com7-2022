@@ -10,7 +10,6 @@ const char nombreArchivo[20] = "ArchivoEmpleados";
 
 
 
-
 int validacionDeAlta2 (int dni) // recorriendo el archivo y verifica si existe
 {
     int flag=0;
@@ -62,6 +61,25 @@ int validacionDeLegajo2 (int legajo) // recorriendo el archivo y verifica si exi
     }
 
     return flag;
+}
+int generarLegajo (archiEmpleado nuevo)
+{
+    FILE buff=fopen(nombreArchivo,"a+b");
+    archiEmpleado aux;
+    if (buff!=NULL)
+    {
+        fseek(buff,sizeof(archiEmpleado)(-1),SEEK_END);
+        if ((fread(&aux,sizeof(archiEmpleado),1,buff))>0)
+        {
+            nuevo.legajo=(aux.legajo)+1;
+        }
+        else
+        {
+            nuevo.legajo=1;
+        }
+        fclose(buff);
+    }
+    return nuevo.legajo;
 }
 ///Carga
 int CargarEmpleado (archiEmpleado nuevo)

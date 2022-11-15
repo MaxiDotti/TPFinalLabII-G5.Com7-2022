@@ -47,6 +47,15 @@ int main()
     }
     while(corte==1);
 
+
+
+
+
+
+
+
+
+
     return 0;
 }
 
