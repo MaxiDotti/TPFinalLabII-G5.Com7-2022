@@ -551,12 +551,12 @@ void modificarE ()
 
             fseek(buffer,sizeof(archiEmpleado)*(posLegajo),SEEK_SET);
             fwrite(&aux,sizeof(archiEmpleado),1,buffer);
-            fclose(buffer);
         }
         else
         {
             printf("\nEl archivo no se pudo abrir.\n");
         }
+        fclose(buffer);
     }
     else
     {
@@ -764,6 +764,7 @@ void menuEmpleados (int validos, int dim)
     case 3:
     {
         modificarE();
+        break;
     }
     case 4:
     {
@@ -839,6 +840,7 @@ void menuEmpleados (int validos, int dim)
                 }
             }
         }
+        break;
     }
     }
 }

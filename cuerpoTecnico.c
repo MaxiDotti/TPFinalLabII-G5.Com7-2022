@@ -189,7 +189,7 @@ void cargarCT () ///CARGA EN EL ARCHIVO
         {
             printf("\nIngrese el numero de telefono :\n");
             fflush(stdin);
-            scanf("%s",validarNum);
+            gets(validarNum);
         }
         while ((validarNumero(validarNum))!=0);
         strcpy(nuevo.telefono,validarNum);

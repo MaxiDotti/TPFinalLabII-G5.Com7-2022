@@ -34,13 +34,13 @@ typedef struct nodoCT{
 ///Menu
 void menuCuerpoTecnico (int validos, int dim);
 
-///Validaciones
+///VALIDACIONES
 int validarNumero (char numeros[]);
 int validarPalabra (char palabra[]);
 int validacionIdCT (int idCT);
 int validacionDniCT (int dni);
 
-///Cargar CT
+///CARGAR CT
 void cargarArchivoCT ();
 void cargarCT ();
 
@@ -65,12 +65,12 @@ nodoCT* buscarPorIdCT (nodoCT* lista, int id);
 nodoCT* buscarPorDniCT (nodoCT* lista, int dni);
 int generarID (registroArchivoCT ct);
 
-///modificar
+///MODIFICAR
 registroArchivoCT modificarDatosCT (registroArchivoCT A);
 void modificarCTEleccion();
 int buscarPosIdArchivoCT (int id);
 
-///baja
+///BAJA
 void bajaReactivarPorIdCT (int activar);
 
 #endif // CUERPOTECNICO_H_INCLUDED
