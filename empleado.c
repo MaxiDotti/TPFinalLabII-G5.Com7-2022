@@ -10,7 +10,6 @@ const char nombreArchivo[20] = "ArchivoEmpleados";
 
 
 
-
 int validacionDeAlta2 (int dni) // recorriendo el archivo y verifica si existe
 {
     int flag=0;
@@ -71,6 +70,7 @@ int generarLegajo (archiEmpleado nuevo)
     if (buff!=NULL)
     {
         fseek(buff,sizeof(archiEmpleado)*(-1),SEEK_END);
+
         if ((fread(&aux,sizeof(archiEmpleado),1,buff))>0)
         {
             nuevo.legajo=(aux.legajo)+1;
@@ -83,6 +83,7 @@ int generarLegajo (archiEmpleado nuevo)
     }
     return nuevo.legajo;
 }
+
 
 ///Carga
 int CargarEmpleado (archiEmpleado nuevo)
@@ -106,14 +107,7 @@ int CargarEmpleado (archiEmpleado nuevo)
         {
             nuevo.dni = dniAux;
 
-            do
-            {
-                printf("\nIngrese el legajo del empleado: \n");
-                fflush(stdin);
-                scanf("%s",&validarNum);
-            }
-            while((validarNumero(validarNum))!=0);
-            nuevo.legajo= atoi(validarNum);
+            nuevo.legajo=generarLegajo(nuevo);
 
             do
             {
@@ -134,7 +128,6 @@ int CargarEmpleado (archiEmpleado nuevo)
             strcpy(nuevo.apellido,validarString);
 
 
-
             do
             {
                 printf("\nIngrese el numero de telefono :\n");
@@ -142,7 +135,7 @@ int CargarEmpleado (archiEmpleado nuevo)
                 scanf("%s",&validarNum);
             }
             while ((validarNumero(validarNum))!=0);
-            nuevo.tel=(atoi(validarNum));
+            strcpy(nuevo.tel,validarNum);
 
             do
             {
@@ -210,7 +203,7 @@ void MostrarEmpleado (stEmpleado nuevo)
     printf("\n NOMBRE: %s ",nuevo.nombre);
     printf("\n APELLIDO: %s ",nuevo.apellido);
     printf("\n DNI: %d ", nuevo.dni);
-    printf("\n TELEFONO: %d ", nuevo.tel);
+    printf("\n TELEFONO: %s ", nuevo.tel);
     printf("\n SUELDO: %f ", nuevo.sueldo);
     if(nuevo.activo == 1)
     {
@@ -245,7 +238,7 @@ void MostararchEpleado(archiEmpleado nuevo)
     printf("\n NOMBRE: %s ",nuevo.nombre);
     printf("\n APELLIDO: %s ",nuevo.apellido);
     printf("\n DNI: %d ", nuevo.dni);
-    printf("\n TELEFONO: %d ", nuevo.tel);
+    printf("\n TELEFONO: %s ", nuevo.tel);
     printf("\n PUESTO: %s ",nuevo.puesto);
     printf("\n SUELDO: %f ", nuevo.sueldo);
     if(nuevo.activo == 1)
@@ -375,7 +368,7 @@ stEmpleado nuevoEmpleado(archiEmpleado aux)
     strcpy(nuevo.nombre,aux.nombre);
     strcpy(nuevo.apellido,aux.apellido);
     nuevo.dni = aux.dni;
-    nuevo.tel = aux.tel;
+    strcpy(nuevo.tel,aux.tel);
     strcpy(nuevo.puesto,aux.puesto);
     nuevo.sueldo = aux.sueldo;
     nuevo.activo = aux.activo;
@@ -603,7 +596,7 @@ archiEmpleado modificarDatosE (archiEmpleado  E)
                 scanf("%s",validarNum);
             }
             while ((validarNumero(validarNum))!=0);
-            E.tel=(atoi(validarNum));
+            strcpy(E.tel,validarNum);
 
             break;
         }

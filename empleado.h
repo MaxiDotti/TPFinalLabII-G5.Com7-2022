@@ -8,7 +8,7 @@ typedef struct{
     char nombre[20];
     char apellido[20];
     int dni;
-    int tel;
+    char tel [15];
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
@@ -21,7 +21,7 @@ typedef struct{
     char nombre[20];
     char apellido[20];
     int dni;
-    int tel;
+    char tel[15];
     char puesto[20]; /// AYUDANTE - PROFE - MEDICO - MAESTRANZA
     float sueldo;
     int activo;
@@ -40,6 +40,7 @@ typedef struct nodoEmpleado{
 ////VALIDACIONES:
 
 int validacionDeAlta2 (int dni);
+int generarLegajo (archiEmpleado nuevo);
 
 ////CARGA:
 int CargarEmpleado (archiEmpleado nuevo);

@@ -72,7 +72,7 @@ int main()
                 char cargo[20];
                 int id;
                 int flag;
-                printf("Menu de mostrar\n1.Mostrar todo\n2.Mostrar por cargo\n3.Buscar por id\n");
+                printf("Menu de mostrar\n1.Mostrar todo\n2.Mostrar por cargo\n3.Buscar por id\n4.Mostrar por division\n");
                 scanf("%d",&eleccion);
                 system("cls");
                 if (eleccion==1)
@@ -97,6 +97,52 @@ int main()
                         printf("No se ha encontrado el id\n");
                     }
                 }
+                else if (eleccion==4)
+                {
+                    int pos;
+                    printf("Division 1\nDivision 2\nDivision 3\n");
+                    scanf("%d",&eleccion);
+                    system("cls");
+                    if (eleccion==1)
+                    {
+                        printf("Division 1\n");
+                        pos=buscarPosDivision(arr,1,validos);
+                        if (pos==-1)
+                        {
+                            printf("No existe la division\n");
+                        }
+                        else
+                        {
+                            mostrarListaCT(arr[pos].ct);
+                        }
+                    }
+                    else if (eleccion==2)
+                    {
+                        printf("Division 2\n");
+                        pos=buscarPosDivision(arr,2,validos);
+                        if (pos==-1)
+                        {
+                            printf("No existe la division\n");
+                        }
+                        else
+                        {
+                            mostrarListaCT(arr[pos].ct);
+                        }
+                    }
+                    else if (eleccion==3)
+                    {
+                        printf("Division 3\n");
+                        pos=buscarPosDivision(arr,3,validos);
+                        if (pos==-1)
+                        {
+                            printf("No existe la division\n");
+                        }
+                        else
+                        {
+                            mostrarListaCT(arr[pos].ct);
+                        }
+                    }
+                }
                 break;
             }
             }
@@ -115,6 +161,12 @@ int main()
         scanf("%i",&corte);
     }
     while(corte==1);
+
+
+
+
+
+
 
     return 0;
 }
