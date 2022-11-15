@@ -2,6 +2,9 @@
 #include "jugador.h"
 #include "empleado.h"
 #include "cuerpoTecnico.h"
+#include "string.h"
+
+
 
 ///Funciones arreglo ct
 
@@ -47,7 +50,7 @@ int agregarDivision(celdaDivision celd[],char nombreDivision[],int idDivision,in
 
 int archivoToArrCT (celdaDivision arr[], int dim)
 {
-    FILE* buf=fopen("ArchivoCuerpoTecnico","rb");
+    FILE* buf=fopen("ArchivoCuerpoTecnico.bin","rb");
     registroArchivoCT aux;
     stCT ct;
 
@@ -145,8 +148,6 @@ void mostrarArregloEmpleado (celdaDivision arr[], int validos)
         system("cls");
     }
 }
-
-
 
 
 

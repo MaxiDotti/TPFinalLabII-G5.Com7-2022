@@ -8,6 +8,7 @@ typedef struct{
     char nombre[20];
     char apellido[20];
     int dni;
+    int edad;
     float sueldo;
     float valorpase;
     char posicion[20]; /// ARQUERO - DEFENSOR - MEDIOCAMPISTA - DELANTERO
@@ -22,6 +23,7 @@ typedef struct{
     char nombre[20];
     char apellido[20];
     int dni;
+    int edad;
     float sueldo;
     float valorpase;
     char posicion[20]; /// ARQUERO - DEF - MEDIOC - DELANTERO
@@ -43,11 +45,14 @@ int verificarDNIenArchivo (FILE *buf, int dni);
 stJugador cargarUnStJugador (registroArchivoJugador aux);
 registroArchivoJugador bajaJugador(registroArchivoJugador aux);
 registroArchivoJugador altaJugador(registroArchivoJugador aux);
+registroArchivoJugador modificarUnJugadorAuxiliar (FILE *buf, registroArchivoJugador aux, int legajo);
+int buscarDni (FILE* buf, int dni);
+void buscarYModificarUnJugador (int dni);
 
 arbolJugador *inicArbol();
 arbolJugador *crearNodoArbol (stJugador aux);
 arbolJugador *insertarEnArbol(arbolJugador *arbol, arbolJugador *nuevo);
-arbolJugador *archivoToArbol (char archiJugador[]);
+arbolJugador *archivoToArbolJugadores ();
 arbolJugador *buscarPorDNI (arbolJugador *arbol, int dni);
 arbolJugador *buscarGoleador (arbolJugador *arbol, arbolJugador *goleador);
 int sumarGolesDivision (arbolJugador *arbol);

@@ -5,7 +5,7 @@
 #include "division.h"
 #include "string.h"
 
-const char nombreArchivoCT[20] = "ArchivoCuerpoTecnico";
+const char nombreArchivoCT[30] = "ArchivoCuerpoTecnico.bin";
 
 int validarNumero (char numeros[])
 {
@@ -20,7 +20,7 @@ int validarNumero (char numeros[])
         }
         else
         {
-            printf("\n\n\t\tUn dato ingresado no es un numero.Vuelva a ingresar el dato:\n\n\t\t");
+            printf("\n\n\t\tUn dato ingresado no es un numero. Vuelva a ingresar el dato:\n\n\t\t");
             flag=1;
         }
     }
@@ -116,6 +116,26 @@ void cargarArchivoCT ()
     while(control!='n');
 }
 
+int generarID (registroArchivoCT ct)
+{
+    FILE *buff=fopen(nombreArchivoCT,"a+b");
+    registroArchivoCT aux;
+    if (buff!=NULL)
+    {
+        fseek(buff,sizeof(registroArchivoCT)*(-1),SEEK_END);
+        if ((fread(&aux,sizeof(registroArchivoCT),1,buff))>0)
+        {
+            ct.idCT=(aux.idCT)+1;
+        }
+        else
+        {
+            ct.idCT=1;
+        }
+        fclose(buff);
+    }
+    return ct.idCT;
+}
+
 void cargarCT ()
 {
     registroArchivoCT nuevo;
@@ -127,17 +147,7 @@ void cargarCT ()
 
     if (buf)
     {
-        do
-        {
-            printf("\nIngrese el id: \n");
-            fflush(stdin);
-            gets(validarNum);
-        }
-        while((validarNumero(validarNum))!=0);
-        nuevo.idCT= atoi(validarNum);
-
-        flag = validacionIdCT (nuevo.idCT);
-
+        nuevo.idCT=generarID(nuevo);
 
         if (flag!=1)
         {
@@ -181,7 +191,7 @@ void cargarCT ()
                 scanf("%s",validarNum);
             }
             while ((validarNumero(validarNum))!=0);
-            nuevo.telefono=(atoi(validarNum));
+            strcpy(nuevo.telefono,validarNum);
 
             do
             {
@@ -199,7 +209,7 @@ void cargarCT ()
                 gets(validarNum);
             }
             while((validarNumero(validarNum))!=0);
-            nuevo.sueldo= atof(validarNum);///no me funciona con comas
+            nuevo.sueldo= atof(validarNum);
 
             nuevo.activo=1;
 
@@ -324,7 +334,7 @@ void mostrarEstructuraCT (stCT dato)
     printf("Apellido: %s \n", dato.apellido);
     printf("Sueldo: %.02f \n", dato.sueldo);
     printf("DNI: %d \n", dato.dni);
-    printf("Telefono: %d \n", dato.telefono);
+    printf("Telefono: %s \n", dato.telefono);
     printf("Cargo en el cuerpo tecnico: %s \n", dato.cargo);
     if (dato.activo==1)
     {
@@ -347,7 +357,7 @@ void mostrarRegistroArchivoCT (registroArchivoCT dato)
     printf("Apellido: %s \n", dato.apellido);
     printf("Sueldo: %.02f \n", dato.sueldo);
     printf("DNI: %d \n", dato.dni);
-    printf("Telefono: %d \n", dato.telefono);
+    printf("Telefono: %s \n", dato.telefono);
     printf("Cargo en el cuerpo tecnico: %s \n", dato.cargo);
     if (dato.activo==1)
     {
@@ -390,7 +400,7 @@ stCT registroToCT (registroArchivoCT A)
     aux.activo=A.activo;
     aux.dni=A.dni;
     aux.sueldo=A.sueldo;
-    aux.telefono=A.telefono;
+    strcpy(aux.telefono,A.telefono);
     aux.idCT=A.idCT;
     strcpy(aux.nombre,A.nombre);
     strcpy(aux.apellido,A.apellido);
@@ -399,24 +409,40 @@ stCT registroToCT (registroArchivoCT A)
     return aux;
 }
 
-nodoCT* buscarPorIdCT (nodoCT* lista, int id)
+void mostrarPorCargo (char cargo[])
 {
-    while(lista!=NULL && lista->dato.idCT != id)
+    FILE* buf=fopen(nombreArchivoCT,"rb");
+    registroArchivoCT aux;
+    if (buf)
     {
-        lista=lista->sig;
+        while (fread(&aux,sizeof(registroArchivoCT),1,buf)>0)
+        {
+            if (strcmpi (aux.cargo,cargo)==0)
+            {
+                mostrarRegistroArchivoCT(aux);
+            }
+        }
     }
-
-    return lista;
 }
 
-nodoCT* buscarPorDniCT (nodoCT* lista, int dni)
+int mostrarPorId (int id)
 {
-    while(lista!=NULL && lista->dato.dni != dni)
-    {
-        lista=lista->sig;
-    }
+    int flag=0;
+    FILE* buf=fopen(nombreArchivoCT,"rb");
+    registroArchivoCT aux;
 
-    return lista;
+    if (buf)
+    {
+        while (fread(&aux,sizeof(registroArchivoCT),1,buf)>0)
+        {
+            if (aux.idCT==id)
+            {
+                mostrarRegistroArchivoCT(aux);
+                flag=1;
+            }
+        }
+    }
+    return flag;
 }
 
 ///Modificar por id en el archivo
@@ -450,7 +476,7 @@ void modificarCTEleccion()
     char validarNum[30];
     int flag;
 
-    do ///No se si va en el menu
+    do
     {
         printf("\nIngrese el id: \n");
         fflush(stdin);
@@ -544,7 +570,7 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
                 scanf("%s",validarNum);
             }
             while ((validarNumero(validarNum))!=0);
-            A.telefono=(atoi(validarNum));
+            strcpy(A.telefono,validarNum);
 
             break;
         }
@@ -569,7 +595,7 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
                 gets(validarNum);
             }
             while((validarNumero(validarNum))!=0);
-            A.sueldo= atof(validarNum);///no me funciona con comas
+            A.sueldo= atof(validarNum);
             break;
         }
         case 6:
@@ -653,7 +679,7 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
     char validarNum[30];
     int flag;
 
-    do ///No se si va en el menu
+    do
     {
         printf("\nIngrese el id: \n");
         fflush(stdin);
@@ -663,7 +689,7 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
     aux.idCT= atoi(validarNum);
 
     flag = validacionIdCT (aux.idCT);
-
+    system("cls");
     if (flag==1)
     {
         int posID = buscarPosIdArchivoCT (aux.idCT);
@@ -677,7 +703,8 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
             fseek(buffer,sizeof(registroArchivoCT)*(posID),SEEK_SET);
             fwrite(&aux,sizeof(registroArchivoCT),1,buffer);
             fclose(buffer);
-
+            printf("Asi quedo: \n");
+            mostrarRegistroArchivoCT(aux);
         }
         else
         {

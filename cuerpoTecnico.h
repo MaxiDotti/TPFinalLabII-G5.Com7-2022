@@ -7,7 +7,7 @@ typedef struct{
     char apellido[20];
     float sueldo;
     int dni;
-    int telefono;
+    char telefono[15];
     char cargo[20];
     int activo;
     char nombreDivision[15]; /// primera , segunda , tercera
@@ -20,7 +20,7 @@ typedef struct{
     char apellido[20];
     float sueldo;
     int dni;
-    int telefono;
+    char telefono[15];
     char cargo[20]; ///Nutricionista, Analista, Psicologo, DT
     int activo;
 }stCT; ///CUERPO TECNICO
@@ -45,14 +45,19 @@ void cargarCT ();
 nodoCT* inicListaDoble ();
 nodoCT* crearNodoCT(stCT dato);
 nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo);
-nodoCT* agregarEnOrdenDoble(nodoCT* lista, nodoCT* nuevoNodo);
+nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo);
 void mostrarListaCT (nodoCT* lista);
 void mostrarEstructuraCT (stCT dato);
+
+///Funciones archivo
 void mostrarRegistroArchivoCT (registroArchivoCT dato);
 nodoCT* ArchiToListaCT (nodoCT* lista);
 stCT registroToCT (registroArchivoCT A);
 nodoCT* buscarPorIdCT (nodoCT* lista, int id);
 nodoCT* buscarPorDniCT (nodoCT* lista, int dni);
+void mostrarPorCargo(char cargo[]);
+int mostrarPorId(int id);
+int generarID (registroArchivoCT ct);
 
 ///modificar
 registroArchivoCT modificarDatosCT (registroArchivoCT A);

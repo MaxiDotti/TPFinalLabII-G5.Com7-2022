@@ -2,35 +2,24 @@
 #include <stdlib.h>
 #include "division.h"
 #include "empleado.h"
+
 int main()
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
     char archivoJugador[] = "ArchivoJugadores";
     ///cargarJugadorRegistroArchivo(archivoJugador);
     ///mostrarArchivoJugador(archivoJugador);
+>>>>>>> d4b114324b525cfeaa22a39421a6faadaeffbbce
 
-    arbolJugador *arbol = inicArbol();
-    arbol = archivoToArbol(archivoJugador);
-    mostrarArbolDNI(arbol);
-
-    arbolJugador *goleador = inicArbol();
-    arbolJugador *goleadores = inicArbol();
-    int i=0; /// SE INICIALIZA EL CONTADOR EN 0
-    goleadores = top3Goleadores(arbol, goleador, goleadores, i);
-    printf("\n\n------------------> GOLEADORES\n\n");
-    if(goleadores){
-        mostrarArbolDNI(goleadores);
-    }
-    else{
-        printf("\nSALIO COMO EL ORTO\n");
-    }
-/*
-    printf("\n\nARBOL ORDENADO POR D.N.I.\n\n");
-    mostrarArbolDNI(arbol);
-*/
     int corte;
     int opcion=0;
     int eleccion;
-    int idAbuscar=0;
+    int controles;
+    int validos=0;
+    celdaDivision arr[5];
     do
     {
         system("cls");
@@ -39,7 +28,95 @@ int main()
         scanf("%i",&opcion);
         system("cls");
 
+        if (opcion==1)
+        {
 
+        }
+        else if (opcion==2)
+        {
+
+        }
+        else if (opcion==3)
+        {
+            system("cls");
+            printf("Menu de Cuerpo Tecnico\n\n");
+            printf("1.Alta\n2.Baja/reactivacion\n3.Modificar\n4.Lista del Cuerpo Tecnico\n0.Salir\n\n");
+            fflush(stdin);
+            scanf("%d",&controles);
+            system("cls");
+            switch(controles)
+            {
+            case 1:
+            {
+                cargarArchivoCT();
+                break;
+            }
+            case 2:
+            {
+                printf("Menu de baja/Reactivacion\nSeleccione 0 para dar de baja, 1 para dar de alta\n");
+                scanf("%d",&eleccion);
+                if (eleccion == 0)
+                {
+                    bajaReactivarPorIdCT(0);
+                }
+                else if (eleccion == 1)
+                {
+                    bajaReactivarPorIdCT(1);
+                }
+                else
+                {
+                    printf("Opcion erronea ingresada\n");
+                }
+                break;
+            }
+            case 3:
+            {
+                modificarCTEleccion();
+                break;
+            }
+            case 4:
+            {
+                validos=archivoToArrCT(arr,5);
+                char cargo[20];
+                int id;
+                int flag;
+                printf("Menu de mostrar\n1.Mostrar todo\n2.Mostrar por cargo\n3.Buscar por id\n");
+                scanf("%d",&eleccion);
+                system("cls");
+                if (eleccion==1)
+                {
+                    mostrarArregloCT(arr,validos);
+                }
+                else if (eleccion==2)
+                {
+                    printf("Ingrese el cargo a mostrar\n");
+                    fflush(stdin);
+                    gets(cargo);
+                    mostrarPorCargo (cargo);
+                }
+                else if (eleccion==3)
+                {
+                    printf("Ingrese el id a buscar\n");
+                    fflush(stdin);
+                    scanf("%d",&id);
+                    flag= mostrarPorId (id);
+                    if (flag==0)
+                    {
+                        printf("No se ha encontrado el id\n");
+                    }
+                }
+                break;
+            }
+            }
+        }
+        else if (opcion==4)
+        {
+
+        }
+        else
+        {
+
+        }
 
 
         printf("\nPRESIONE 1 PARA VOLVER AL MENU PRINCIPAL / 0 PARA SALIR\n");
@@ -47,6 +124,7 @@ int main()
     }
     while(corte==1);
 
+<<<<<<< HEAD
 
 
 
@@ -56,6 +134,9 @@ int main()
 
 
 
+=======
+>>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
+>>>>>>> 32789900a17e534a71da308fc7ed95367d452f3a
     return 0;
 }
 
