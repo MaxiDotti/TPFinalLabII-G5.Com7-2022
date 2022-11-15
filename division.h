@@ -35,7 +35,8 @@ int altaJugadorDivision (celdaDivision celd[], stJugador nuevoJug, char nombreDi
 int archivoToArrJug (celdaDivision arr[], int dim);
 int agregarDivisionJugador(celdaDivision celd[],char nombreDivision[],int idDivision,int validos);
 
-
+////PROTOTIPADO DIVISION
+void mostrarArrDivGeneral(celdaDivision arr[], int validos);
 
 
 #endif // DIVISION_H_INCLUDED

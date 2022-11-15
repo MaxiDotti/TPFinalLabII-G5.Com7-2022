@@ -7,6 +7,130 @@
 
 const char nombreArchivoCT[30] = "ArchivoCuerpoTecnico.bin";
 
+void menuCuerpoTecnico (int validos)
+{
+    int eleccion;
+    int controles;
+    celdaDivision arr[5];
+
+    system("cls");
+    printf("------> MENU DE CUERPO TECNICO\n\n");
+    printf("1.ALTA\n2.BAJA/REACTIVACION\n3.MODIFICAR\n4.LISTA DEL CUERPO TECNICO\n0.SALIR\n\n");
+    fflush(stdin);
+    scanf("%d",&controles);
+    system("cls");
+    switch(controles)
+    {
+    case 1:
+    {
+        cargarArchivoCT();
+        break;
+    }
+    case 2:
+    {
+        printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
+        scanf("%d",&eleccion);
+        if (eleccion == 0)
+        {
+            bajaReactivarPorIdCT(0);
+        }
+        else if (eleccion == 1)
+        {
+            bajaReactivarPorIdCT(1);
+        }
+        else
+        {
+            printf("OPCION ERRONEA INGRESADA\n");
+        }
+        break;
+    }
+    case 3:
+    {
+        modificarCTEleccion();
+        break;
+    }
+    case 4:
+    {
+        validos=archivoToArrCT(arr,5);
+        char cargo[20];
+        int id;
+        int flag;
+        printf("------> MENU DE MOSTRAR\n1.MOSTRAR TODO\n2.MOSTRAR POR CARGO\n3.MOSTRAR POR ID\n4.MOSTRAR POR DIVISION\n");
+        scanf("%d",&eleccion);
+        system("cls");
+        if (eleccion==1)
+        {
+            mostrarArregloCT(arr,validos);
+        }
+        else if (eleccion==2)
+        {
+            printf("INGRESE EL CARGO A MOSTRAR\n");
+            fflush(stdin);
+            gets(cargo);
+            mostrarPorCargo (cargo);
+        }
+        else if (eleccion==3)
+        {
+            printf("INGRESE EL ID A BUSCAR\n");
+            fflush(stdin);
+            scanf("%d",&id);
+            flag= mostrarPorId (id);
+            if (flag==0)
+            {
+                printf("NO SE HA ENCONTRADO DEL ID\n");
+            }
+        }
+        else if (eleccion==4)
+        {
+            int pos;
+            printf("DIVISION 1\nDIVISION 2\nDIVISION 3\n");
+            scanf("%d",&eleccion);
+            system("cls");
+            if (eleccion==1)
+            {
+                printf("DIVISION 1\n");
+                pos=buscarPosDivision(arr,1,validos);
+                if (pos==-1)
+                {
+                    printf("No existe la division\n");
+                }
+                else
+                {
+                    mostrarListaCT(arr[pos].ct);
+                }
+            }
+            else if (eleccion==2)
+            {
+                printf("DIVISION 2\n");
+                pos=buscarPosDivision(arr,2,validos);
+                if (pos==-1)
+                {
+                    printf("No existe la division\n");
+                }
+                else
+                {
+                    mostrarListaCT(arr[pos].ct);
+                }
+            }
+            else if (eleccion==3)
+            {
+                printf("DIVISION3\n");
+                pos=buscarPosDivision(arr,3,validos);
+                if (pos==-1)
+                {
+                    printf("NO EXISTE LA DIVISION\n");
+                }
+                else
+                {
+                    mostrarListaCT(arr[pos].ct);
+                }
+            }
+        }
+        break;
+    }
+    }
+}
+
 int validarNumero (char numeros[])
 {
     int i=0;
@@ -54,7 +178,7 @@ int validacionIdCT (int idCT) // recorriendo el archivo y verifica si existe
     int flag=0;
     registroArchivoCT aux;
 
-    FILE *buf=fopen(nombreArchivoCT,"rb");
+    FILE *buf=fopen("ArchivoCuerpoTecnico.bin","rb");
 
     if (buf!=NULL)
     {
@@ -139,7 +263,7 @@ int generarID (registroArchivoCT ct)
 void cargarCT ()
 {
     registroArchivoCT nuevo;
-    int flag=-1;
+    int flag;
     char validarNum[30];
     char validarString[30];
 
@@ -149,105 +273,104 @@ void cargarCT ()
     {
         nuevo.idCT=generarID(nuevo);
 
-        if (flag!=1)
+
+        do
+        {
+            printf("\nIngrese el nombre: \n");
+            fflush(stdin);
+            gets(validarString);
+        }
+        while((validarPalabra(validarString))!=0);
+        strcpy(nuevo.nombre,validarString);
+
+        do
+        {
+            printf("\nIngrese el apellido:\n");
+            fflush(stdin);
+            gets(validarString);
+        }
+        while((validarPalabra(validarString))!=0);
+        strcpy(nuevo.apellido,validarString);
+
+        do
         {
             do
             {
-                printf("\nIngrese el nombre: \n");
-                fflush(stdin);
-                gets(validarString);
-            }
-            while((validarPalabra(validarString))!=0);
-            strcpy(nuevo.nombre,validarString);
-
-            do
-            {
-                printf("\nIngrese el apellido:\n");
-                fflush(stdin);
-                gets(validarString);
-            }
-            while((validarPalabra(validarString))!=0);
-            strcpy(nuevo.apellido,validarString);
-
-            do
-            {
-                do
-                {
-                    printf("\nIngrese el dni: \n");
-                    fflush(stdin);
-                    gets(validarNum);
-                }
-                while((validarNumero(validarNum))!=0);
-                nuevo.dni= atoi(validarNum);
-
-                flag= validacionDniCT (nuevo.dni);
-            }
-            while (flag==1);
-
-            do
-            {
-                printf("\nIngrese el numero de telefono :\n");
-                fflush(stdin);
-                scanf("%s",validarNum);
-            }
-            while ((validarNumero(validarNum))!=0);
-            strcpy(nuevo.telefono,validarNum);
-
-            do
-            {
-                printf("\nIngrese el cargo en el cuerpo tecnico: \n");
-                fflush(stdin);
-                gets(validarString);
-            }
-            while((validarPalabra(validarString))!=0);
-            strcpy(nuevo.cargo,validarString);
-
-            do
-            {
-                printf("\nIngrese el sueldo:\n");
+                printf("\nIngrese el dni: \n");
                 fflush(stdin);
                 gets(validarNum);
             }
             while((validarNumero(validarNum))!=0);
-            nuevo.sueldo= atof(validarNum);
+            nuevo.dni= atoi(validarNum);
 
-            nuevo.activo=1;
+            flag= validacionDniCT (nuevo.dni);
+        }
+        while (flag==1);
 
+        do
+        {
+            printf("\nIngrese el numero de telefono :\n");
+            fflush(stdin);
+            scanf("%s",validarNum);
+        }
+        while ((validarNumero(validarNum))!=0);
+        strcpy(nuevo.telefono,validarNum);
+
+        do
+        {
+            printf("\nIngrese el cargo en el cuerpo tecnico: \n");
+            fflush(stdin);
+            gets(validarString);
+        }
+        while((validarPalabra(validarString))!=0);
+        strcpy(nuevo.cargo,validarString);
+
+        do
+        {
+            printf("\nIngrese el sueldo:\n");
+            fflush(stdin);
+            gets(validarNum);
+        }
+        while((validarNumero(validarNum))!=0);
+        nuevo.sueldo= atof(validarNum);
+
+        nuevo.activo=1;
+
+        do
+        {
+            flag=0;
             do
             {
-                flag=0;
-                do
-                {
-                    printf("\nIngrese la categoria a la que pertenece\n");
-                    fflush(stdin);
-                    gets(validarString);
-                }
-                while((validarPalabra(validarString))!=0);
-                strcpy(nuevo.nombreDivision,validarString);
-
-                if(strcmpi(nuevo.nombreDivision,"primera")== 0)
-                {
-                    nuevo.idDivision =1;
-                }
-                else if (strcmpi(nuevo.nombreDivision,"segunda")== 0)
-                {
-                    nuevo.idDivision =2;
-                }
-                else if (strcmpi(nuevo.nombreDivision,"tercera")== 0)
-                {
-                    nuevo.idDivision =3;
-                }
-                else
-                {
-                    printf("\nCategoria erronea, vuelva a ingresar\n");
-                    flag=1;
-                }
+                printf("\nIngrese la categoria a la que pertenece\n");
+                fflush(stdin);
+                gets(validarString);
             }
-            while (flag==1);
+            while((validarPalabra(validarString))!=0);
+            strcpy(nuevo.nombreDivision,validarString);
 
-            fwrite(&nuevo,sizeof(registroArchivoCT),1,buf);
-
+            if(strcmpi(nuevo.nombreDivision,"primera")== 0)
+            {
+                nuevo.idDivision =1;
+            }
+            else if (strcmpi(nuevo.nombreDivision,"segunda")== 0)
+            {
+                nuevo.idDivision =2;
+            }
+            else if (strcmpi(nuevo.nombreDivision,"tercera")== 0)
+            {
+                nuevo.idDivision =3;
+            }
+            else
+            {
+                printf("\nCategoria erronea, vuelva a ingresar\n");
+                flag=1;
+            }
         }
+        while (flag==1);
+
+        fwrite(&nuevo,sizeof(registroArchivoCT),1,buf);
+
+
     }
     else
     {
@@ -328,23 +451,23 @@ void mostrarListaCT (nodoCT* lista)
 
 void mostrarEstructuraCT (stCT dato)
 {
-    printf("\n----------------------------------------------\n");
-    printf("ID: %d \n", dato.idCT);
-    printf("Nombre: %s \n", dato.nombre);
-    printf("Apellido: %s \n", dato.apellido);
-    printf("Sueldo: %.02f \n", dato.sueldo);
-    printf("DNI: %d \n", dato.dni);
-    printf("Telefono: %s \n", dato.telefono);
-    printf("Cargo en el cuerpo tecnico: %s \n", dato.cargo);
+    printf("\n---------- ID: %i ------------", dato.idCT);
+    printf("\n|          NOMBRE: %s ",dato.nombre);
+    printf("\n|        APELLIDO: %s ",dato.apellido);
+    printf("\n|        SUELDO: %.02f ", dato.sueldo);
+    printf("\n|             DNI: %d", dato.dni);
+    printf("\n|        TELEFONO: %s ", dato.telefono);
+    printf("\n|         CARGO: %s ",dato.cargo);
+
     if (dato.activo==1)
     {
-        printf("Estado: Activo");
+        printf("\n|         ESTADO: ACTIVO");
     }
     else
     {
-        printf("Estado: Inactivo");
+        printf("\n|          ESTADO: INACTIVO");
     }
-    printf("\n----------------------------------------------\n");
+    printf("\n-------------------------------");
 }
 
 void mostrarRegistroArchivoCT (registroArchivoCT dato)

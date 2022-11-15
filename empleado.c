@@ -84,11 +84,25 @@ int generarLegajo (archiEmpleado nuevo)
     return nuevo.legajo;
 }
 
+void cargarArchivoE ()
+{
+    char control='s';
+    do
+    {
+        CargarEmpleado();
+        printf("\nDesea seguir ingresando? s/n\n");
+        fflush(stdin);
+        scanf("%c",&control);
+    }
+    while(control!='n');
+}
+
+
 
 ///Carga
-int CargarEmpleado (archiEmpleado nuevo)
+int CargarEmpleado ()
 {
-
+    archiEmpleado nuevo;
     int flag = -1;
     int dniAux = 0;
 
@@ -99,9 +113,16 @@ int CargarEmpleado (archiEmpleado nuevo)
 
     if(archi)
     {
-        printf("\nIngrese el dni del empleado: \n");
-        scanf("%d",&dniAux);
-        flag = validarNumero(dniAux);
+        do
+        {
+            printf("\nIngrese el dni del empleado: \n");
+            fflush(stdin);
+            gets(validarNum);
+        }
+        while((validarNumero(validarNum))!=0);
+        nuevo.dni= atoi(validarNum);
+        flag=validacionDeAlta2(nuevo.dni);
+
 
         if(flag == 0)
         {
@@ -198,22 +219,23 @@ int CargarEmpleado (archiEmpleado nuevo)
 void MostrarEmpleado (stEmpleado nuevo)
 {
 
-    printf("----------------------------");
-    printf("\n LEGAJO: %d",nuevo.legajo);
-    printf("\n NOMBRE: %s ",nuevo.nombre);
-    printf("\n APELLIDO: %s ",nuevo.apellido);
-    printf("\n DNI: %d ", nuevo.dni);
-    printf("\n TELEFONO: %s ", nuevo.tel);
-    printf("\n SUELDO: %f ", nuevo.sueldo);
+
+    printf("\n---------- LEGAJO: %i ----------", nuevo.legajo);
+    printf("\n|          NOMBRE: %s ",nuevo.nombre);
+    printf("\n|        APELLIDO: %s ",nuevo.apellido);
+    printf("\n|             DNI: %d", nuevo.dni);
+    printf("\n|        TELEFONO: %s ", nuevo.tel);
+    printf("\n|        PUESTO: %s ",nuevo.puesto);
+    printf("\n|        SUELDO: %.02f ", nuevo.sueldo);
     if(nuevo.activo == 1)
     {
-        printf("\nACTIVO\n");
+        printf("\n|          ESTADO: ACTIVO");
     }
     else
     {
-        printf("\nINACTIVO\n");
+        printf("\n|          ESTADO: INACTIVO");
     }
-    printf("-----------------------------\n");
+    printf("\n-------------------------------");
 }
 
 void MostarNodoE (nodoEmpleado * NodoE)
@@ -234,24 +256,24 @@ void MostrarListaE (nodoEmpleado * ListaE)
 void MostararchEpleado(archiEmpleado nuevo)
 {
     printf("----------------------------");
-    printf("\n LEGAJO: %d",nuevo.legajo);
-    printf("\n NOMBRE: %s ",nuevo.nombre);
-    printf("\n APELLIDO: %s ",nuevo.apellido);
-    printf("\n DNI: %d ", nuevo.dni);
-    printf("\n TELEFONO: %s ", nuevo.tel);
-    printf("\n PUESTO: %s ",nuevo.puesto);
-    printf("\n SUELDO: %f ", nuevo.sueldo);
+    printf("\n---------- LEGAJO: %i ----------", nuevo.legajo);
+    printf("\n|          NOMBRE: %s ",nuevo.nombre);
+    printf("\n|        APELLIDO: %s ",nuevo.apellido);
+    printf("\n|             DNI: %d", nuevo.dni);
+    printf("\n|        TELEFONO: %s ", nuevo.tel);
+    printf("\n|        PUESTO: %s ",nuevo.puesto);
+    printf("\n|        SUELDO: %f ", nuevo.sueldo);
     if(nuevo.activo == 1)
     {
-        printf("\nACTIVO\n");
+       printf("\n|          ESTADO: ACTIVO");
     }
     else
     {
-        printf("\nINACTIVO\n");
+        printf("\n|          ESTADO: INACTIVO");
     }
-    printf("\n DIVISION: %s",nuevo.nombreDivision);
-    printf("\n ID DIVISION: %d",nuevo.idDivision);
-    printf("------------------------------\n");
+    printf("\n|        DIVISION: %s",nuevo.nombreDivision);
+    printf("\n|        ID DIVISION: %d",nuevo.idDivision);
+    printf("-------------------------------\n");
 }
 
 void MostarArchiE()
@@ -461,7 +483,8 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
         printf("\nIngrese el legajo: \n");
         fflush(stdin);
         gets(validarNum);
-    }while((validarNumero(validarNum))!=0);
+    }
+    while((validarNumero(validarNum))!=0);
     aux.legajo= atoi(validarNum);
 
     flag = validacionDeLegajo2(aux.legajo);
@@ -479,12 +502,9 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
             fseek(buffer,sizeof(archiEmpleado)*(posLegajo),SEEK_SET);
             fwrite(&aux,sizeof(archiEmpleado),1,buffer);
             fclose(buffer);
-<<<<<<< HEAD
+
             printf("Asi quedo: \n");
             MostarArchiE(aux);
-=======
-
->>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
         }
         else
         {

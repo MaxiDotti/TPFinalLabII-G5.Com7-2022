@@ -43,7 +43,7 @@ int validacionDeAlta2 (int dni);
 int generarLegajo (archiEmpleado nuevo);
 
 ////CARGA:
-int CargarEmpleado (archiEmpleado nuevo);
+int CargarEmpleado ();
 stEmpleado nuevoEmpleado(archiEmpleado aux);
 
 ////MOSTRAR:

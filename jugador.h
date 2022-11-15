@@ -60,6 +60,7 @@ arbolJugador *top3Goleadores (arbolJugador *arbol, arbolJugador *goleador, arbol
 arbolJugador *buscarPorDNIyDarDeBaja (arbolJugador *arbol, int dni);
 arbolJugador *buscarGoleadorActivo (arbolJugador *arbol, arbolJugador *goleador);
 int mostrarNodoArbolPorLegajo (arbolJugador *arbol, int legajo);
+void mostrarArbolDNI(arbolJugador* arbol);
 
 
 /***********************************************************************/

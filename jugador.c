@@ -546,7 +546,8 @@ int sumarGolesDivision (arbolJugador *arbol){
     return goles;
 }
 
-void menuJugador(int validos){
+void menuJugador(int validos)
+{
 
     int controles, eleccion, dni, flag = 0;
     char validar[30];

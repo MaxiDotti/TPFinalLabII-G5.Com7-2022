@@ -31,6 +31,9 @@ typedef struct nodoCT{
     struct nodoCT *sig;
 }nodoCT;
 
+///Menu
+void menuCuerpoTecnico (int validos);
+
 ///Validaciones
 int validarNumero (char numeros[]);
 int validarPalabra (char palabra[]);

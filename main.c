@@ -5,27 +5,11 @@
 
 int main()
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-    char archivoJugador[] = "ArchivoJugadores";
-    ///cargarJugadorRegistroArchivo(archivoJugador);
-    ///mostrarArchivoJugador(archivoJugador);
->>>>>>> d4b114324b525cfeaa22a39421a6faadaeffbbce
->>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
-
->>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
-    int corte;
+    int corte=0;
     int opcion=0;
-    int eleccion;
-    int controles;
     int validos=0;
     celdaDivision arr[5];
+
     do
     {
         system("cls");
@@ -44,126 +28,30 @@ int main()
         }
         else if (opcion==3)
         {
-            system("cls");
-            printf("Menu de Cuerpo Tecnico\n\n");
-            printf("1.Alta\n2.Baja/reactivacion\n3.Modificar\n4.Lista del Cuerpo Tecnico\n0.Salir\n\n");
-            fflush(stdin);
-            scanf("%d",&controles);
-            system("cls");
-            switch(controles)
-            {
-            case 1:
-            {
-                cargarArchivoCT();
-                break;
-            }
-            case 2:
-            {
-                printf("Menu de baja/Reactivacion\nSeleccione 0 para dar de baja, 1 para dar de alta\n");
-                scanf("%d",&eleccion);
-                if (eleccion == 0)
-                {
-                    bajaReactivarPorIdCT(0);
-                }
-                else if (eleccion == 1)
-                {
-                    bajaReactivarPorIdCT(1);
-                }
-                else
-                {
-                    printf("Opcion erronea ingresada\n");
-                }
-                break;
-            }
-            case 3:
-            {
-                modificarCTEleccion();
-                break;
-            }
-            case 4:
-            {
-                validos=archivoToArrCT(arr,5);
-                char cargo[20];
-                int id;
-                int flag;
-                printf("Menu de mostrar\n1.Mostrar todo\n2.Mostrar por cargo\n3.Buscar por id\n4.Mostrar por division\n");
-                scanf("%d",&eleccion);
-                system("cls");
-                if (eleccion==1)
-                {
-                    mostrarArregloCT(arr,validos);
-                }
-                else if (eleccion==2)
-                {
-                    printf("Ingrese el cargo a mostrar\n");
-                    fflush(stdin);
-                    gets(cargo);
-                    mostrarPorCargo (cargo);
-                }
-                else if (eleccion==3)
-                {
-                    printf("Ingrese el id a buscar\n");
-                    fflush(stdin);
-                    scanf("%d",&id);
-                    flag= mostrarPorId (id);
-                    if (flag==0)
-                    {
-                        printf("No se ha encontrado el id\n");
-                    }
-                }
-                else if (eleccion==4)
-                {
-                    int pos;
-                    printf("Division 1\nDivision 2\nDivision 3\n");
-                    scanf("%d",&eleccion);
-                    system("cls");
-                    if (eleccion==1)
-                    {
-                        printf("Division 1\n");
-                        pos=buscarPosDivision(arr,1,validos);
-                        if (pos==-1)
-                        {
-                            printf("No existe la division\n");
-                        }
-                        else
-                        {
-                            mostrarListaCT(arr[pos].ct);
-                        }
-                    }
-                    else if (eleccion==2)
-                    {
-                        printf("Division 2\n");
-                        pos=buscarPosDivision(arr,2,validos);
-                        if (pos==-1)
-                        {
-                            printf("No existe la division\n");
-                        }
-                        else
-                        {
-                            mostrarListaCT(arr[pos].ct);
-                        }
-                    }
-                    else if (eleccion==3)
-                    {
-                        printf("Division 3\n");
-                        pos=buscarPosDivision(arr,3,validos);
-                        if (pos==-1)
-                        {
-                            printf("No existe la division\n");
-                        }
-                        else
-                        {
-                            mostrarListaCT(arr[pos].ct);
-                        }
-                    }
-                }
-                break;
-            }
-            }
+            menuCuerpoTecnico (validos);
         }
         else if (opcion==4)
         {
+            ///cargarArchivoE();
+            int maxValidos;
 
+            validos=archivoToArrCT(arr,5);
+            maxValidos=validos;
+
+            validos = archivoToArrJug(arr, 5);
+            if(validos>maxValidos)
+            {
+                maxValidos=validos;
+            }
+
+            validos=archivoArrE(arr,5);
+
+            if(validos>maxValidos)
+            {
+                maxValidos=validos;
+            }
+
+            mostrarArrDivGeneral(arr,maxValidos);
         }
         else
         {
@@ -176,28 +64,7 @@ int main()
     }
     while(corte==1);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
 
-
-
-
-
-
-<<<<<<< HEAD
-=======
-
-
-
-=======
->>>>>>> 614713851bfbbb5b3e6bbf4617b35e24e3f4144b
->>>>>>> 32789900a17e534a71da308fc7ed95367d452f3a
->>>>>>> c74ff6e1677f4e5f6ff173970cf5fd7d2d300fff
->>>>>>> 25bdc31261b559e7b88f7f5d9a5629c4c9f68811
     return 0;
 }
 
