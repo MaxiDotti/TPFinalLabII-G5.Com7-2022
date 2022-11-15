@@ -372,6 +372,7 @@ int buscarYModificarUnJugador (int dni){
         flag = verificarDNIenArchivo(buf, dni); /// SI ENCUENTRA EL DNI DEVUELVE -1
 
         if(flag == -1){
+            fseek(buf, 0, 0);
             pos = buscarPosicionDni(buf, dni);
             fseek(buf, sizeof(registroArchivoJugador)*(pos), 0);
             fread(&aux, sizeof(registroArchivoJugador), 1, buf);
@@ -487,6 +488,20 @@ void mostrarArbolDNI(arbolJugador *arbol){
     }
 }
 
+void mostrarNombreArbol (arbolJugador* arbol, char nombre[])
+{
+    if (arbol)
+    {
+        mostrarNombreArbol (arbol->izq, nombre);
+        if (strcmpi(arbol->dato.nombre,nombre)==0)
+        {
+            printf("\nJugadores: \n");
+            mostrarUnStJugador(arbol->dato);
+        }
+        mostrarNombreArbol (arbol->der, nombre);
+    }
+}
+
 arbolJugador *buscarPorDNI (arbolJugador *arbol, int dni){
     arbolJugador *buscar = inicArbol();
 
@@ -546,20 +561,20 @@ int sumarGolesDivision (arbolJugador *arbol){
     return goles;
 }
 
-void menuJugador(int validos)
+void menuJugador(int validos, int dim)
 {
 
     int controles, eleccion, dni, flag = 0;
     char validar[30];
-    celdaDivision celd[20];
+    celdaDivision celd[dim];
 
     system("cls");
     printf("------> MENU DE JUGADORES\n\n");
-    printf("[1] ALTA\n");
+    printf("[1] CARGAR JUGADOR/ES\n");
     printf("[2] BAJA - REACTIVACION\n");
     printf("[3] MODIFICAR\n");
     printf("[4] LISTAR JUGADORES\n");
-    printf("[0] SALIR\n\n");
+    printf("[0] SALIR AL MENU PRINCIPAL\n\n");
 
     printf("OPCION: ");
     fflush(stdin);
@@ -567,6 +582,8 @@ void menuJugador(int validos)
     system("cls");
 
     switch(controles){
+        case 0:
+            break;
         case 1:{
             cargarJugadorRegistroArchivo();
             break;
@@ -600,7 +617,7 @@ void menuJugador(int validos)
             }
             break;
             }
-        case 3:{
+            case 3:{
             do{
                 printf("------> MENU DE MODIFICACIONES\n\n");
                 printf("INGRESE EL DNI PARA MODIFICAR LOS DATOS: ");
@@ -630,12 +647,15 @@ void menuJugador(int validos)
                 printf("[2] MOSTRAR POR DNI (menor a mayor)\n");
                 printf("[3] MOSTRAR POR LEGAJO\n");
                 printf("[4] MOSTRAR POR DIVISION\n");
-                printf("[5] MOSTRAR GOLEADORES\n\n");
+                printf("[5] MOSTRAR GOLEADORES\n");
+                printf("[0] SALIR AL MENU PRINCIPAL\n\n");
 
                 printf("OPCION: ");
                 scanf("%d",&eleccion);
                 system("cls");
-
+                if (eleccion==0){
+                    break;
+                }
                 if (eleccion==1){
                     mostrarArchivoJugador();
                 }
@@ -648,7 +668,7 @@ void menuJugador(int validos)
                     flag = mostrarNodoArbolPorLegajo(aux, legajo);
                 }
                 else if (eleccion==4){
-                    validos = archivoToArrJug(celd, 5);
+                    validos = archivoToArrJug(celd, dim);
 
                     printf("------> MOSTRAR POR DIVISION\n\n");
                     printf("[1] PRIMERA\n");
@@ -687,7 +707,7 @@ void menuJugador(int validos)
                     }
                 }
                 else if (eleccion==5){
-                    validos = archivoToArrJug(celd, 5);
+                    validos = archivoToArrJug(celd, dim);
                     printf("MOSTRAR GOLEADORES\n\n");
                     printf("[1] GOLEADOR PRIMERA DIVISION\n");
                     printf("[2] GOLEADOR SEGUNDA DIVISION\n");
@@ -699,17 +719,11 @@ void menuJugador(int validos)
                     system("cls");
                     if(eleccion == 1){
                         pos = buscarPosDivision(celd, 1, validos);
-                        if (pos != -1){
-                            jug = buscarGoleador(celd[pos].jug, jug);
-                            mostrarUnStJugador(jug->dato);
-                        }
-                        else{
-                            printf("NO ENCONTRO EL GOLEADOR\n");
-                        }
+                        jug = buscarGoleador(celd[pos].jug, jug);
+                        mostrarUnStJugador(jug->dato);
                     }
                     else if(eleccion == 2){
                         pos = buscarPosDivision(celd, 2, validos);
-
                         jug = buscarGoleador(celd[pos].jug, jug);
                         mostrarUnStJugador(jug->dato);
                     }
@@ -730,64 +744,3 @@ void menuJugador(int validos)
             }
         }
 }
-
-
-
-
-
-
-
-
-
-/*
-arbolJugador *buscarPorDNIyDarDeBaja (arbolJugador *arbol, int dni){
-    if(arbol){
-        if(arbol->dato.dni == dni){
-            arbol->dato.activo = 0;
-        }
-        else{
-            if(arbol->dato.dni < dni){
-                arbol = buscarPorDNI(arbol->der, dni);
-            }
-            else{
-                arbol = buscarPorDNI(arbol->izq, dni);
-            }
-        }
-    }
-    return arbol;
-}
-
-arbolJugador *buscarGoleadorActivo (arbolJugador *arbol, arbolJugador *goleador){ /// SE LE PASA POR PARAMETRO UN GOLEADOR EN NULL
-    if(arbol){
-        if(!goleador && arbol->dato.activo == 1){
-            goleador = arbol;
-        }
-        else if(arbol->dato.goles > goleador->dato.goles && arbol->dato.activo == 1){
-            goleador = arbol;
-        }
-        goleador = buscarGoleadorActivo(arbol->der, goleador);
-        goleador = buscarGoleadorActivo(arbol->izq, goleador);
-    }
-    return goleador;
-}
-
-arbolJugador *top3Goleadores (arbolJugador *arbol, arbolJugador *goleador, arbolJugador *goleadores, int cont){
-    if(arbol){
-        printf("\nENTRA AL IF BUSCARGOLEADORACTIVO ------------\n");
-        goleador = buscarGoleadorActivo(arbol, goleador);
-        printf("\nSALE DEL IF BUSCARGOLEADORACTIVO ------------\n");
-        goleadores = insertarEnArbol(goleadores, goleador); /// INSERTO EL GOLEADOR EN EL ARBOL DE GOLEADORES
-        arbol = buscarPorDNIyDarDeBaja(arbol, goleador->dato.dni); /// BUSCO EL DNI DEL GOLEADOR EN EL ARBOL Y LO DOY DE BAJA
-    }
-
-    if(cont<1){ /// REPETIMOS LA FUNCION 3 VECES
-        printf("\nENTRA AL IF ------------\n");
-        printf("\nCONTADOR: %i ------------\n", cont);
-        cont++;
-        goleador = inicArbol(); /// INICIO EL ARBOL GOLEADOR PARA BUSCAR EL OTRO GOLEADOR MENOR
-        goleadores = top3Goleadores(arbol, goleador, goleadores, cont);
-    }
-    return goleadores;
-}
-*/
-

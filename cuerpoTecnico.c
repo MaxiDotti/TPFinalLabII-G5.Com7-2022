@@ -7,129 +7,6 @@
 
 const char nombreArchivoCT[30] = "ArchivoCuerpoTecnico.bin";
 
-void menuCuerpoTecnico (int validos)
-{
-    int eleccion;
-    int controles;
-    celdaDivision arr[5];
-
-    system("cls");
-    printf("------> MENU DE CUERPO TECNICO\n\n");
-    printf("1.ALTA\n2.BAJA/REACTIVACION\n3.MODIFICAR\n4.LISTA DEL CUERPO TECNICO\n0.SALIR\n\n");
-    fflush(stdin);
-    scanf("%d",&controles);
-    system("cls");
-    switch(controles)
-    {
-    case 1:
-    {
-        cargarArchivoCT();
-        break;
-    }
-    case 2:
-    {
-        printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
-        scanf("%d",&eleccion);
-        if (eleccion == 0)
-        {
-            bajaReactivarPorIdCT(0);
-        }
-        else if (eleccion == 1)
-        {
-            bajaReactivarPorIdCT(1);
-        }
-        else
-        {
-            printf("OPCION ERRONEA INGRESADA\n");
-        }
-        break;
-    }
-    case 3:
-    {
-        modificarCTEleccion();
-        break;
-    }
-    case 4:
-    {
-        validos=archivoToArrCT(arr,5);
-        char cargo[20];
-        int id;
-        int flag;
-        printf("------> MENU DE MOSTRAR\n1.MOSTRAR TODO\n2.MOSTRAR POR CARGO\n3.MOSTRAR POR ID\n4.MOSTRAR POR DIVISION\n");
-        scanf("%d",&eleccion);
-        system("cls");
-        if (eleccion==1)
-        {
-            mostrarArregloCT(arr,validos);
-        }
-        else if (eleccion==2)
-        {
-            printf("INGRESE EL CARGO A MOSTRAR\n");
-            fflush(stdin);
-            gets(cargo);
-            mostrarPorCargo (cargo);
-        }
-        else if (eleccion==3)
-        {
-            printf("INGRESE EL ID A BUSCAR\n");
-            fflush(stdin);
-            scanf("%d",&id);
-            flag= mostrarPorId (id);
-            if (flag==0)
-            {
-                printf("NO SE HA ENCONTRADO DEL ID\n");
-            }
-        }
-        else if (eleccion==4)
-        {
-            int pos;
-            printf("DIVISION 1\nDIVISION 2\nDIVISION 3\n");
-            scanf("%d",&eleccion);
-            system("cls");
-            if (eleccion==1)
-            {
-                printf("DIVISION 1\n");
-                pos=buscarPosDivision(arr,1,validos);
-                if (pos==-1)
-                {
-                    printf("No existe la division\n");
-                }
-                else
-                {
-                    mostrarListaCT(arr[pos].ct);
-                }
-            }
-            else if (eleccion==2)
-            {
-                printf("DIVISION 2\n");
-                pos=buscarPosDivision(arr,2,validos);
-                if (pos==-1)
-                {
-                    printf("No existe la division\n");
-                }
-                else
-                {
-                    mostrarListaCT(arr[pos].ct);
-                }
-            }
-            else if (eleccion==3)
-            {
-                printf("DIVISION3\n");
-                pos=buscarPosDivision(arr,3,validos);
-                if (pos==-1)
-                {
-                    printf("NO EXISTE LA DIVISION\n");
-                }
-                else
-                {
-                    mostrarListaCT(arr[pos].ct);
-                }
-            }
-        }
-        break;
-    }
-    }
-}
 
 int validarNumero (char numeros[])
 {
@@ -493,6 +370,19 @@ void mostrarRegistroArchivoCT (registroArchivoCT dato)
     printf("\n----------------------------------------------\n");
 }
 
+void mostrarNombreCT (nodoCT* ct, char nombre[])
+{
+    while (ct)
+ {
+    if (strcmpi(ct->dato.nombre,nombre)==0)
+    {
+        printf("\nCuerpo Tecnico: \n");
+        mostrarEstructuraCT(ct->dato);
+    }
+    ct=ct->sig;
+ }
+}
+
 nodoCT* ArchiToListaCT (nodoCT* lista)
 {
     FILE* buf=fopen(nombreArchivoCT,"rb");
@@ -839,5 +729,125 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
         printf("El id no existe\n");
     }
 
+}
+
+void menuCuerpoTecnico (int validos,int dim)
+{
+    int eleccion,controles,flag,id,pos;
+    celdaDivision arr[dim];
+    char cargo[20];
+
+    system("cls");
+    printf("------> MENU DE CUERPO TECNICO\n\n");
+    printf("1.ALTA\n2.BAJA/REACTIVACION\n3.MODIFICAR\n4.LISTA DEL CUERPO TECNICO\n0.SALIR\n\n");
+    fflush(stdin);
+    scanf("%d",&controles);
+    system("cls");
+    switch(controles)
+    {
+    case 1:
+    {
+        cargarArchivoCT();
+        break;
+    }
+    case 2:
+    {
+        printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
+        scanf("%d",&eleccion);
+        if (eleccion == 0)
+        {
+            bajaReactivarPorIdCT(0);
+        }
+        else if (eleccion == 1)
+        {
+            bajaReactivarPorIdCT(1);
+        }
+        else
+        {
+            printf("OPCION ERRONEA INGRESADA\n");
+        }
+        break;
+    }
+    case 3:
+    {
+        modificarCTEleccion();
+        break;
+    }
+    case 4:
+    {
+        validos=archivoToArrCT(arr,dim);
+        printf("------> MENU DE MOSTRAR\n1.MOSTRAR TODO\n2.MOSTRAR POR CARGO\n3.MOSTRAR POR ID\n4.MOSTRAR POR DIVISION\n");
+        scanf("%d",&eleccion);
+        system("cls");
+        if (eleccion==1)
+        {
+            mostrarArregloCT(arr,validos);
+        }
+        else if (eleccion==2)
+        {
+            printf("INGRESE EL CARGO A MOSTRAR\n");
+            fflush(stdin);
+            gets(cargo);
+            mostrarPorCargo (cargo);
+        }
+        else if (eleccion==3)
+        {
+            printf("INGRESE EL ID A BUSCAR\n");
+            fflush(stdin);
+            scanf("%d",&id);
+            flag= mostrarPorId (id);
+            if (flag==0)
+            {
+                printf("NO SE HA ENCONTRADO DEL ID\n");
+            }
+        }
+        else if (eleccion==4)
+        {
+            printf("DIVISION 1\nDIVISION 2\nDIVISION 3\n");
+            scanf("%d",&eleccion);
+            system("cls");
+            if (eleccion==1)
+            {
+                printf("DIVISION 1\n");
+                pos=buscarPosDivision(arr,1,validos);
+                if (pos==-1)
+                {
+                    printf("No existe la division\n");
+                }
+                else
+                {
+                    mostrarListaCT(arr[pos].ct);
+                }
+            }
+            else if (eleccion==2)
+            {
+                printf("DIVISION 2\n");
+                pos=buscarPosDivision(arr,2,validos);
+                if (pos==-1)
+                {
+                    printf("No existe la division\n");
+                }
+                else
+                {
+                    mostrarListaCT(arr[pos].ct);
+                }
+            }
+            else if (eleccion==3)
+            {
+                printf("DIVISION 3\n");
+                pos=buscarPosDivision(arr,3,validos);
+                if (pos==-1)
+                {
+                    printf("NO EXISTE LA DIVISION\n");
+                }
+                else
+                {
+                    mostrarListaCT(arr[pos].ct);
+                }
+            }
+        }
+        break;
+    }
+    }
 }
 

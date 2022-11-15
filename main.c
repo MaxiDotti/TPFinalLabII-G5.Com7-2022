@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "division.h"
-#include "empleado.h"
 
 int main()
 {
+
     int corte=0;
     int opcion=0;
     int validos=0;
-    celdaDivision arr[5];
-
+    int dim=5;
     do
     {
         system("cls");
@@ -20,59 +19,25 @@ int main()
 
         if (opcion==1)
         {
-            menuJugador(validos);
+            menuJugador(validos,dim);
         }
         else if (opcion==2)
         {
-
+            menuEmpleados (validos,dim);
         }
         else if (opcion==3)
         {
-            menuCuerpoTecnico (validos);
+            menuCuerpoTecnico (validos,dim);
         }
         else if (opcion==4)
         {
-            ///cargarArchivoE();
-            int maxValidos;
-
-            validos=archivoToArrCT(arr,5);
-            maxValidos=validos;
-
-            validos = archivoToArrJug(arr, 5);
-            if(validos>maxValidos)
-            {
-                maxValidos=validos;
-            }
-
-            validos=archivoArrE(arr,5);
-
-            if(validos>maxValidos)
-            {
-                maxValidos=validos;
-            }
-
-            mostrarArrDivGeneral(arr,maxValidos);
-        }
-        else
-        {
-
+            menuDivision (validos,dim);
         }
 
-
-        printf("\nPRESIONE 1 PARA VOLVER AL MENU PRINCIPAL / 0 PARA SALIR\n");
+        printf("\nPRESIONE 1 PARA VOLVER AL MENU PRINCIPAL / 0 PARA SALIR: ");
         scanf("%i",&corte);
     }
     while(corte==1);
 
-
     return 0;
 }
-
-
-
-
-
-
-
-
-

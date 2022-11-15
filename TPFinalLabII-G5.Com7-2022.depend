@@ -1,17 +1,16 @@
 # depslib dependency file v1.0
-1668488456 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\main.c
+1668496690 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\main.c
+	<stdio.h>
+	<stdlib.h>
+	"division.h"
+
+1668487121 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
 	<stdio.h>
 	<stdlib.h>
 	"division.h"
 	"empleado.h"
 
-1668480007 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\main.c
-	<stdio.h>
-	<stdlib.h>
-	"division.h"
-	"empleado.h"
-
-1668483061 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
+1668486055 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
 	"division.h"
 	<string.h>
@@ -20,7 +19,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1668467547 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
+1668483593 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -28,9 +27,9 @@
 	"division.h"
 	"string.h"
 
-1668467547 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
+1668483593 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\cuerpotecnico.h
 
-1668468141 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
+1668483874 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -38,20 +37,21 @@
 	"string.h"
 	"division.h"
 
-1668467547 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
+1668483593 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\empleado.h
 
-1668480933 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
+1668483846 source:c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.c
 	"division.h"
 	"jugador.h"
 	"empleado.h"
 	"cuerpoTecnico.h"
+	"string.h"
 
 1668480933 c:\users\cecilia a\searches\desktop\tpfinallabii-g5.com7-2022\division.h
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"jugador.h"
 
-1668488142 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\cuerpotecnico.c
+1668498092 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\cuerpotecnico.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -59,27 +59,27 @@
 	"division.h"
 	"string.h"
 
-1668484105 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\cuerpotecnico.h
+1668496714 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\cuerpotecnico.h
 
-1668488662 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\division.c
+1668496690 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\division.c
 	"division.h"
 	"jugador.h"
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"string.h"
 
-1668485095 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\division.h
+1668496698 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\division.h
 	"empleado.h"
 	"cuerpoTecnico.h"
 	"jugador.h"
 
-1668486833 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\empleado.h
+1668497957 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\empleado.h
 
-1668485054 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\jugador.h
+1668496690 c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\jugador.h
 	<stdio.h>
 	<stdlib.h>
 
-1668488142 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\empleado.c
+1668498191 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\empleado.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -87,7 +87,7 @@
 	"string.h"
 	"division.h"
 
-1668484105 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\jugador.c
+1668496690 source:c:\users\mateo\onedrive\desktop\cosas\codeblocks 2cuatri\tpfinallabii-g5.com7-2022\jugador.c
 	"jugador.h"
 	"division.h"
 	<string.h>

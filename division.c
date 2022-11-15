@@ -4,7 +4,6 @@
 #include "cuerpoTecnico.h"
 #include "string.h"
 
-
 ///Funciones arreglo ct
 
 int altaCT (celdaDivision celd[], stCT nuevoCT, char nombreDivision[], int idDivision, int validos)
@@ -197,7 +196,7 @@ int archivoToArrJug (celdaDivision arr[], int dim)
     }
     return validos;
 }
-
+///FUNCIONES GENERALES
 
 void mostrarArrDivGeneral(celdaDivision arr[], int validos)
 {
@@ -206,7 +205,7 @@ void mostrarArrDivGeneral(celdaDivision arr[], int validos)
     while (i<validos)
     {
         printf("Division: %s\n",arr[i].dato.nombreDivision);
-        printf("Id de la division : %d\n",arr[i].dato.idDivision);
+        printf("Id de la division : %d\n\n\n",arr[i].dato.idDivision);
         if (arr[i].jug)
         {
             printf("\nJugadores: \n");
@@ -222,6 +221,161 @@ void mostrarArrDivGeneral(celdaDivision arr[], int validos)
             printf("\nCuerpo Tecnico: \n");
             mostrarListaCT(arr[i].ct);
         }
+        printf("\n\n\n");
         i++;
+    }
+}
+
+void mostrarUnaDivision (celdaDivision arr[], int i)
+{
+    system("cls");
+
+    printf("Division: %s\n",arr[i].dato.nombreDivision);
+    printf("Id de la division : %d\n\n\n",arr[i].dato.idDivision);
+    if (arr[i].jug)
+    {
+        printf("\nJugadores: \n");
+        mostrarArbolDNI(arr[i].jug);
+    }
+    if (arr[i].emp)
+    {
+        printf("\nEmpleados: \n");
+        MostrarListaE(arr[i].emp);
+    }
+    if (arr[i].ct)
+    {
+        printf("\nCuerpo Tecnico: \n");
+        mostrarListaCT(arr[i].ct);
+    }
+    printf("\n\n\n");
+}
+
+void mostrarPorNombreDiv(celdaDivision arr[],char nombre[], int validos)
+{
+    int i=0;
+    while (validos>i)
+    {
+
+        printf("Division: %s\n",arr[i].dato.nombreDivision);
+        printf("Id de la division : %d\n",arr[i].dato.idDivision);
+        if (arr[i].jug)
+        {
+            mostrarNombreArbol (arr[i].jug,nombre);
+        }
+        if (arr[i].emp)
+        {
+            mostrarNombreE(arr[i].emp,nombre);
+        }
+        if (arr[i].ct)
+        {
+            mostrarNombreCT (arr[i].ct,nombre);
+        }
+        printf("\n\n\n");
+        i++;
+    }
+}
+
+void inicializarArreglo (celdaDivision arr[], int dim)
+{
+    int i=0;
+    while (i<dim)
+    {
+        arr[i].ct=inicListaDoble();
+        arr[i].emp=inicListaS();
+        arr[i].jug=inicArbol();
+        i++;
+    }
+}
+
+void menuDivision (int validos, int dim)
+{
+    int controles,pos,maxValidos,i;
+    celdaDivision arr[dim];
+
+    system("cls");
+    printf("------> MENU DE DIVISION\n\n");
+    printf("1.MOSTRAR TODAS LAS DIVISIONES\n2.MOSTRAR POR DIVISION\n3.BUSCAR NOMBRES\n0.SALIR\n");
+    fflush(stdin);
+    scanf("%d",&controles);
+    system("cls");
+    inicializarArreglo (arr,dim);
+
+    switch(controles)
+    {
+    case 1:
+    {
+
+        validos=archivoToArrCT(arr,dim);
+        maxValidos=validos;
+
+        validos = archivoToArrJug(arr, dim);
+        if(validos>maxValidos)
+        {
+            maxValidos=validos;
+        }
+        validos=archivoArrE(arr,dim);
+        if(validos>maxValidos)
+        {
+            maxValidos=validos;
+        }
+        mostrarArrDivGeneral(arr,maxValidos);
+        break;
+    }
+    case 2:
+    {
+        validos=archivoToArrCT(arr,dim);
+        maxValidos=validos;
+
+        validos = archivoToArrJug(arr, dim);
+        if(validos>maxValidos)
+        {
+            maxValidos=validos;
+        }
+        validos=archivoArrE(arr,dim);
+        if(validos>maxValidos)
+        {
+            maxValidos=validos;
+        }
+
+        printf("DIVISION 1\nDIVISION 2\nDIVISION 3\n");
+        scanf("%d",&i);
+
+        pos=buscarPosDivision(arr,i,maxValidos);
+        if (pos != -1)
+        {
+            mostrarUnaDivision (arr,pos);
+        }
+        else
+        {
+            printf("\nLA DIVISION NO EXISTE\n");
+        }
+        break;
+
+    }
+    case 3:
+    {
+        char nombre[15];
+
+        validos=archivoToArrCT(arr,dim);
+        maxValidos=validos;
+
+        validos = archivoToArrJug(arr, dim);
+        if(validos>maxValidos)
+        {
+            maxValidos=validos;
+        }
+        validos=archivoArrE(arr,dim);
+        if(validos>maxValidos)
+        {
+            maxValidos=validos;
+        }
+
+        printf("INGRESE EL NOMBRE A BUSCAR\n");
+        fflush(stdin);
+        gets(nombre);
+        system("cls");
+        mostrarPorNombreDiv(arr,nombre,maxValidos);
+        break;
+    }
     }
 }

@@ -61,8 +61,8 @@ arbolJugador *buscarPorDNIyDarDeBaja (arbolJugador *arbol, int dni);
 arbolJugador *buscarGoleadorActivo (arbolJugador *arbol, arbolJugador *goleador);
 int mostrarNodoArbolPorLegajo (arbolJugador *arbol, int legajo);
 void mostrarArbolDNI(arbolJugador* arbol);
-
-
+void mostrarNombreArbol (arbolJugador* arbol, char nombre[]);
+void menuJugador(int validos, int dim);
 /***********************************************************************/
 
 #endif // JUGADOR_H_INCLUDED

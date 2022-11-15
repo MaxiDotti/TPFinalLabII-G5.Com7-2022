@@ -84,12 +84,19 @@ int generarLegajo (archiEmpleado nuevo)
     return nuevo.legajo;
 }
 
-void cargarArchivoE ()
+
+///Carga
+void CargarArchivoE ()
 {
     char control='s';
+    int flag=0;
     do
     {
-        CargarEmpleado();
+        flag=CargarEmpleado();
+        if (flag!=0)
+        {
+            printf("\nYa se encuentra cargado el dni\n");
+        }
         printf("\nDesea seguir ingresando? s/n\n");
         fflush(stdin);
         scanf("%c",&control);
@@ -104,7 +111,6 @@ int CargarEmpleado ()
 {
     archiEmpleado nuevo;
     int flag = -1;
-    int dniAux = 0;
 
     char validarNum [20];
     char validarString [20];
@@ -121,12 +127,11 @@ int CargarEmpleado ()
         }
         while((validarNumero(validarNum))!=0);
         nuevo.dni= atoi(validarNum);
-        flag=validacionDeAlta2(nuevo.dni);
+        flag=validacionDeAlta2(nuevo.dni);///arreglado
 
 
         if(flag == 0)
         {
-            nuevo.dni = dniAux;
 
             nuevo.legajo=generarLegajo(nuevo);
 
@@ -174,9 +179,9 @@ int CargarEmpleado ()
                 scanf("%s",&validarNum);
             }
             while((validarNumero(validarNum))!=0);
-            nuevo.sueldo= atof(validarNum); /// fijarse si esta es la funcion correcta para float
+            nuevo.sueldo= atof(validarNum);
 
-            nuevo.activo=1;/// si lo da de alta es por que va a estra activo
+            nuevo.activo=1;/// alta
 
             do
             {
@@ -238,45 +243,40 @@ void MostrarEmpleado (stEmpleado nuevo)
     printf("\n-------------------------------");
 }
 
-void MostarNodoE (nodoEmpleado * NodoE)
-{
-    MostrarEmpleado(NodoE->dato);
-}
+
 
 void MostrarListaE (nodoEmpleado * ListaE)
 {
-    nodoEmpleado * seg = ListaE;
 
-    while(seg->sig != NULL)
+    while(ListaE != NULL)
     {
-        MostarNodoE(ListaE);
-        seg = seg->sig;
+        MostrarEmpleado(ListaE->dato);
+        ListaE = ListaE->sig;
     }
 }
-void MostararchEpleado(archiEmpleado nuevo)
+void MostrararchEmpleado(archiEmpleado nuevo)
 {
-    printf("----------------------------");
     printf("\n---------- LEGAJO: %i ----------", nuevo.legajo);
     printf("\n|          NOMBRE: %s ",nuevo.nombre);
     printf("\n|        APELLIDO: %s ",nuevo.apellido);
     printf("\n|             DNI: %d", nuevo.dni);
     printf("\n|        TELEFONO: %s ", nuevo.tel);
     printf("\n|        PUESTO: %s ",nuevo.puesto);
-    printf("\n|        SUELDO: %f ", nuevo.sueldo);
+    printf("\n|        SUELDO: %.02f ", nuevo.sueldo);
     if(nuevo.activo == 1)
     {
-       printf("\n|          ESTADO: ACTIVO");
+        printf("\n|          ESTADO: ACTIVO");
     }
     else
     {
         printf("\n|          ESTADO: INACTIVO");
     }
     printf("\n|        DIVISION: %s",nuevo.nombreDivision);
-    printf("\n|        ID DIVISION: %d",nuevo.idDivision);
-    printf("-------------------------------\n");
+    printf("\n|        ID DIVISION: %d\n",nuevo.idDivision);
 }
 
-void MostarArchiE()
+
+void MostrarArchiE()
 {
     FILE * archi= fopen(nombreArchivo,"rb");
     archiEmpleado aux;
@@ -284,8 +284,7 @@ void MostarArchiE()
     {
         while(fread(&aux,sizeof(archiEmpleado),1,archi)>0)
         {
-            MostararchEpleado(aux);
-
+            MostrararchEmpleado(aux);
         }
 
         fclose(archi);
@@ -298,6 +297,54 @@ void MostarArchiE()
     }
 }
 
+void mostrarNombreE(nodoEmpleado* emp, char nombre[])
+{
+    while (emp)
+    {
+        if (strcmpi(emp->dato.nombre,nombre)==0)
+        {
+            printf("\nEmpleados: \n");
+            MostrarEmpleado(emp->dato);
+        }
+        emp=emp->sig;
+    }
+}
+
+void mostrarPorPuesto (char puesto[])
+{
+    FILE* buf=fopen(nombreArchivo,"rb");
+    archiEmpleado aux;
+    if (buf)
+    {
+        while (fread(&aux,sizeof(archiEmpleado),1,buf)>0)
+        {
+            if (strcmpi (aux.puesto,puesto)==0)
+            {
+                MostrararchEmpleado(aux);
+            }
+        }
+    }
+}
+
+int mostrarPorLegajo (int legajo)
+{
+    int flag=0;
+    FILE* buf=fopen(nombreArchivo,"rb");
+    archiEmpleado aux;
+
+    if (buf)
+    {
+        while (fread(&aux,sizeof(archiEmpleado),1,buf)>0)
+        {
+            if (aux.legajo==legajo)
+            {
+                MostrararchEmpleado(aux);
+                flag=1;
+            }
+        }
+    }
+    return flag;
+}
 /// Funciones Lista
 
 nodoEmpleado * inicListaS()
@@ -323,15 +370,11 @@ nodoEmpleado * crearNodoS(stEmpleado nuevo)
 nodoEmpleado * agregarPpioS (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE)
 {
 
-    if(listaE == NULL)
+    if(listaE!=NULL)
     {
-        listaE = nuevoNodoE;
+        nuevoNodoE->sig=listaE;
     }
-    else
-    {
-        nuevoNodoE->sig = listaE;
-        listaE = nuevoNodoE;
-    }
+    listaE=nuevoNodoE;
 
     return listaE;
 }
@@ -363,7 +406,10 @@ nodoEmpleado * agregarEnOrden(nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE)
                 seg = seg->sig;
             }
 
-            nuevoNodoE->sig = seg;
+            if (seg)
+            {
+                nuevoNodoE->sig = seg;
+            }
             ante->sig = nuevoNodoE;
         }
     }
@@ -504,7 +550,7 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
             fclose(buffer);
 
             printf("Asi quedo: \n");
-            MostarArchiE(aux);
+            MostrararchEmpleado(aux);
         }
         else
         {
@@ -518,7 +564,7 @@ void bajaReactivarPorLegajoE (int activar) /// 1 alta 0 baja
 
 }
 
-void modificarE (int activar)
+void modificarE ()
 {
     FILE *buffer=fopen(nombreArchivo,"r+b");
     archiEmpleado aux;
@@ -568,8 +614,8 @@ archiEmpleado modificarDatosE (archiEmpleado  E)
 {
     system("cls");
     printf("\nDatos actuales del ingresado\n");
+    MostrararchEmpleado(E);
     int flag;
-    MostarArchiE();
     int bucle=0;
     char validarNum[30];
     char validarString[30];
@@ -713,14 +759,131 @@ archiEmpleado modificarDatosE (archiEmpleado  E)
         }
         system("cls");
         printf("\nAsi quedo modificado\n");
-        MostarArchiE();
+        MostrararchEmpleado(E);
     }
     while (bucle!=0);
     return E;
 }
 
 
+void menuEmpleados (int validos, int dim)
+{
+    int eleccion,controles,legajo,flag,pos;
+    celdaDivision arr[dim];
+    char puesto[15];
 
+
+    system("cls");
+    printf("------> MENU DE EMPLEADOS\n\n");
+    printf("1.ALTA\n2.BAJA/REACTIVACION\n3.MODIFICAR\n4.LISTA DE EMPLEADOS\n0.SALIR\n\n");
+    fflush(stdin);
+    scanf("%d",&controles);
+    system("cls");
+    switch(controles)
+    {
+    case 1:
+    {
+        CargarArchivoE();
+        break;
+    }
+    case 2:
+        printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
+        scanf("%d",&eleccion);
+        if (eleccion == 0)
+        {
+            bajaReactivarPorLegajoE(0);
+        }
+        else if (eleccion == 1)
+        {
+            bajaReactivarPorLegajoE(1);
+        }
+        else
+        {
+            printf("OPCION ERRONEA INGRESADA\n");
+        }
+
+        break;
+    case 3:
+    {
+        modificarE();
+    }
+    case 4:
+    {
+        validos= archivoArrE (arr, dim);
+        printf("%d",validos);
+        printf("------> MENU DE MOSTRAR\n1.MOSTRAR TODO\n2.MOSTRAR POR PUESTO\n3.MOSTRAR POR ID\n4.MOSTRAR POR DIVISION\n");
+        scanf("%d",&eleccion);
+        system("cls");
+        if (eleccion==1)
+        {
+            mostrarArregloEmpleado(arr,validos);
+        }
+        else if (eleccion==2)
+        {
+            printf("INGRESE EL PUESTO A MOSTRAR\n");
+            fflush(stdin);
+            gets(puesto);
+            mostrarPorPuesto (puesto);
+        }
+        else if(eleccion==3)
+        {
+            printf("INGRESE EL LEGAJO A BUSCAR\n");
+            fflush(stdin);
+            scanf("%d",&legajo);
+            flag= mostrarPorLegajo (legajo);
+            if (flag==0)
+            {
+                printf("NO SE HA ENCONTRADO DEL ID\n");
+            }
+        }
+        else if (eleccion==4)
+        {
+            printf("DIVISION 1\nDIVISION 2\nDIVISION 3\n");
+            scanf("%d",&eleccion);
+            system("cls");
+            if (eleccion==1)
+            {
+                printf("DIVISION 1\n");
+                pos=buscarPosDivision(arr,1,validos);
+                if (pos==-1)
+                {
+                    printf("No existe la division\n");
+                }
+                else
+                {
+                    MostrarListaE (arr[pos].emp);
+                }
+            }
+            else if (eleccion==2)
+            {
+                printf("DIVISION 2\n");
+                pos=buscarPosDivision(arr,2,validos);
+                if (pos==-1)
+                {
+                    printf("No existe la division\n");
+                }
+                else
+                {
+                    MostrarListaE (arr[pos].emp);
+                }
+            }
+            else if (eleccion==3)
+            {
+                printf("DIVISION 3\n");
+                pos=buscarPosDivision(arr,3,validos);
+                if (pos==-1)
+                {
+                    printf("NO EXISTE LA DIVISION\n");
+                }
+                else
+                {
+                    MostrarListaE (arr[pos].emp);
+                }
+            }
+        }
+    }
+    }
+}
 
 
 

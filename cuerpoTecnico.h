@@ -32,7 +32,7 @@ typedef struct nodoCT{
 }nodoCT;
 
 ///Menu
-void menuCuerpoTecnico (int validos);
+void menuCuerpoTecnico (int validos, int dim);
 
 ///Validaciones
 int validarNumero (char numeros[]);
@@ -51,6 +51,7 @@ nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo);
 nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo);
 void mostrarListaCT (nodoCT* lista);
 void mostrarEstructuraCT (stCT dato);
+void mostrarNombreCT (nodoCT* ct, char nombre[]);
 
 ///Funciones archivo
 void mostrarRegistroArchivoCT (registroArchivoCT dato);

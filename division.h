@@ -34,9 +34,14 @@ void mostrarArregloEmpleado (celdaDivision arr[], int validos);
 int altaJugadorDivision (celdaDivision celd[], stJugador nuevoJug, char nombreDivision[], int idDivision, int validos);
 int archivoToArrJug (celdaDivision arr[], int dim);
 int agregarDivisionJugador(celdaDivision celd[],char nombreDivision[],int idDivision,int validos);
+void menuJugador(int validos,int dim);
 
 ////PROTOTIPADO DIVISION
 void mostrarArrDivGeneral(celdaDivision arr[], int validos);
+void inicializarArreglo (celdaDivision arr[], int dim);
+void menuDivision (int validos, int dim);
+void mostrarUnaDivision (celdaDivision arr[], int i);
+void mostrarPorNombreDiv(celdaDivision arr[],char nombre[], int validos);
 
 
 #endif // DIVISION_H_INCLUDED

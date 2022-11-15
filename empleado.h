@@ -44,20 +44,24 @@ int generarLegajo (archiEmpleado nuevo);
 
 ////CARGA:
 int CargarEmpleado ();
+void CargarArchivoE ();
 stEmpleado nuevoEmpleado(archiEmpleado aux);
 
 ////MOSTRAR:
 void MostrarEmpleado(stEmpleado nuevo);
-void MostarNodoE (nodoEmpleado * NodoE);
 void MostrarListaE (nodoEmpleado * ListaE);
-void MostararchEpleado(archiEmpleado nuevo);
-void MostarArchiE();
+void MostrararchEmpleado(archiEmpleado nuevo);
+void MostrarArchiE();
+void mostrarNombreE(nodoEmpleado* emp, char nombre[]);
+void mostrarPorPuesto (char puesto[]);
+int mostrarPorLegajo (int legajo);
 
 ////BAJAS:
 int buscarPosLegajoArchivoE (int legajo);
 void bajaReactivarPorLegajoE (int activar);
 
 ////MODIFICACIONES:
+void modificarE ();
 archiEmpleado modificarDatosE (archiEmpleado  E);
 
 ////FUNCIONES LISTA:
@@ -68,5 +72,8 @@ nodoEmpleado * agregarEnOrden (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE)
 nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int dni);
 nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE);
 nodoEmpleado * borrarNodoE(nodoEmpleado* listaE, int dni);
+
+////MENU
+void menuEmpleados (int validos, int dim);
 
 #endif // EMPLEADO_H_INCLUDED
