@@ -7,8 +7,8 @@
 
 const char nombreArchivoCT[30] = "ArchivoCuerpoTecnico.bin";
 
-
-int validarNumero (char numeros[])
+///VALIDACIONES
+int validarNumero (char numeros[]) ///0 SI ES UN NUMERO 1 SI NO LO ES
 {
     int i=0;
     int flag=0;
@@ -29,7 +29,7 @@ int validarNumero (char numeros[])
     return flag;
 }
 
-int validarPalabra (char palabra[])
+int validarPalabra (char palabra[]) ///0 SI ES UNA PALABRA 1 SI NO LO ES
 {
     int i=0;
     int flag=0;
@@ -77,7 +77,7 @@ int validacionIdCT (int idCT) // recorriendo el archivo y verifica si existe
     return flag;
 }
 
-int validacionDniCT (int dni)
+int validacionDniCT (int dni) ///VALIDA DESDE EL ARCHIVO EL DNI
 {
     int flag=0;
     registroArchivoCT aux;
@@ -104,6 +104,7 @@ int validacionDniCT (int dni)
     return flag;
 }
 
+///CARGAR
 void cargarArchivoCT ()
 {
     char control='s';
@@ -117,7 +118,7 @@ void cargarArchivoCT ()
     while(control!='n');
 }
 
-int generarID (registroArchivoCT ct)
+int generarID (registroArchivoCT ct) ///ABRE EL ARCHIVO Y BUSCA EL ULTIMO ID
 {
     FILE *buff=fopen(nombreArchivoCT,"a+b");
     registroArchivoCT aux;
@@ -137,7 +138,7 @@ int generarID (registroArchivoCT ct)
     return ct.idCT;
 }
 
-void cargarCT ()
+void cargarCT () ///CARGA EN EL ARCHIVO
 {
     registroArchivoCT nuevo;
     int flag;
@@ -256,6 +257,7 @@ void cargarCT ()
     fclose(buf);
 }
 
+///FUNCIONES BASICAR LISTA DOBLE
 nodoCT* inicListaDoble ()
 {
     return NULL;
@@ -282,7 +284,7 @@ nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo)
 
     return lista;
 }
-nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo)
+nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo) ///EN ORDEN POR ID
 {
     if(lista==NULL)
     {
@@ -317,6 +319,7 @@ nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo)
     return lista;
 }
 
+///MOSTRAR
 void mostrarListaCT (nodoCT* lista)
 {
     while(lista!=NULL)
@@ -370,7 +373,7 @@ void mostrarRegistroArchivoCT (registroArchivoCT dato)
     printf("\n----------------------------------------------\n");
 }
 
-void mostrarNombreCT (nodoCT* ct, char nombre[])
+void mostrarNombreCT (nodoCT* ct, char nombre[]) ///MUESTRA TODOS LOS NODOS CON UN NOMBRE ENVIADO POR PARAMETRO
 {
     while (ct)
  {
@@ -422,7 +425,7 @@ stCT registroToCT (registroArchivoCT A)
     return aux;
 }
 
-void mostrarPorCargo (char cargo[])
+void mostrarPorCargo (char cargo[]) ///BUSCA UN CARGO Y LO MUESTRA
 {
     FILE* buf=fopen(nombreArchivoCT,"rb");
     registroArchivoCT aux;
@@ -438,7 +441,7 @@ void mostrarPorCargo (char cargo[])
     }
 }
 
-int mostrarPorId (int id)
+int mostrarPorId (int id) ///BUSCA UN ID Y LO MUESTRA
 {
     int flag=0;
     FILE* buf=fopen(nombreArchivoCT,"rb");
@@ -458,8 +461,8 @@ int mostrarPorId (int id)
     return flag;
 }
 
-///Modificar por id en el archivo
-int buscarPosIdArchivoCT (int id)
+///MODIFICAR POR ID EN EL ARCHIVO
+int buscarPosIdArchivoCT (int id) ///BUSCA EL ID
 {
     FILE *buffer=fopen(nombreArchivoCT,"rb");
     registroArchivoCT aux;
@@ -482,7 +485,9 @@ int buscarPosIdArchivoCT (int id)
     }
     return rta;
 }
-void modificarCTEleccion()
+
+///Modificar
+void modificarCTEleccion() ///MODIFICA
 {
     FILE *buffer=fopen(nombreArchivoCT,"r+b");
     registroArchivoCT aux;
@@ -526,6 +531,7 @@ void modificarCTEleccion()
         printf("El id no existe\n");
     }
 }
+
 
 registroArchivoCT modificarDatosCT (registroArchivoCT A)
 {
@@ -683,9 +689,9 @@ registroArchivoCT modificarDatosCT (registroArchivoCT A)
 }
 
 
-///Baja y reactivar
+///BAJA Y REACTIVAR
 
-void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
+void bajaReactivarPorIdCT (int activar) /// 1 ALTA 0 BAJA
 {
     FILE *buffer=fopen(nombreArchivoCT,"r+b");
     registroArchivoCT aux;
@@ -731,6 +737,7 @@ void bajaReactivarPorIdCT (int activar) /// 1 alta 0 baja
 
 }
 
+///MENU
 void menuCuerpoTecnico (int validos,int dim)
 {
     int eleccion,controles,flag,id,pos;
@@ -754,11 +761,11 @@ void menuCuerpoTecnico (int validos,int dim)
     {
         printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
         scanf("%d",&eleccion);
-        if (eleccion == 0)
+        if (eleccion == 0)///BAJA
         {
             bajaReactivarPorIdCT(0);
         }
-        else if (eleccion == 1)
+        else if (eleccion == 1)///ALTA
         {
             bajaReactivarPorIdCT(1);
         }

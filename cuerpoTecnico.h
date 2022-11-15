@@ -44,23 +44,25 @@ int validacionDniCT (int dni);
 void cargarArchivoCT ();
 void cargarCT ();
 
-///Funciones lista doble
+///FUNCIONES LISTAS DOBLES
 nodoCT* inicListaDoble ();
 nodoCT* crearNodoCT(stCT dato);
 nodoCT* agregarAlPpioDoble(nodoCT* lista, nodoCT* nuevoNodo);
 nodoCT* agregarEnOrdenDobleId(nodoCT* lista, nodoCT* nuevoNodo);
+
+///MOSTRAR
 void mostrarListaCT (nodoCT* lista);
 void mostrarEstructuraCT (stCT dato);
 void mostrarNombreCT (nodoCT* ct, char nombre[]);
-
-///Funciones archivo
+void mostrarPorCargo(char cargo[]);
+int mostrarPorId(int id);
 void mostrarRegistroArchivoCT (registroArchivoCT dato);
+
+///FUNCIONES ARCHIVO
 nodoCT* ArchiToListaCT (nodoCT* lista);
 stCT registroToCT (registroArchivoCT A);
 nodoCT* buscarPorIdCT (nodoCT* lista, int id);
 nodoCT* buscarPorDniCT (nodoCT* lista, int dni);
-void mostrarPorCargo(char cargo[]);
-int mostrarPorId(int id);
 int generarID (registroArchivoCT ct);
 
 ///modificar

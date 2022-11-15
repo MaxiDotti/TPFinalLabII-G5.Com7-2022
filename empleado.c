@@ -86,7 +86,7 @@ int generarLegajo (archiEmpleado nuevo)
 
 
 ///Carga
-void CargarArchivoE ()
+void CargarArchivoE () //llama a cargarEmpleado y lo mete en un bucle
 {
     char control='s';
     int flag=0;
@@ -127,7 +127,7 @@ int CargarEmpleado ()
         }
         while((validarNumero(validarNum))!=0);
         nuevo.dni= atoi(validarNum);
-        flag=validacionDeAlta2(nuevo.dni);///arreglado
+        flag=validacionDeAlta2(nuevo.dni);
 
 
         if(flag == 0)
@@ -158,7 +158,7 @@ int CargarEmpleado ()
             {
                 printf("\nIngrese el numero de telefono :\n");
                 fflush(stdin);
-                scanf("%s",&validarNum);
+                gets(validarNum);
             }
             while ((validarNumero(validarNum))!=0);
             strcpy(nuevo.tel,validarNum);
@@ -176,7 +176,7 @@ int CargarEmpleado ()
             {
                 printf("\n Ingrese el sueldo del empleado:\n");
                 fflush(stdin);
-                scanf("%s",&validarNum);
+                gets(validarNum);
             }
             while((validarNumero(validarNum))!=0);
             nuevo.sueldo= atof(validarNum);
@@ -297,7 +297,7 @@ void MostrarArchiE()
     }
 }
 
-void mostrarNombreE(nodoEmpleado* emp, char nombre[])
+void mostrarNombreE(nodoEmpleado* emp, char nombre[]) ///Muestra por nombre
 {
     while (emp)
     {
@@ -310,7 +310,7 @@ void mostrarNombreE(nodoEmpleado* emp, char nombre[])
     }
 }
 
-void mostrarPorPuesto (char puesto[])
+void mostrarPorPuesto (char puesto[]) ///Muestra por puesto
 {
     FILE* buf=fopen(nombreArchivo,"rb");
     archiEmpleado aux;
@@ -326,7 +326,7 @@ void mostrarPorPuesto (char puesto[])
     }
 }
 
-int mostrarPorLegajo (int legajo)
+int mostrarPorLegajo (int legajo) ///Muestra por legajo
 {
     int flag=0;
     FILE* buf=fopen(nombreArchivo,"rb");
@@ -416,18 +416,6 @@ nodoEmpleado * agregarEnOrden(nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE)
     return listaE;
 }
 
-nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int dni)
-{
-
-    nodoEmpleado * seg;
-
-    while ((seg != NULL) && ( dni != seg->dato.dni))
-    {
-        seg=seg->sig;
-    }
-
-    return seg;
-}
 stEmpleado nuevoEmpleado(archiEmpleado aux)
 {
     stEmpleado nuevo;
@@ -457,36 +445,6 @@ nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE)
         listaE = agregarEnOrden(listaE,nuevoNdo);
     }
 
-    return listaE;
-}
-
-nodoEmpleado * borrarNodoE(nodoEmpleado* listaE, int dni)
-{
-    nodoEmpleado * seg;
-    nodoEmpleado * ante;
-    if((listaE != NULL) && (listaE->dato.dni == dni ))
-    {
-
-        nodoEmpleado * aux = listaE;
-        listaE = listaE->sig;
-        free(aux);
-    }
-    else
-    {
-        seg = listaE;
-        while((seg != NULL) && (listaE->dato.dni != dni))
-        {
-            ante = seg;
-            seg = seg->sig;
-        }
-
-        if(seg!=NULL)
-        {
-            ante->sig = seg->sig;
-            free(seg);
-
-        }
-    }
     return listaE;
 }
 
@@ -765,7 +723,7 @@ archiEmpleado modificarDatosE (archiEmpleado  E)
     return E;
 }
 
-
+///Menu
 void menuEmpleados (int validos, int dim)
 {
     int eleccion,controles,legajo,flag,pos;
@@ -789,11 +747,11 @@ void menuEmpleados (int validos, int dim)
     case 2:
         printf("------> MENU DE BAJA/REACTIVACION\n0 PARA DAR DE BAJA, 1 PARA DAR DE ALTA\n");
         scanf("%d",&eleccion);
-        if (eleccion == 0)
+        if (eleccion == 0)///Da de baja
         {
             bajaReactivarPorLegajoE(0);
         }
-        else if (eleccion == 1)
+        else if (eleccion == 1)///Da de alta
         {
             bajaReactivarPorLegajoE(1);
         }
@@ -809,7 +767,7 @@ void menuEmpleados (int validos, int dim)
     }
     case 4:
     {
-        validos= archivoArrE (arr, dim);
+        validos= archivoArrE (arr, dim);///Pasa del archivo al arreglo
         printf("%d",validos);
         printf("------> MENU DE MOSTRAR\n1.MOSTRAR TODO\n2.MOSTRAR POR PUESTO\n3.MOSTRAR POR ID\n4.MOSTRAR POR DIVISION\n");
         scanf("%d",&eleccion);

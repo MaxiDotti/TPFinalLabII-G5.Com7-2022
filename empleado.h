@@ -69,9 +69,7 @@ nodoEmpleado * inicListaS ();
 nodoEmpleado * crearNodoS (stEmpleado nuevo);
 nodoEmpleado * agregarPpioS (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
 nodoEmpleado * agregarEnOrden (nodoEmpleado * listaE, nodoEmpleado * nuevoNodoE);
-nodoEmpleado * buscarNodoE (nodoEmpleado * listaE, int dni);
 nodoEmpleado * ArchiaListaE (nodoEmpleado * listaE);
-nodoEmpleado * borrarNodoE(nodoEmpleado* listaE, int dni);
 
 ////MENU
 void menuEmpleados (int validos, int dim);
